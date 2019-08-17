@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+    <!--扫描dao包,包括子包，使注解生效，-->
+    <context:component-scan base-package="com.su.dao"/>
+    <!-- 数据库连接信息的配置文件 -->
+    <context:property-placeholder
+            location="classpath:database/database.properties"/>
+    <!-- 数据库连接池 -->
+    <bean id="dataSource"
+          class="com.alibaba.druid.pool.DruidDataSource"
+          p:driverClassName="${jdbc.driver}" p:url="${jdbc.url}"
+          p:username="${jdbc.username}" p:password="${jdbc.password}"
+          p:maxActive="${jdbc.maxActive}" p:maxWait="${jdbc.maxWait}"
+          p:initialSize="${jdbc.initialSize}"
+          destroy-method="close"/>
+    <!--配置MyBatis工厂，同时指定数据源，并与MyBatis完美整合-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
+          p:dataSource-ref="dataSource"
+          p:configLocation="classpath:mybatis-config.xml"/>
+    <!--Mapper代理开发，Spring自动扫描MyBatis接口,设定扫描dao层-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
+          p:basePackage="com.su.dao"
+          p:sqlSessionFactoryBeanName="sqlSessionFactory"/>
+
+</beans>

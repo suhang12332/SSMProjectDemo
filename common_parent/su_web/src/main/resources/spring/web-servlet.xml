@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--扫描controller包-->
+    <context:component-scan base-package="com.su.controller"/>
+    <!--导入applicationService配置文件-->
+    <import resource="applicationContext-service.xml"/>
+    <!--自动注册组件-->
+    <mvc:annotation-driven/>
+    <!--试图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="internalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <!--允许css文件夹下的文件可见-->
+    <mvc:resources mapping="/css/**" location="/css/"/>
+    <mvc:resources mapping="/js/**" location="/js/"/>
+    <mvc:resources mapping="/images/**" location="/images/"/>
+    <mvc:resources mapping="/fontAwesome/**" location="/fontAwesome/"/>
+    <mvc:resources mapping="/lib/**" location="/lib/"/>
+    <mvc:resources mapping="/fonts/**" location="/fonts/"/>
+    <mvc:resources mapping="/logo/**" location="/logo/"/>
+    <mvc:resources mapping="/error/**" location="/error/"/>
+
+    <!--配置消息属性文件-->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="error.productError"/>
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="cacheSeconds" value="120"/>
+    </bean>
+
+    <!--注册校验器-->
+    <bean id="validatorFactoryBean" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+        <property name="validationMessageSource" ref="messageSource"/>
+    </bean>
+    <!--注册格式化转换器-->
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean"/>
+
+    <!--开启spring的valid功能-->
+    <mvc:annotation-driven conversion-service="conversionService" validator="validatorFactoryBean"/>
+
+</beans>
