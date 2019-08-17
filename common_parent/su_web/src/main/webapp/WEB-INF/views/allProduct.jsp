@@ -32,13 +32,15 @@
     <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
 
     <!-- Styles -->
-    <link href="${pageContext.request.contextPath}/fontAwesome/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/fontAwesome/css/fontawesome-all.min.css"
+          rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/lib/themify-icons.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/lib/weather-icons.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/lib/mmc-chat.css" rel="stylesheet"/>
     <link href="${pageContext.request.contextPath}/css/lib/sidebar.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/lib/bootstrap.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/lib/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/lib/sweetalert/sweetalert.css"
+          rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/lib/nixon.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 
@@ -81,7 +83,8 @@
             </div><!-- /# row -->
             <div class="main-content">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-10">
                         <div class="card alert">
                             <div class="card-header">
                                 <h4>产品信息表 </h4>
@@ -158,11 +161,16 @@
                                                         关闭
                                                     </c:if></td>
                                                 <td style="text-align: -webkit-center;">
-                                                    <button onclick="window.location.href='${pageContext.request.contextPath}/product/updateProduct.doid=${all[stat.index].productId}'" class="ti-pencil btn" style="background:transparent;"></button>
+                                                    <button onclick="window.location.href='${pageContext.request.contextPath}/product/toUpdate.do?id=${all[stat.index].productId}'"
+                                                            class="ti-pencil btn"
+                                                            style="background:transparent;outline:none;"></button>
                                                     <button
-                                                       class="ti-trash btn  " style="background: transparent" onclick="deletebyId()">
+                                                            class="ti-trash btn  "
+                                                            style="background: transparent;outline: none;"
+                                                            onclick="deletebyId()">
                                                     </button>
-                                                    <span id="delete" onclick="window.location.href='${pageContext.request.contextPath}/product/deleteProductById.do?id=${all[stat.index].productId}'"></span>
+                                                    <span id="delete"
+                                                          onclick="window.location.href='${pageContext.request.contextPath}/product/deleteProductById.do?id=${all[stat.index].productId}'"></span>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -172,10 +180,11 @@
                             </div>
                         </div>
                     </div><!-- /# column -->
-                </div><!-- /# row -->     </div>
-        </div><!-- /# container-fluid -->
-    </div><!-- /# main -->
-
+                    <div class="col-lg-1"></div>
+                </div><!-- /# row -->
+            </div><!-- /# container-fluid -->
+        </div><!-- /# main -->
+    </div>
 </div><!-- /# content wrap -->
 
 <script src="${pageContext.request.contextPath}/js/lib/jquery.min.js"></script>
@@ -186,10 +195,11 @@
 <script src="${pageContext.request.contextPath}/js/lib/bootstrap.min.js"></script><!-- bootstrap -->
 <script src="${pageContext.request.contextPath}/js/lib/mmc-common.js"></script>
 <script src="${pageContext.request.contextPath}/js/lib/mmc-chat.js"></script>
-<script src="${pageContext.request.contextPath}/js/lib/sweetalert/sweetalert.min.js"></script><!-- scripit init-->
-<script src="${pageContext.request.contextPath}/js/lib/sweetalert/sweetalert.init.js"></script><!-- scripit init-->
+<script src="${pageContext.request.contextPath}/js/lib/sweetalert/sweetalert.min.js"></script>
+<!-- scripit init-->
+<script src="${pageContext.request.contextPath}/js/lib/sweetalert/sweetalert.init.js"></script>
+<!-- scripit init-->
 <script src="${pageContext.request.contextPath}/js/scripts.js"></script><!-- scripit init-->
-
 
 
 </body>

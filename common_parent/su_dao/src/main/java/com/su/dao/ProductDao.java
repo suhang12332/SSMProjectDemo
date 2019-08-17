@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultType;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,7 +33,7 @@ public interface ProductDao extends BaseDao<Product> {
      */
     @Override
     @Select("select * from product")
-    @ResultType(ProductDao.class)
+    @ResultType(Product.class)
     List<Product> findAll();
 
     /**
@@ -42,7 +43,9 @@ public interface ProductDao extends BaseDao<Product> {
      * @return T 返回的结果集
      */
     @Override
-    Product findById(Integer id);
+    @Select("select * from product where productId=#{id}")
+    @ResultType(Product.class)
+    Product findById(@Param("id") Integer id);
 
     /**
      * description: 根据id删除信息
@@ -71,5 +74,6 @@ public interface ProductDao extends BaseDao<Product> {
      * @return int 返回操作的行数
      */
     @Override
+    @Update("update product set productName=#{productName},cityName=#{cityName},departureTime=#{departureTime,jdbcType=TIMESTAMP},productPrice=#{productPrice},productDesc=#{productDesc},productStatus=#{productStatus} where productId=#{productId}")
     int update(Product product);
 }

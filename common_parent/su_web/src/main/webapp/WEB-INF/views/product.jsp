@@ -72,7 +72,7 @@
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
                                 <li><a href="#">仪表盘</a></li>
-                                <li class="active">添加产品信息表</li>
+                                <li class="active">更改产品信息表</li>
 
                             </ol>
                         </div>
@@ -84,7 +84,7 @@
                 <div class="col-lg-8">
                     <div class="card alert">
                         <div class="card-header">
-                            <h4>添加产品信息表单</h4>
+                            <h4>更改产品信息表单</h4>
                             <div class="card-header-right-icon">
                                 <ul>
                                     <%--                                    <li class="card-close" data-dismiss="alert"><i class="ti-close"></i></li>--%>
@@ -101,12 +101,15 @@
                         </div><br>
                         <div class="card-body">
                             <div class="horizontal-form-elements">
-                                <form:form modelAttribute="product" method="post" action="${pageContext.request.contextPath}/product/addProduct.do" cssClass="form-horizontal">
+                                <form:form modelAttribute="product" method="post" action="${pageContext.request.contextPath}/product/updateProduct.do" cssClass="form-horizontal">
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" >产品id</label>
-                                                <form:input path="productId" cssClass="form-control" value="${product.productId}" placeholder="产品名称" readonly=""/>
+                                                <div class="col-sm-8">
+                                                    <form:input path="productId" cssClass="form-control" value="${product.productId}" placeholder="产品名称" readonly="true"/>
+                                                </div>
+                                                <label class="col-sm-2 control-label" style="color: red">*此信息不能更改 </label>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">产品名称</label>

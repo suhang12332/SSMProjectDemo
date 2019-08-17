@@ -34,7 +34,7 @@ function deletebyId(){
             confirmButtonText: "是的,删除它 !!",
             cancelButtonText: "不，取消它 !!",
             closeOnConfirm: false,
-            closeOnCancel: false
+            // closeOnCancel: false
         },
         function(isConfirm){
             if (isConfirm) {
@@ -44,7 +44,7 @@ function deletebyId(){
                 elementById.click();
             }
             else {
-                swal("取消 !!", "嘿 ,记录很安全 !!", "error");
+                swal("已取消 !!", "嘿 ,记录很安全 !!", "error");
             }
         });
 };

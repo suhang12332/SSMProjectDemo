@@ -19,8 +19,7 @@
           destroy-method="close"/>
     <!--配置MyBatis工厂，同时指定数据源，并与MyBatis完美整合-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
-          p:dataSource-ref="dataSource"
-          p:configLocation="classpath:mybatis-config.xml"/>
+          p:dataSource-ref="dataSource"/>
     <!--Mapper代理开发，Spring自动扫描MyBatis接口,设定扫描dao层-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
           p:basePackage="com.su.dao"

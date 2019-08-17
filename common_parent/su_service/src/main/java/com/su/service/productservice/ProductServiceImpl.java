@@ -49,5 +49,4 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
     public int update(Product product) {
         return productDao.update(product);
     }
-
 }

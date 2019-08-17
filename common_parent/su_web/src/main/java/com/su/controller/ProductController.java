@@ -53,7 +53,6 @@ public class ProductController extends BaseException {
             return "addProduct";
         }
         productService.insert(product);
-        System.out.println(product.getDepartureTime());
         return "redirect:findAll.do";
     }
 
@@ -69,10 +68,23 @@ public class ProductController extends BaseException {
         return "redirect:findAll.do";
     }
 
-    @GetMapping("/updateProduct.do")
-    public String updateProduct(@RequestParam("id") Integer id,Model model) {
+    @GetMapping("/toUpdate.do")
+    public String toUpdate(@RequestParam("id") Integer id,Model model) {
         Product byId = productService.findById(id);
         model.addAttribute("product", byId);
         return "product";
+    }
+
+    @PostMapping("/updateProduct.do")
+    public String updateProduct(@Valid Product product,BindingResult result) {
+        if (result.hasErrors()) {
+            return "product";
+        }
+        productService.update(product);
+        return "redirect:findAll.do";
+    }
+    @GetMapping("/login.do")
+    public String Login(){
+        return "login";
     }
 }

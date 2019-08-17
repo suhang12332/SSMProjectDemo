@@ -28,11 +28,11 @@
     <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
 
     <!-- Styles -->
-    <link href="assets/fontAwesome/css/fontawesome-all.min.css" rel="stylesheet">
-    <link href="assets/css/lib/themify-icons.css" rel="stylesheet">
-    <link href="assets/css/lib/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/lib/nixon.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/fontAwesome/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/lib/themify-icons.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/lib/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/lib/nixon.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 </head>
 
 <body class="bg-primary">
