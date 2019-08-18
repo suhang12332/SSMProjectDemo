@@ -65,7 +65,7 @@
                 <div class="col-lg-8 p-0">
                     <div class="page-header">
                         <div class="page-title">
-                            <h1>仪表盘 1</h1>
+                            <h1>基础数据</h1>
                         </div>
                     </div>
                 </div><!-- /# column -->
@@ -73,8 +73,7 @@
                     <div class="page-header">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li><a href="#">仪表板</a></li>
-                                <li><a href="#">表</a></li>
+                                <li><a href="#">基础数据</a></li>
                                 <li class="active">所有产品表</li>
                             </ol>
                         </div>
@@ -87,12 +86,12 @@
                     <div class="col-lg-10">
                         <div class="card alert">
                             <div class="card-header">
-                                <h4>产品信息表 </h4>
+                                <h4>所有产品表 </h4>
 
                                 <div class="card-header-right-icon">
                                     <button type="button" class="btn btn-default btn-outline m-b-10"
                                             onclick="window.location.href='${pageContext.request.contextPath}/product/toAdd.do'">
-                                        增加订单
+                                        增加产品
                                     </button>
                                     <ul>
                                         <%--                                        <li class="card-close" data-dismiss="alert"><i--%>
@@ -170,7 +169,7 @@
                                                             onclick="deletebyId()">
                                                     </button>
                                                     <span id="delete"
-                                                          onclick="window.location.href='${pageContext.request.contextPath}/product/deleteProductById.do?id=${all[stat.index].productId}'"></span>
+                                                          onclick="window.location.href='${pageContext.request.contextPath}/orders/deleteOrdersByProductId.do?id=${all[stat.index].productId}'"></span>
                                                 </td>
                                             </tr>
                                             </tbody>

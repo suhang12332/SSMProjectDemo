@@ -44,10 +44,9 @@ public class Product {
      * 出发的时间
      */
     /**
-     * past注解会判断用户输入日期是否在当期日期之前
+     *
      */
     @NotNull(message = "{product.departureTime}")
-    @Past(message = "{product.departureTime1}")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date departureTime;
     /**

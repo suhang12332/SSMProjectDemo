@@ -16,12 +16,15 @@
         <div class="nano-content">
             <ul>
                 <li class="active">
-                    <a class="sidebar-sub-toggle" href="${pageContext.request.contextPath}/index.jsp"><i class="ti-home"></i> 首页</a>
+                    <a class="sidebar-sub-toggle" onclick="window.location.href='${pageContext.request.contextPath}/index.jsp'"><i class="ti-home"></i> 首页</a>
                 </li>
                 <li>
                     <a class="sidebar-sub-toggle"><i class="ti-layout"></i> 基础数据 <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                     <ul>
                         <li><a href="${pageContext.request.contextPath}/product/findAll.do">产品管理</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="${pageContext.request.contextPath}/orders/findAllOrder.do">订单管理</a></li>
                     </ul>
                 </li>
                 <li>

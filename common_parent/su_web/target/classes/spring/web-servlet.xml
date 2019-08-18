@@ -27,7 +27,12 @@
 
     <!--配置消息属性文件-->
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-        <property name="basename" value="error.productError"/>
+        <property name="basenames">
+            <list>
+                <value>error.productError</value>
+                <value>error.ordersError</value>
+            </list>
+        </property>
         <property name="defaultEncoding" value="utf-8"/>
         <property name="cacheSeconds" value="120"/>
     </bean>

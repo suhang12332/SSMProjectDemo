@@ -32,7 +32,7 @@
     <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
 
     <!-- Styles -->
-    <link href="${pageContext.request.contextPath}/fontAwesome/css/fontawesome-all.min.css"
+    <link href="${pageContext.request.contextPath}/fontAwesome/css/fontawesome-orders.min.css"
           rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/lib/themify-icons.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/lib/weather-icons.css" rel="stylesheet">
@@ -74,7 +74,8 @@
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
                                 <li><a href="#">基础数据</a></li>
-                                <li class="active">所有产品表</li>
+                                <li><a href="#">表</a></li>
+                                <li class="active">所有订单表</li>
                             </ol>
                         </div>
                     </div>
@@ -86,12 +87,12 @@
                     <div class="col-lg-10">
                         <div class="card alert">
                             <div class="card-header">
-                                <h4>所有产品表 </h4>
+                                <h4>所订单表 </h4>
 
                                 <div class="card-header-right-icon">
                                     <button type="button" class="btn btn-default btn-outline m-b-10"
-                                            onclick="window.location.href='${pageContext.request.contextPath}/product/toAdd.do'">
-                                        增加产品
+                                            onclick="window.location.href='${pageContext.request.contextPath}/orders/toAdd.do'">
+                                        增加订单
                                     </button>
                                     <ul>
                                         <%--                                        <li class="card-close" data-dismiss="alert"><i--%>
@@ -103,7 +104,7 @@
                                                                              role="link"></i>
                                             <ul class="card-option-dropdown dropdown-menu">
                                                 <li>
-                                                    <a href="${pageContext.request.contextPath}/product/findAll.do"><i
+                                                    <a href="${pageContext.request.contextPath}/orders/findAllOrder.do"><i
                                                             class="ti-loop"></i> 更新数据</a>
                                                 </li>
                                                 <li><a href="#"><i class="ti-menu-alt"></i> 详细日志</a>
@@ -119,48 +120,63 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <c:if test="${all.size()==0}">
-                                    <p style="text-align: center">没有产品信息</p>
+                                <c:if test="${orders.size()==0}">
+                                    <p style="text-align: center">没有订单信息</p>
                                 </c:if>
-                                <c:if test="${all.size()!=0}">
+                                <c:if test="${orders.size()!=0}">
                                     <table class="table table-responsive table-hover"
                                            style="text-align: center">
                                         <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>产品id</th>
-                                            <th>产品名称</th>
-                                            <th>出发城市</th>
-                                            <th>出发时间</th>
-                                            <th>产品价格</th>
-                                            <th>产品描述</th>
-                                            <th>产品状态</th>
-                                            <th style="text-align: center">产品操作</th>
+                                            <th>订单id</th>
+                                            <th>下单时间</th>
+                                            <th>出游人数</th>
+                                            <th>订单描述</th>
+                                            <th>支付方式</th>
+                                            <th>订单状态</th>
+                                            <th>产品编号</th>
+                                            <th>会员编号</th>
+                                            <th style="text-align: center">订单操作</th>
                                         </tr>
                                         </thead>
-                                        <c:forEach items="${all}" varStatus="stat" begin="0"
-                                                   end="${all.size()}">
+                                        <c:forEach items="${orders}" varStatus="stat" begin="0"
+                                                   end="${orders.size()}">
 
                                             <tbody>
                                             <tr>
                                                 <th scope="row">${stat.index+1}</th>
-                                                <td>${all[stat.index].productId}</td>
-                                                <td>${all[stat.index].productName}</td>
-                                                <td>${all[stat.index].cityName}</td>
+                                                <td>${orders[stat.index].orderId}</td>
                                                 <td><fmt:formatDate
-                                                        value="${all[stat.index].departureTime}"
+                                                        value="${orders[stat.index].orderTime}"
                                                         pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                                                <td>￥${all[stat.index].productPrice}</td>
-                                                <td>${all[stat.index].productDesc}</td>
-                                                <td><c:if
-                                                        test="${all[stat.index].productStatus==1}">
-                                                    开启
-                                                </c:if>
-                                                    <c:if test="${all[stat.index].productStatus==0}">
-                                                        关闭
-                                                    </c:if></td>
+                                                <td>${orders[stat.index].peopleCount}</td>
+
+                                                <td>${orders[stat.index].orderDesc}</td>
+
+                                                <td>
+                                                    <c:if test="${orders[stat.index].payType==1}">
+                                                        微信
+                                                    </c:if>
+                                                    <c:if test="${orders[stat.index].payType==0}">
+                                                        支付宝
+                                                    </c:if>
+                                                    <c:if test="${orders[stat.index].payType==2}">
+                                                        其他
+                                                    </c:if>
+                                                </td>
+                                                <td>
+                                                    <c:if test="${orders[stat.index].payType==1}">
+                                                        已支付
+                                                    </c:if>
+                                                    <c:if test="${orders[stat.index].payType==0}">
+                                                        未支付
+                                                    </c:if>
+                                                </td>
+                                                <td>${orders[stat.index].product.productId}</td>
+                                                <td>${orders[stat.index].memberid.memberidId}</td>
                                                 <td style="text-align: -webkit-center;">
-                                                    <button onclick="window.location.href='${pageContext.request.contextPath}/product/toUpdate.do?id=${all[stat.index].productId}'"
+                                                    <button onclick="window.location.href='${pageContext.request.contextPath}/product/toUpdate.do?id=${orders[stat.index].orderId}'"
                                                             class="ti-pencil btn"
                                                             style="background:transparent;outline:none;"></button>
                                                     <button
@@ -169,7 +185,7 @@
                                                             onclick="deletebyId()">
                                                     </button>
                                                     <span id="delete"
-                                                          onclick="window.location.href='${pageContext.request.contextPath}/orders/deleteOrdersByProductId.do?id=${all[stat.index].productId}'"></span>
+                                                          onclick="window.location.href='${pageContext.request.contextPath}/orders/deleteOrdersById.do?id=${orders[stat.index].orderId}'"></span>
                                                 </td>
                                             </tr>
                                             </tbody>

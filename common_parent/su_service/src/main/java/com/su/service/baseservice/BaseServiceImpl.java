@@ -1,7 +1,6 @@
 package com.su.service.baseservice;
-
+import com.su.dao.OrdersDao;
 import com.su.dao.ProductDao;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -18,5 +17,10 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
     protected ProductDao productDao;
     public BaseServiceImpl(@Qualifier("productDao") ProductDao productDao) {
         this.productDao = productDao;
+    }
+    @Autowired
+    protected OrdersDao ordersDao;
+    public BaseServiceImpl(@Qualifier("ordersDao") OrdersDao ordersDao) {
+        this.ordersDao = ordersDao;
     }
 }
