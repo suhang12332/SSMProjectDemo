@@ -63,7 +63,7 @@
                 <div class="col-lg-8 p-0">
                     <div class="page-header">
                         <div class="page-title">
-                            <h1>仪表盘 1</h1>
+                            <h1>数据管理</h1>
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                     <div class="page-header">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li><a href="#">仪表盘</a></li>
+                                <li><a href="${pageContext.request.contextPath}/product/findAll.do">产品管理</a></li>
                                 <li class="active">添加产品信息表</li>
 
                             </ol>
@@ -90,7 +90,7 @@
 <%--                                    <li class="card-close" data-dismiss="alert"><i class="ti-close"></i></li>--%>
                                     <li class="card-option drop-menu"><i class="ti-settings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="link"></i>
                                         <ul class="card-option-dropdown dropdown-menu">
-                                            <li><a href="#"><i class="ti-loop"></i> 更新日志</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/product/toAdd.do"><i class="ti-loop"></i> 更新日志</a></li>
                                             <li><a href="#"><i class="ti-menu-alt"></i> 详细日志</a></li>
                                             <li><a href="#"><i class="ti-pulse"></i> 统计</a></li>
                                             <li><a href="#"><i class="ti-power-off"></i> 清楚的是</a></li>

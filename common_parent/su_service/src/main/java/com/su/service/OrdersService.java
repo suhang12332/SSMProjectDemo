@@ -1,10 +1,7 @@
 package com.su.service;
-
 import com.su.entity.Orders;
 import com.su.service.baseservice.BaseService;
-
 import java.util.List;
-
 /**
  * Created with IntelliJ IDEA
  *
@@ -37,4 +34,21 @@ public interface OrdersService extends BaseService<Orders> {
      * @return int 返回操作的行数
      */
     int deleteOrdersById(Integer id);
+
+    /**
+     * description: 根据订单id查询订单信息
+     *
+     * @param id 查询条件
+     * @return com.su.entity.Orders 返回查找的数据
+     */
+    @Override
+    Orders findById(Integer id);
+    /**
+     * description: 更新订单信息
+     *
+     * @param orders 订单对象引用
+     * @return int 返回操作的行数
+     */
+    @Override
+    int update(Orders orders);
 }

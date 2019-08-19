@@ -31,6 +31,7 @@
             <list>
                 <value>error.productError</value>
                 <value>error.ordersError</value>
+                <value>error.touristError</value>
             </list>
         </property>
         <property name="defaultEncoding" value="utf-8"/>

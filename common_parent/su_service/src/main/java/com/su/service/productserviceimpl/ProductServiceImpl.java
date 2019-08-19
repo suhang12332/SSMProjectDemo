@@ -1,4 +1,4 @@
-package com.su.service.productservice;
+package com.su.service.productserviceimpl;
 
 import com.su.dao.ProductDao;
 import com.su.entity.Product;

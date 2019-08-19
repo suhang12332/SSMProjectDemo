@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -54,7 +55,6 @@ public class Orders {
     /**
      * 产品信息
      */
-    @NotNull(message = "{orders.productId}")
     private Product product;
     /**
      * 游客信息
@@ -63,6 +63,16 @@ public class Orders {
     /**
      * 会员信息
      */
-    @NotNull(message = "{orders.memberidId}")
+
     private Memberid memberid;
+    /**
+     * 会员id(外键)
+     */
+    @NotNull(message = "{orders.memberidId}")
+    private Integer memberidId;
+    /**
+     * 产品id(外键)
+     */
+    @NotNull(message = "{orders.productId}")
+    private Integer productId;
 }

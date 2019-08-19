@@ -97,7 +97,7 @@ public class ProductController extends BaseException {
     public String toUpdate(@RequestParam("id") Integer id,Model model) {
         Product byId = productService.findById(id);
         model.addAttribute("product", byId);
-        return "product";
+        return "updateProduct";
     }
     /**
      * description: 更新产品信息
@@ -109,7 +109,7 @@ public class ProductController extends BaseException {
     @PostMapping("/updateProduct.do")
     public String updateProduct(@Valid Product product,BindingResult result) {
         if (result.hasErrors()) {
-            return "product";
+            return "updateProduct";
         }
         productService.update(product);
         return "redirect:findAll.do";

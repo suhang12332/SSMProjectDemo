@@ -65,7 +65,7 @@
                 <div class="col-lg-8 p-0">
                     <div class="page-header">
                         <div class="page-title">
-                            <h1>基础数据</h1>
+                            <h1>数据管理</h1>
                         </div>
                     </div>
                 </div><!-- /# column -->
@@ -73,8 +73,7 @@
                     <div class="page-header">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li><a href="#">基础数据</a></li>
-                                <li><a href="#">表</a></li>
+                                <li><a href="${pageContext.request.contextPath}/orders/findAllOrder.do">订单管理</a></li>
                                 <li class="active">所有订单表</li>
                             </ol>
                         </div>
@@ -87,7 +86,7 @@
                     <div class="col-lg-10">
                         <div class="card alert">
                             <div class="card-header">
-                                <h4>所订单表 </h4>
+                                <h4>所有订单表 </h4>
 
                                 <div class="card-header-right-icon">
                                     <button type="button" class="btn btn-default btn-outline m-b-10"
@@ -95,8 +94,6 @@
                                         增加订单
                                     </button>
                                     <ul>
-                                        <%--                                        <li class="card-close" data-dismiss="alert"><i--%>
-                                        <%--                                                class="ti-close"></i></li>--%>
                                         <li class="card-option drop-menu"><i class="ti-settings"
                                                                              data-toggle="dropdown"
                                                                              aria-haspopup="true"
@@ -176,7 +173,7 @@
                                                 <td>${orders[stat.index].product.productId}</td>
                                                 <td>${orders[stat.index].memberid.memberidId}</td>
                                                 <td style="text-align: -webkit-center;">
-                                                    <button onclick="window.location.href='${pageContext.request.contextPath}/product/toUpdate.do?id=${orders[stat.index].orderId}'"
+                                                    <button onclick="window.location.href='${pageContext.request.contextPath}/orders/toUpdate.do?id=${orders[stat.index].orderId}'"
                                                             class="ti-pencil btn"
                                                             style="background:transparent;outline:none;"></button>
                                                     <button

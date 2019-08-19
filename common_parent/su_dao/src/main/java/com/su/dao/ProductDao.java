@@ -33,8 +33,9 @@ public interface ProductDao extends BaseDao<Product> {
      */
     @Override
     @Select("select * from product")
-    @ResultType(Product.class)
+    @ResultType(List.class)
     List<Product> findAll();
+
 
     /**
      * description: 根据id查询信息
@@ -47,6 +48,7 @@ public interface ProductDao extends BaseDao<Product> {
     @ResultType(Product.class)
     Product findById(@Param("id") Integer id);
 
+
     /**
      * description: 根据id删除信息
      *
@@ -57,6 +59,7 @@ public interface ProductDao extends BaseDao<Product> {
     @Delete("delete from product where productId=#{id}")
     int deleteById(@Param("id") Integer id);
 
+
     /**
      * description: 插入信息
      *
@@ -66,6 +69,7 @@ public interface ProductDao extends BaseDao<Product> {
     @Override
     @Insert("insert into product (productId, productName, cityName, departureTime, productPrice, productDesc,productStatus) values(null,#{productName},#{cityName},#{departureTime,jdbcType=TIMESTAMP},#{productPrice},#{productDesc},#{productStatus})")
     int insert(Product product);
+
 
     /**
      * description: 更新信息

@@ -85,13 +85,40 @@ public class OrdersController extends BaseException {
         if (result.hasErrors()) {
             return "addOrders";
         }
-        System.out.println(orders);
         ordersService.insert(orders);
         return "redirect:findAllOrder.do";
     }
+    /**
+     * description: 根据订单id删除订单信息
+     *
+     * @param id 订单id
+     * @return java.lang.String 返回视图
+     */
     @GetMapping("/deleteOrdersById.do")
     public String deleteOrderById(@RequestParam("id") Integer id) {
         ordersService.deleteOrdersById(id);
+        return "redirect:findAllOrder.do";
+    }
+    /**
+     * description: 根据订单id查询订单的信息
+     *
+     * @param id 查询条件
+     * @param model model域用来存放查询结果
+     * @return java.lang.String
+     */
+    @GetMapping("/toUpdate.do")
+    public String toUpdate(@RequestParam("id") Integer id,Model model) {
+        Orders byId = ordersService.findById(id);
+        model.addAttribute("orders", byId);
+        return "updateOrders";
+    }
+
+    @PostMapping("/updateOrders.do")
+    public String updateOrders(@Valid Orders orders, BindingResult result) {
+        if (result.hasErrors()) {
+            return "updateOrders";
+        }
+        ordersService.update(orders);
         return "redirect:findAllOrder.do";
     }
 }

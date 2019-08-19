@@ -43,9 +43,6 @@ public class Product {
     /**
      * 出发的时间
      */
-    /**
-     *
-     */
     @NotNull(message = "{product.departureTime}")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date departureTime;

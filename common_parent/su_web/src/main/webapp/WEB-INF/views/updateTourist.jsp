@@ -63,7 +63,7 @@
                 <div class="col-lg-8 p-0">
                     <div class="page-header">
                         <div class="page-title">
-                            <h1>仪表盘 1</h1>
+                            <h1>游客管理</h1>
                         </div>
                     </div>
                 </div>
@@ -71,9 +71,8 @@
                     <div class="page-header">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li><a href="#">仪表盘</a></li>
-                                <li class="active">更改产品信息表</li>
-
+                                <li><a href="${pageContext.request.contextPath}/tourist/findAllTourist.do">游客信息</a></li>
+                                <li class="active">修改游客信息表</li>
                             </ol>
                         </div>
                     </div>
@@ -84,13 +83,13 @@
                 <div class="col-lg-8">
                     <div class="card alert">
                         <div class="card-header">
-                            <h4>更改产品信息表单</h4>
+                            <h4>修改游客信息表单</h4>
                             <div class="card-header-right-icon">
                                 <ul>
                                     <%--                                    <li class="card-close" data-dismiss="alert"><i class="ti-close"></i></li>--%>
                                     <li class="card-option drop-menu"><i class="ti-settings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="link"></i>
                                         <ul class="card-option-dropdown dropdown-menu">
-                                            <li><a href="#"><i class="ti-loop"></i> 更新日志</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/tourist/toUpdate.do?id=${param.id}"><i class="ti-loop"></i> 更新日志</a></li>
                                             <li><a href="#"><i class="ti-menu-alt"></i> 详细日志</a></li>
                                             <li><a href="#"><i class="ti-pulse"></i> 统计</a></li>
                                             <li><a href="#"><i class="ti-power-off"></i> 清楚的是</a></li>
@@ -101,69 +100,66 @@
                         </div><br>
                         <div class="card-body">
                             <div class="horizontal-form-elements">
-                                <form:form modelAttribute="product" method="post" action="${pageContext.request.contextPath}/product/updateProduct.do" cssClass="form-horizontal">
+                                <form:form modelAttribute="tourist" method="post" action="${pageContext.request.contextPath}/tourist/updateTourist.do" cssClass="form-horizontal">
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label" >产品id</label>
+                                                <label class="col-sm-2 control-label">游客id</label>
                                                 <div class="col-sm-8">
-                                                    <form:input path="productId" cssClass="form-control" value="${product.productId}" placeholder="产品名称" readonly="true"/>
+                                                    <form:input path="passengerId" cssClass="form-control" value="${tourist.passengerId}" placeholder="游客id" readonly="true"/>
                                                 </div>
-                                                <label class="col-sm-2 control-label" style="color: red">*此信息不能更改 </label>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label">产品名称</label>
+                                                <label class="col-sm-2 control-label">游客名称</label>
                                                 <div class="col-sm-8">
-                                                    <form:input path="productName" cssClass="form-control" value="${product.productName}" placeholder="产品名称"/>
+                                                    <form:input path="passengerName" cssClass="form-control" value="${tourist.passengerName}" placeholder="游客名称"/>
                                                 </div>
-                                                <label class="col-sm-2 control-label" style="color: red"><form:errors path="productName"/> </label>
+                                                <label class="col-sm-2 control-label" style="color: red"><form:errors path="passengerName"/> </label>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label">出发城市</label>
+                                                <label class="col-sm-2 control-label">游客性别</label>
                                                 <div class="col-sm-8">
-                                                    <form:input path="cityName" cssClass="form-control" value="${product.cityName}" placeholder="出发城市"/>
+                                                    <form:input path="passengerSex" cssClass="form-control" value="${tourist.passengerSex}" placeholder="游客性别"/>
                                                 </div>
-                                                <label class="col-sm-2 control-label" style="color: red"><form:errors path="cityName"/> </ label>
+                                                <label class="col-sm-2 control-label" style="color: red"><form:errors path="passengerSex"/> </ label>
                                             </div>
-                                            <c:set var="departureTime">
-                                                <fmt:formatDate value="${product.departureTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
-                                            </c:set>
+
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label">出发时间</label>
+                                                <label class="col-sm-2 control-label">联系方式</label>
                                                 <div class="col-sm-8">
-                                                    <div class='input-group date'>
-                                                        <form:input path="departureTime" autocomplete="off" id="form_datetime" cssClass="form-control" value="${departureTime}" placeholder="出发时间"/>
-                                                        <span class="input-group-addon" style="background: transparent">
-                                                            <span class="ti-calendar"></span>
-                                                        </span>
-                                                    </div>
+                                                    <form:input path="passengerPhoneNumber" cssClass="form-control" value="${tourist.passengerPhoneNumber}" placeholder="联系方式"/>
                                                 </div>
-                                                <label class="col-sm-2 control-label" style="color: red"><form:errors path="departureTime" /> </label>
+                                                <label class="col-sm-2 control-label" style="color: red"><form:errors path="passengerPhoneNumber"/> </label>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label">产品价格</label>
+                                                <label class="col-sm-2 control-label">证件类型</label>
                                                 <div class="col-sm-8">
-                                                    <form:input path="productPrice" cssClass="form-control" value="${product.productPrice}" placeholder="产品价格"/>
-                                                </div>
-                                                <label class="col-sm-2 control-label" style="color: red"><form:errors path="productPrice"/> </label>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">产品状态</label>
-                                                <div class="col-sm-8">
-                                                    <form:select path="productStatus" cssClass="form-control btn btn-primary">
-                                                        <label>请选择产品状态</label>
-                                                        <form:option value="0" cssClass="form-control btn btn-primary">关闭</form:option>
-                                                        <form:option value="1" cssClass="form-control btn btn-primary">打开</form:option>
+                                                    <form:select path="credentialsType" cssClass="form-control btn btn-primary">
+                                                        <label>请选择证件类型</label>
+                                                        <form:option value="0" cssClass="form-control btn btn-primary">身份证</form:option>
+                                                        <form:option value="1" cssClass="form-control btn btn-primary">护照</form:option>
+                                                        <form:option value="2" cssClass="form-control btn btn-primary">军官证</form:option>
                                                     </form:select>
                                                 </div>
-                                                <label class="col-sm-2 control-label" style="color: red"><form:errors path="productStatus" /> </label>
+                                                <label class="col-sm-2 control-label" style="color: red"><form:errors path="credentialsType" /> </label>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label">产品描述</label>
+                                                <label class="col-sm-2 control-label">证件号码</label>
                                                 <div class="col-sm-8">
-                                                    <form:textarea path="productDesc" cssClass="form-control" value="${product.productDesc}" placeholder="产品描述"/>
+                                                    <form:input path="credentialsNum" cssClass="form-control" value="${tourist.credentialsNum}" placeholder="证件号码"/>
                                                 </div>
-                                                <label class="col-sm-2 control-label" style="color: red"><form:errors path="productDesc"/>  </label>
+                                                <label class="col-sm-2 control-label" style="color: red"><form:errors path="credentialsNum"/>  </label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">游客类型</label>
+                                                <div class="col-sm-8">
+                                                    <form:select path="passengerType" cssClass="form-control btn btn-primary">
+                                                        <label>请选择游客类型</label>
+                                                        <form:option value="0" cssClass="form-control btn btn-primary">成人</form:option>
+                                                        <form:option value="1" cssClass="form-control btn btn-primary">儿童</form:option>
+                                                    </form:select>
+                                                </div>
+                                                <label class="col-sm-2 control-label" style="color: red"><form:errors path="passengerType" /> </label>
                                             </div>
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-primary col-sm-offset-4">确认</button>

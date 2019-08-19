@@ -9,9 +9,11 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.ResultType;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.mapping.FetchType;
 import org.springframework.stereotype.Repository;
 
@@ -34,11 +36,9 @@ public interface OrdersDao extends BaseDao<Orders> {
     /**
      * description: 查找所有的订单信息
      *
-     * @param
      * @return java.util.List<com.su.entity.Orders>
      */
     @Override
-    @ResultType(com.su.entity.Product.class)
     @Results(id="findAll",value = {
             @Result(property = "orderId", column = "orderId", id = true, javaType = Integer.class),
             @Result(property = "orderTime", column = "orderTime", javaType = Date.class),
@@ -51,6 +51,8 @@ public interface OrdersDao extends BaseDao<Orders> {
     })
     @Select("select * from orders")
     List<Orders> findAll();
+
+
     /**
      * description: 因为删除一个产品时候的外键因素,所以先要删除订单表中的产品id
      *
@@ -60,6 +62,8 @@ public interface OrdersDao extends BaseDao<Orders> {
     @Override
     @Delete("delete from orders where productId=#{id}")
     int deleteById(@Param("id") Integer id);
+
+
     /**
      * description: 增加一个订单
      *
@@ -67,8 +71,10 @@ public interface OrdersDao extends BaseDao<Orders> {
      * @return int 操作的行数
      */
     @Override
-    @Insert("insert into orders (orderTime, peopleCount, orderDesc, payType, orderStatus, productId, memberid) values (#{orderTime,jdbcType=TIMESTAMP},#{peopleCount},#{orderDesc},#{payType},#{orderStatus},#{product.productId},#{memberid.memberidId})")
+    @Insert("insert into orders (orderTime, peopleCount, orderDesc, payType, orderStatus, productId, memberidId) values (#{orderTime,jdbcType=TIMESTAMP},#{peopleCount},#{orderDesc},#{payType},#{orderStatus},#{productId},#{memberidId})")
     int insert(Orders orders);
+
+
     /**
      * description: 根据id删除一条订单信息
      *
@@ -76,5 +82,30 @@ public interface OrdersDao extends BaseDao<Orders> {
      * @return int 返回操作的行数
      */
     @Delete("delete from orders where orderId=#{id}")
-    int deleteOrdersById(Integer id);
+    int deleteOrdersById(@Param("id") Integer id);
+
+
+    /**
+     * description: 根据订单id查询订单信息 ,@ResultMap("findAll")为调用上面的Result
+     *
+     * @param id 查询条件
+     * @return com.su.entity.Orders 返回查找的数据
+     */
+    @Override
+    @ResultMap("findAll")
+    @Select("select * from orders where orderId=#{id}")
+    @ResultType(List.class)
+    Orders findById(Integer id);
+
+
+    /**
+     * description: 更新订单信息
+     *
+     * @param orders
+     * @return int
+     */
+    @Override
+    @Update("update orders set orderTime=#{orderTime,jdbcType=TIMESTAMP},peopleCount=#{peopleCount},orderDesc=#{orderDesc},payType=#{payType},orderStatus=#{orderStatus},productId=#{productId},memberidId=#{memberidId} where orderId=#{orderId}")
+    int update(Orders orders);
+
 }

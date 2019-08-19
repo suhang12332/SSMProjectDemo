@@ -32,7 +32,7 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 
     @Override
     public Orders findById(Integer id) {
-        return null;
+        return ordersDao.findById(id);
     }
 
     @Override
@@ -50,8 +50,9 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
         System.out.println(orders);
         return ordersDao.insert(orders);
     }
+
     @Override
     public int update(Orders orders) {
-        return 0;
+        return ordersDao.update(orders);
     }
 }

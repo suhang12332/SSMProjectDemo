@@ -63,7 +63,7 @@
                 <div class="col-lg-8 p-0">
                     <div class="page-header">
                         <div class="page-title">
-                            <h1>仪表盘 1</h1>
+                            <h1>数据管理</h1>
                         </div>
                     </div>
                 </div>
@@ -71,8 +71,8 @@
                     <div class="page-header">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li><a href="#">仪表盘</a></li>
-                                <li class="active">添加产品信息表</li>
+                                <li><a href="${pageContext.request.contextPath}/orders/findAllOrder.do">订单管理</a></li>
+                                <li class="active">增加订单信息表</li>
 
                             </ol>
                         </div>
@@ -84,13 +84,13 @@
                 <div class="col-lg-8">
                     <div class="card alert">
                         <div class="card-header">
-                            <h4>添加产品信息表单</h4>
+                            <h4>增加订单信息表单</h4>
                             <div class="card-header-right-icon">
                                 <ul>
                                     <%--                                    <li class="card-close" data-dismiss="alert"><i class="ti-close"></i></li>--%>
                                     <li class="card-option drop-menu"><i class="ti-settings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="link"></i>
                                         <ul class="card-option-dropdown dropdown-menu">
-                                            <li><a href="#"><i class="ti-loop"></i> 更新日志</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/orders/toAdd.do"><i class="ti-loop"></i> 更新日志</a></li>
                                             <li><a href="#"><i class="ti-menu-alt"></i> 详细日志</a></li>
                                             <li><a href="#"><i class="ti-pulse"></i> 统计</a></li>
                                             <li><a href="#"><i class="ti-power-off"></i> 清楚的是</a></li>
@@ -111,7 +111,7 @@
                                                 <label class="col-sm-2 control-label">下单时间</label>
                                                 <div class="col-sm-8">
                                                     <div class='input-group date'>
-                                                        <form:input path="orderTime" autocomplete="off" id="form_datetime" cssClass="form-control" value="${orders.orderTime}" placeholder="下单时间"/>
+                                                        <form:input path="orderTime" autocomplete="off" id="form_datetime" cssClass="form-control" value="${departureTime}" placeholder="下单时间"/>
                                                         <span class="input-group-addon" style="background: transparent">
                                                             <span class="ti-calendar"></span>
                                                         </span>
@@ -136,16 +136,16 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">产品编号</label>
                                                 <div class="col-sm-8">
-                                                    <form:input path="product.productId" cssClass="form-control" value="${orders.product.productId}" placeholder="产品编号"/>
+                                                    <form:input path="productId" cssClass="form-control" value="${orders.product.productId}" placeholder="产品编号"/>
                                                 </div>
-                                                <label class="col-sm-2 control-label" style="color: red"><form:errors path="product.productId"/> </label>
+                                                <label class="col-sm-2 control-label" style="color: red"><form:errors path="productId"/> </label>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">会员编号</label>
                                                 <div class="col-sm-8">
-                                                    <form:input path="memberid.memberidId" cssClass="form-control" value="${orders.memberid.memberidId}" placeholder="会员编号"/>
+                                                    <form:input path="memberidId" cssClass="form-control" value="${orders.memberid.memberidId}" placeholder="会员编号"/>
                                                 </div>
-                                                <label class="col-sm-2 control-label" style="color: red"><form:errors path="memberid.memberidId"/> </label>
+                                                <label class="col-sm-2 control-label" style="color: red"><form:errors path="memberidId"/> </label>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">支付方式</label>

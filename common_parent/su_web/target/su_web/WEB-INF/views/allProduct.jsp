@@ -65,7 +65,7 @@
                 <div class="col-lg-8 p-0">
                     <div class="page-header">
                         <div class="page-title">
-                            <h1>基础数据</h1>
+                            <h1>数据管理</h1>
                         </div>
                     </div>
                 </div><!-- /# column -->
@@ -73,7 +73,7 @@
                     <div class="page-header">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li><a href="#">基础数据</a></li>
+                                <li><a href="${pageContext.request.contextPath}/product/findAll.do">产品管理</a></li>
                                 <li class="active">所有产品表</li>
                             </ol>
                         </div>
