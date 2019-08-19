@@ -98,7 +98,13 @@ public class TouristController {
         model.addAttribute("tourist", byId);
         return "updateTourist";
     }
-
+    /**
+     * description: 更新游客信息
+     *
+     * @param tourist 游客信息引用
+     * @param result 数据验证的结果集,如果没错误的话,重定向到findAllTourist.do,有错误返回本页视图,显示错误信息
+     * @return java.lang.String
+     */
     @PostMapping("/updateTourist.do")
     public String updateTourist(@Valid Tourist tourist, BindingResult result) {
         if (result.hasErrors()) {

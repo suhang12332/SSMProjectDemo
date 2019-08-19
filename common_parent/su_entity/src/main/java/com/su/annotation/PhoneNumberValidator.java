@@ -13,12 +13,10 @@ import javax.validation.ConstraintValidatorContext;
  * @description
  * @date 2019/8/19 下午9:28
  */
-
-/**
- * PhoneNumber为自定义注解,String为注解的参数类型
- */
-
 public class PhoneNumberValidator implements ConstraintValidator<PhoneNumber, String> {
+    /**
+     * PhoneNumber为自定义注解,String为注解的参数类型
+     */
     @Override
     public boolean isValid(String value, ConstraintValidatorContext constraintValidatorContext) {
         //value就是要验证的数据
