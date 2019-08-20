@@ -50,4 +50,10 @@ public class TouristServiceImpl extends BaseServiceImpl<Tourist> implements Tour
 
         return touristDao.update(tourist);
     }
+
+
+    @Override
+    public List<Tourist> selectTouristByCredentialsNum(String credentialsNum) {
+        return touristDao.selectTouristByCredentialsNum(credentialsNum);
+    }
 }

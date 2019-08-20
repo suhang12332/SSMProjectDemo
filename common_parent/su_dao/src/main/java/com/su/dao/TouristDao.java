@@ -76,4 +76,22 @@ public interface TouristDao extends BaseDao<Tourist> {
     @Override
     @Update("update tourist set passengerName=#{passengerName},passengerSex=#{passengerSex},passengerPhoneNumber=#{passengerPhoneNumber},credentialsType=#{credentialsType},credentialsNum=#{credentialsNum},passengerType=#{passengerType} where passengerId=#{passengerId}")
     int update(Tourist tourist);
+
+    /**
+     * description: 根据查询证件号码游客信息个数
+     *
+     * @param credentialsNum 证件号码
+     * @return int 返回查询个数
+     */
+    @Select("select * from tourist where credentialsNum=#{credentialsNum}")
+    List<Tourist> selectTouristByCredentialsNum(@Param("credentialsNum") String credentialsNum);
+
+    /**
+     * description: 根据电话查询游客信息个数
+     *
+     * @param phoneNumber 电话
+     * @return int 返回查询个数
+     */
+    @Select("select * from tourist where passengerPhoneNumber=#{phoneNumber}")
+    List<Tourist> selectTouristByPhoneNumber(@Param("phoneNumber") String phoneNumber);
 }

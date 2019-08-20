@@ -158,7 +158,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">支付方式</label>
                                                 <div class="col-sm-8">
-                                                    <form:select path="payType" cssClass="form-control btn btn-primary">
+                                                    <form:select path="payType" cssClass="form-control btn btn-primary" itemValue="${orders.payType}">
                                                         <label>请选择支付方式</label>
                                                         <form:option value="0" cssClass="form-control btn btn-primary">支付宝</form:option>
                                                         <form:option value="1" cssClass="form-control btn btn-primary">微信</form:option>
@@ -170,7 +170,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">订单状态</label>
                                                 <div class="col-sm-8">
-                                                    <form:select path="orderStatus" cssClass="form-control btn btn-primary">
+                                                    <form:select path="orderStatus" cssClass="form-control btn btn-primary" itemValue="${orders.orderStatus}">
                                                         <label>请选择支付方式</label>
                                                         <form:option value="0" cssClass="form-control btn btn-primary">未支付</form:option>
                                                         <form:option value="1" cssClass="form-control btn btn-primary">已支付</form:option>

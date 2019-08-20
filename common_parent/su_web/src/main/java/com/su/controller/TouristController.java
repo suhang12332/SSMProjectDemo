@@ -1,5 +1,6 @@
 package com.su.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.su.entity.Tourist;
 import com.su.service.TouristService;
 
@@ -10,8 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -112,5 +116,11 @@ public class TouristController {
         }
         touristService.update(tourist);
         return "redirect:findAllTourist.do";
+    }
+    @ResponseBody
+    @GetMapping("/judeTouristPhoneNumber.do")
+    public Integer selectTouristByPhoneNumber(@RequestParam("credentialsNum") String credentialsNum) {
+        List<Tourist> tourists = touristService.selectTouristByCredentialsNum(credentialsNum);
+        return tourists.size();
     }
 }

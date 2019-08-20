@@ -163,10 +163,10 @@
                                                     </c:if>
                                                 </td>
                                                 <td>
-                                                    <c:if test="${orders[stat.index].payType==1}">
+                                                    <c:if test="${orders[stat.index].orderStatus==1}">
                                                         已支付
                                                     </c:if>
-                                                    <c:if test="${orders[stat.index].payType==0}">
+                                                    <c:if test="${orders[stat.index].orderStatus==0}">
                                                         未支付
                                                     </c:if>
                                                 </td>
