@@ -127,9 +127,10 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">联系方式</label>
                                                 <div class="col-sm-8">
-                                                    <form:input path="passengerPhoneNumber" cssClass="form-control" value="${tourist.passengerPhoneNumber}" placeholder="联系方式"/>
+                                                    <form:input path="passengerPhoneNumber" cssClass="form-control" value="${tourist.passengerPhoneNumber}" placeholder="联系方式" id="phoneNumber" onkeyup="judeTouristPhoneNumber()"/>
                                                 </div>
-                                                <label class="col-sm-2 control-label" style="color: red"><form:errors path="passengerPhoneNumber"/> </label>
+                                                <label class="col-sm-2 control-label" style="color: red" id="errorPhoneNumber"><form:errors path="passengerPhoneNumber"/> </label>
+                                                <input value="${tourist.passengerPhoneNumber}" style="display: none" id="phoneNum">
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">证件类型</label>
@@ -146,10 +147,12 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">证件号码</label>
                                                 <div class="col-sm-8">
-                                                    <form:input path="credentialsNum" cssClass="form-control" value="${tourist.credentialsNum}" placeholder="证件号码" id="credentialsNum" onkeyup="judgeTourist()"/>
+                                                    <form:input path="credentialsNum" cssClass="form-control" value="${tourist.credentialsNum}" placeholder="证件号码" id="credentialsNum" onkeyup="judgeTouristCredentialsNum()"/>
                                                 </div>
-                                                <label class="col-sm-2 control-label" style="color: red" id="error"><form:errors path="credentialsNum" />  </label>
-                                                <input value="${tourist.passengerPhoneNumber}" style="display: none" id="phoneNumber">
+                                                <label class="col-sm-2 control-label" style="color: red"><form:errors path="credentialsNum"/>  </label>
+                                                <label class="col-sm-2 control-label" style="color: red" id="errorCredentialsNum"><form:errors path="credentialsNum" />  </label>
+                                                <input value="${tourist.passengerPhoneNumber}" style="display: none" id="credentials">
+                                            </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">游客类型</label>
@@ -204,17 +207,15 @@
                                            minView: 0,  //0表示可以选择小时、分钟   1只可以选择小时
                                            minuteStep: 1//分钟间隔1分钟
                                        });
-    function judgeTourist() {
-        $("#error").html("");
-        var credentialsNum = document.getElementById("credentialsNum").value;
-        var value = document.getElementById("phoneNumber").value;
-        var b1 = credentialsNum == value;
-        console.log(b1)
+    function judeTouristPhoneNumber() {
+        $("#errorPhoneNumber").html("");
+        var phoneNumber = document.getElementById("phoneNumber").value;
+        var value = document.getElementById("phoneNum").value;
+        var b1 = phoneNumber == value;
         if (!b1) {
-
             $.ajax({
                        //请求路径
-                       url:"${pageContext.request.contextPath}/tourist/judeTouristPhoneNumber.do?credentialsNum="+credentialsNum,
+                       url:"${pageContext.request.contextPath}/tourist/judeTouristPhoneNumber.do?phoneNumber="+phoneNumber,
                        //请求方式
                        type:"get",
                        //data表示发送的数据
@@ -224,7 +225,33 @@
                        //响应的结果
                        success:function (data) {
                            if (data !=0) {
-                               $("#error").html("该证件号已经存在");
+                               $("#errorPhoneNumber").html("该联系方式已经存在");
+                           }
+                       }
+                   });
+        }
+    }
+    function judgeTouristCredentialsNum() {
+        $("#errorCredentialsNum").html("");
+        var credentialsNum = document.getElementById("credentialsNum").value;
+        console.log(credentialsNum)
+        var value = document.getElementById("credentials").value;
+        console.log(value)
+        var b1 = credentialsNum == value;
+        if (!b1) {
+            $.ajax({
+                       //请求路径
+                       url:"${pageContext.request.contextPath}/tourist/judeTouristCredentialsNum.do?credentialsNum="+credentialsNum,
+                       //请求方式
+                       type:"get",
+                       //data表示发送的数据
+                       data:{},
+                       //定义回调响应的数据格式为JSON字符串,该字符串可以省略
+                       dataType:"json",
+                       //响应的结果
+                       success:function (data) {
+                           if (data !=0) {
+                               $("#errorCredentialsNum").html("该证件号码已经存在");
                            }
                        }
                    });

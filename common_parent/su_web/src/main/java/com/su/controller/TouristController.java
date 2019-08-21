@@ -117,10 +117,24 @@ public class TouristController {
         touristService.update(tourist);
         return "redirect:findAllTourist.do";
     }
+    /**
+     * description: 接受前台的ajax传来的请求,根据游客证件号码查询游客信息
+     *
+     * @param credentialsNum 证件号码
+     * @return java.lang.Integer
+     */
     @ResponseBody
-    @GetMapping("/judeTouristPhoneNumber.do")
-    public Integer selectTouristByPhoneNumber(@RequestParam("credentialsNum") String credentialsNum) {
+    @GetMapping("/judeTouristCredentialsNum.do")
+    public int selectTouristByCredentialsNum(@RequestParam("credentialsNum") String credentialsNum) {
         List<Tourist> tourists = touristService.selectTouristByCredentialsNum(credentialsNum);
         return tourists.size();
     }
+
+    @ResponseBody
+    @GetMapping("/judeTouristPhoneNumber.do")
+    public Integer selectTouristByPhoneNumber(@RequestParam("phoneNumber") String phoneNumber) {
+        List<Tourist> tourists = touristService.selectTouristByPhoneNumber(phoneNumber);
+        return tourists.size();
+    }
+
 }

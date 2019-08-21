@@ -136,14 +136,22 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">产品编号</label>
                                                 <div class="col-sm-8">
-                                                    <form:input path="productId" cssClass="form-control" value="${orders.product.productId}" placeholder="产品编号"/>
+                                                    <form:select  path="productId" cssStyle="outline: none" cssClass="form-control btn" value="${orders.product.productId}" placeholder="产品编号">
+                                                        <c:forEach begin="0" end="${product.size()-1}" varStatus="stat">
+                                                            <form:option value="${product[stat.index].productId}">${product[stat.index].productName}</form:option>
+                                                        </c:forEach>
+                                                    </form:select>
                                                 </div>
                                                 <label class="col-sm-2 control-label" style="color: red"><form:errors path="productId"/> </label>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">会员编号</label>
                                                 <div class="col-sm-8">
-                                                    <form:input path="memberidId" cssClass="form-control" value="${orders.memberid.memberidId}" placeholder="会员编号"/>
+                                                    <form:select path="memberidId" cssStyle="outline: none" cssClass="form-control" value="${orders.memberid.memberidId}" placeholder="会员编号">
+                                                        <c:forEach begin="0" end="${memberid.size()-1}" varStatus="stat">
+                                                            <form:option value="${memberid[stat.index].memberidId}">${memberid[stat.index].memberidName}</form:option>
+                                                        </c:forEach>
+                                                    </form:select>
                                                 </div>
                                                 <label class="col-sm-2 control-label" style="color: red"><form:errors path="memberidId"/> </label>
                                             </div>

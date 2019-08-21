@@ -24,30 +24,7 @@
 //             swal("删除 !!", "嘿，文件已被删除 !!", "成功");
 //         });
 // };
-function deletebyId(){
-    swal({
-            title: "你确定要删除吗 ?",
-            text: "你将永远失去,不能再被恢复 !!",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "是的,删除它 !!",
-            cancelButtonText: "不，取消它 !!",
-            closeOnConfirm: false,
-            // closeOnCancel: false
-        },
-        function(isConfirm){
-            if (isConfirm) {
-                swal("删除成功 !!", "嘿 ,记录已被删除 !!", "success");
-                var elementById = document.getElementById("delete");
-                console.log(elementById);
-                elementById.click();
-            }
-            else {
-                swal("已取消 !!", "嘿 ,记录很安全 !!", "error");
-            }
-        });
-};
+
 // document.querySelector('.sweet-image-message').onclick = function(){
 //     swal({
 //         title: "Sweet !!",

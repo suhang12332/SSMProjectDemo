@@ -18,7 +18,15 @@ public interface TouristService extends BaseService<Tourist> {
      * description: 根据证件号码查询游客信息
      *
      * @param credentialsNum 证件号码
-     * @return int 查询总数
+     * @return java.util.List<com.su.entity.Tourist>
      */
     List<Tourist> selectTouristByCredentialsNum(String credentialsNum);
+
+    /**
+     * description: 根据电话号码查询游客信息
+     *
+     * @param phoneNumber 电话号码
+     * @return java.util.List<com.su.entity.Tourist>
+     */
+    List<Tourist> selectTouristByPhoneNumber(String phoneNumber);
 }

@@ -173,10 +173,8 @@
                                                     <button
                                                             class="ti-trash btn  "
                                                             style="background: transparent;outline: none;"
-                                                            onclick="deletebyId()">
+                                                            onclick="deletebyId3(${tourist[stat.index].passengerId})">
                                                     </button>
-                                                    <span id="delete"
-                                                          onclick="window.location.href='${pageContext.request.contextPath}/tourist/deleteTouristById.do?id=${tourist[stat.index].passengerId}'"></span>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -203,11 +201,32 @@
 <script src="${pageContext.request.contextPath}/js/lib/mmc-chat.js"></script>
 <script src="${pageContext.request.contextPath}/js/lib/sweetalert/sweetalert.min.js"></script>
 <!-- scripit init-->
-<script src="${pageContext.request.contextPath}/js/lib/sweetalert/sweetalert.init.js"></script>
-<!-- scripit init-->
 <script src="${pageContext.request.contextPath}/js/scripts.js"></script><!-- scripit init-->
 
-
+<script type="text/javascript">
+    function deletebyId3(id){
+        swal({
+                 title: "你确定要删除吗 ?",
+                 text: "你将永远失去,不能再被恢复 !!",
+                 type: "warning",
+                 showCancelButton: true,
+                 confirmButtonColor: "#DD6B55",
+                 confirmButtonText: "是的,删除它 !!",
+                 cancelButtonText: "不，取消它 !!",
+                 closeOnConfirm: false,
+                 // closeOnCancel: false
+             },
+             function(isConfirm){
+                 if (isConfirm) {
+                     swal("删除成功 !!", "嘿 ,记录已被删除 !!", "success");
+                     window.location.href='${pageContext.request.contextPath}/tourist/deleteTouristById.do?id='+id
+                 }
+                 else {
+                     swal("已取消 !!", "嘿 ,记录很安全 !!", "error");
+                 }
+             });
+    };
+</script>
 </body>
 
 </html>

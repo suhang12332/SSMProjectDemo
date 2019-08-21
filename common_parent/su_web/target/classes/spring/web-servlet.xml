@@ -9,7 +9,7 @@
     <!--导入applicationService配置文件-->
     <import resource="applicationContext-service.xml"/>
     <!--自动注册组件-->
-    <mvc:annotation-driven/>
+
     <!--试图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="internalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"/>
@@ -47,9 +47,9 @@
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean"/>
 
     <!--开启spring的valid功能-->
-    <mvc:annotation-driven conversion-service="conversionService" validator="validatorFactoryBean"/>
+    <mvc:annotation-driven conversion-service="conversionService" validator="validatorFactoryBean">
     <!--fast json配置-->
-    <mvc:annotation-driven>
+
         <!--不使用json数据转换器-->
         <mvc:message-converters register-defaults="false">
             <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">

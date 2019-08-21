@@ -1,8 +1,13 @@
 package com.su.controller;
 
+import com.su.entity.Memberid;
 import com.su.entity.Orders;
+import com.su.entity.Product;
 import com.su.exception.BaseException;
+import com.su.service.MemberidService;
 import com.su.service.OrdersService;
+import com.su.service.ProductService;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,16 +34,16 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/orders")
 public class OrdersController extends BaseException {
-    /**
-     * description: 构造方法注入orderService,其实现类为OrderServiceImpl
-     *
-     * @param ordersService 要注入的引用值
-     * @return 无返回值
-     */
+    private ProductService productService;
     private OrdersService ordersService;
+    private MemberidService memberidService;
     @Autowired
-    public OrdersController(@Qualifier("ordersServiceImpl") OrdersService ordersService) {
+    public OrdersController(@Qualifier("ordersServiceImpl") OrdersService ordersService,
+                            @Qualifier("productServiceImpl") ProductService productService,
+                            @Qualifier("memberidServiceImpl") MemberidService memberidService) {
         this.ordersService = ordersService;
+        this.productService = productService;
+        this.memberidService = memberidService;
     }
     /**
      * description: 查询所有的订单信息
@@ -71,6 +76,10 @@ public class OrdersController extends BaseException {
      */
     @GetMapping("/toAdd.do")
     public String toAdd(Model model) {
+        List<Product> all = productService.findAll();
+        List<Memberid> all1 = memberidService.findAll();
+        model.addAttribute("product", all);
+        model.addAttribute("memberid", all1);
         model.addAttribute("orders", new Orders());
         return "addOrders";
     }
@@ -81,8 +90,12 @@ public class OrdersController extends BaseException {
      * @return java.lang.String 返回到查询订单的操作的方法
      */
     @PostMapping("/addOrders.do")
-    public String addOrders(@Valid Orders orders, BindingResult result) {
+    public String addOrders(@Valid Orders orders, BindingResult result,Model model) {
         if (result.hasErrors()) {
+            List<Product> all = productService.findAll();
+            List<Memberid> all1 = memberidService.findAll();
+            model.addAttribute("product", all);
+            model.addAttribute("memberid", all1);
             return "addOrders";
         }
         ordersService.insert(orders);

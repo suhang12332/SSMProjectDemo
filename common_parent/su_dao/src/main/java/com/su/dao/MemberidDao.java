@@ -9,6 +9,8 @@ import org.apache.ibatis.annotations.ResultType;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA
  *
@@ -30,4 +32,11 @@ public interface MemberidDao extends BaseDao<Memberid> {
     @Select("select * from memberid where memberidId=#{id}")
     @ResultType(Memberid.class)
     Memberid findById(@Param("id") Integer id);
+    /**
+     * description: 查询所有的会员信息
+     * @return java.util.List<com.su.entity.Memberid>
+     */
+    @Override
+    @Select("select * from memberid")
+    List<Memberid> findAll();
 }

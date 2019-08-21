@@ -179,10 +179,8 @@
                                                     <button
                                                             class="ti-trash btn  "
                                                             style="background: transparent;outline: none;"
-                                                            onclick="deletebyId()">
+                                                            onclick="deletebyId1(${orders[stat.index].orderId})">
                                                     </button>
-                                                    <span id="delete"
-                                                          onclick="window.location.href='${pageContext.request.contextPath}/orders/deleteOrdersById.do?id=${orders[stat.index].orderId}'"></span>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -213,7 +211,30 @@
 <!-- scripit init-->
 <script src="${pageContext.request.contextPath}/js/scripts.js"></script><!-- scripit init-->
 
-
+<script type="text/javascript">
+    function deletebyId1(id){
+        swal({
+                 title: "你确定要删除吗 ?",
+                 text: "你将永远失去,不能再被恢复 !!",
+                 type: "warning",
+                 showCancelButton: true,
+                 confirmButtonColor: "#DD6B55",
+                 confirmButtonText: "是的,删除它 !!",
+                 cancelButtonText: "不，取消它 !!",
+                 closeOnConfirm: false,
+                 // closeOnCancel: false
+             },
+             function(isConfirm){
+                 if (isConfirm) {
+                     swal("删除成功 !!", "嘿 ,记录已被删除 !!", "success");
+                     window.location.href='${pageContext.request.contextPath}/orders/deleteOrdersById.do?id='+id
+                 }
+                 else {
+                     swal("已取消 !!", "嘿 ,记录很安全 !!", "error");
+                 }
+             });
+    };
+</script>
 </body>
 
 </html>

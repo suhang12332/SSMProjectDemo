@@ -56,4 +56,9 @@ public class TouristServiceImpl extends BaseServiceImpl<Tourist> implements Tour
     public List<Tourist> selectTouristByCredentialsNum(String credentialsNum) {
         return touristDao.selectTouristByCredentialsNum(credentialsNum);
     }
+
+    @Override
+    public List<Tourist> selectTouristByPhoneNumber(String phoneNumber) {
+        return touristDao.selectTouristByPhoneNumber(phoneNumber);
+    }
 }
