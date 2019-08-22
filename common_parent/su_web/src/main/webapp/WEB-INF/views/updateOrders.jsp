@@ -144,21 +144,29 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">产品编号</label>
                                                 <div class="col-sm-8">
-                                                    <form:input path="productId" cssClass="form-control" value="${orders.product.productId}" placeholder="产品编号"/>
+                                                    <form:select  path="product.productId" cssStyle="outline: none" cssClass="form-control btn" itemValue="${orders.product.productId}">
+                                                        <c:forEach begin="0" end="${product.size()-1}" varStatus="stat">
+                                                                <form:option value="${product[stat.index].productId}">${product[stat.index].productName}</form:option>
+                                                        </c:forEach>
+                                                    </form:select>
                                                 </div>
-                                                <label class="col-sm-2 control-label" style="color: red"><form:errors path="productId"/> </label>
+                                                <label class="col-sm-2 control-label" style="color: red"> </label>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">会员编号</label>
                                                 <div class="col-sm-8">
-                                                    <form:input path="memberidId" cssClass="form-control" value="${orders.memberid.memberidId}" placeholder="会员编号"/>
+                                                    <form:select path="memberid.memberidId" cssStyle="outline: none" cssClass="form-control" placeholder="会员编号">
+                                                        <c:forEach begin="0" end="${memberid.size()-1}" varStatus="stat">
+                                                                <form:option value="${memberid[stat.index].memberidId}">${memberid[stat.index].memberidName}</form:option>
+                                                        </c:forEach>
+                                                    </form:select>
                                                 </div>
-                                                <label class="col-sm-2 control-label" style="color: red"><form:errors path="memberidId"/> </label>
+                                                <label class="col-sm-2 control-label" style="color: red"></label>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">支付方式</label>
                                                 <div class="col-sm-8">
-                                                    <form:select path="payType" cssClass="form-control btn btn-primary" itemValue="${orders.payType}">
+                                                    <form:select path="payType" cssClass="form-control btn btn-primary" >
                                                         <label>请选择支付方式</label>
                                                         <form:option value="0" cssClass="form-control btn btn-primary">支付宝</form:option>
                                                         <form:option value="1" cssClass="form-control btn btn-primary">微信</form:option>
@@ -170,7 +178,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">订单状态</label>
                                                 <div class="col-sm-8">
-                                                    <form:select path="orderStatus" cssClass="form-control btn btn-primary" itemValue="${orders.orderStatus}">
+                                                    <form:select path="orderStatus" cssClass="form-control btn btn-primary" >
                                                         <label>请选择支付方式</label>
                                                         <form:option value="0" cssClass="form-control btn btn-primary">未支付</form:option>
                                                         <form:option value="1" cssClass="form-control btn btn-primary">已支付</form:option>

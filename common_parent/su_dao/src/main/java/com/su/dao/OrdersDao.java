@@ -71,7 +71,7 @@ public interface OrdersDao extends BaseDao<Orders> {
      * @return int 操作的行数
      */
     @Override
-    @Insert("insert into orders (orderTime, peopleCount, orderDesc, payType, orderStatus, productId, memberidId) values (#{orderTime,jdbcType=TIMESTAMP},#{peopleCount},#{orderDesc},#{payType},#{orderStatus},#{productId},#{memberidId})")
+    @Insert("insert into orders (orderTime, peopleCount, orderDesc, payType, orderStatus, productId, memberidId) values (#{orderTime,jdbcType=TIMESTAMP},#{peopleCount},#{orderDesc},#{payType},#{orderStatus},#{product.productId},#{memberid.memberidId})")
     int insert(Orders orders);
 
 
@@ -105,7 +105,7 @@ public interface OrdersDao extends BaseDao<Orders> {
      * @return int
      */
     @Override
-    @Update("update orders set orderTime=#{orderTime,jdbcType=TIMESTAMP},peopleCount=#{peopleCount},orderDesc=#{orderDesc},payType=#{payType},orderStatus=#{orderStatus},productId=#{productId},memberidId=#{memberidId} where orderId=#{orderId}")
+    @Update("update orders set orderTime=#{orderTime,jdbcType=TIMESTAMP},peopleCount=#{peopleCount},orderDesc=#{orderDesc},payType=#{payType},orderStatus=#{orderStatus},productId=#{product.productId},memberidId=#{memberid.memberidId} where orderId=#{orderId}")
     int update(Orders orders);
 
 }

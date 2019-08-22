@@ -149,10 +149,8 @@
                                                 <div class="col-sm-8">
                                                     <form:input path="credentialsNum" cssClass="form-control" value="${tourist.credentialsNum}" placeholder="证件号码" id="credentialsNum" onkeyup="judgeTouristCredentialsNum()"/>
                                                 </div>
-                                                <label class="col-sm-2 control-label" style="color: red"><form:errors path="credentialsNum"/>  </label>
                                                 <label class="col-sm-2 control-label" style="color: red" id="errorCredentialsNum"><form:errors path="credentialsNum" />  </label>
                                                 <input value="${tourist.passengerPhoneNumber}" style="display: none" id="credentials">
-                                            </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">游客类型</label>

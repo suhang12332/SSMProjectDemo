@@ -63,16 +63,6 @@ public class Orders {
     /**
      * 会员信息
      */
-
     private Memberid memberid;
-    /**
-     * 会员id(外键)
-     */
-    @NotNull(message = "{orders.memberidId}")
-    private Integer memberidId;
-    /**
-     * 产品id(外键)
-     */
-    @NotNull(message = "{orders.productId}")
-    private Integer productId;
+
 }

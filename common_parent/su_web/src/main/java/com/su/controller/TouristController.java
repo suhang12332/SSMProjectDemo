@@ -129,7 +129,12 @@ public class TouristController {
         List<Tourist> tourists = touristService.selectTouristByCredentialsNum(credentialsNum);
         return tourists.size();
     }
-
+    /**
+     * description: 接受前台的ajax传来的请求,根据游客联系方式查询游客信息
+     *
+     * @param phoneNumber 电话号码
+     * @return java.lang.Integer
+     */
     @ResponseBody
     @GetMapping("/judeTouristPhoneNumber.do")
     public Integer selectTouristByPhoneNumber(@RequestParam("phoneNumber") String phoneNumber) {

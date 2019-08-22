@@ -121,14 +121,31 @@ public class OrdersController extends BaseException {
      */
     @GetMapping("/toUpdate.do")
     public String toUpdate(@RequestParam("id") Integer id,Model model) {
+        List<Product> all = productService.findAll();
+        List<Memberid> all1 = memberidService.findAll();
+        model.addAttribute("product", all);
+        model.addAttribute("memberid", all1);
         Orders byId = ordersService.findById(id);
         model.addAttribute("orders", byId);
+        System.out.println(all);
+        System.out.println(all1);
+        System.out.println(byId);
         return "updateOrders";
     }
-
+    /**
+     * description: 更新订单信息
+     *
+     * @param orders 订单信息引用
+     * @param result jsr数据验证结果集
+     * @return java.lang.String
+     */
     @PostMapping("/updateOrders.do")
-    public String updateOrders(@Valid Orders orders, BindingResult result) {
+    public String updateOrders(@Valid Orders orders, BindingResult result,Model model) {
         if (result.hasErrors()) {
+            List<Product> all = productService.findAll();
+            List<Memberid> all1 = memberidService.findAll();
+            model.addAttribute("product", all);
+            model.addAttribute("memberid", all1);
             return "updateOrders";
         }
         ordersService.update(orders);
