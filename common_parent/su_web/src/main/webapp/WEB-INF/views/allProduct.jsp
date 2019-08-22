@@ -160,14 +160,13 @@
                                                         关闭
                                                     </c:if></td>
                                                 <td style="text-align: -webkit-center;">
-                                                    <button onclick="window.location.href='${pageContext.request.contextPath}/product/toUpdate.do?id=${all[stat.index].productId}'"
-                                                            class="ti-pencil btn"
-                                                            style="background:transparent;outline:none;"></button>
-                                                    <button
-                                                            class="ti-trash btn  "
-                                                            style="background: transparent;outline: none;"
+                                                    <i onclick="window.location.href='${pageContext.request.contextPath}/product/toUpdate.do?id=${all[stat.index].productId}'"
+                                                            class="ti-pencil"
+                                                            style="cursor: pointer;z-index: 999"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <i class="ti-trash "
+                                                            style="cursor: pointer;z-index: 999"
                                                             onclick="deletebyId2(${all[stat.index].productId})">
-                                                    </button>
+                                                    </i>
                                                 </td>
                                             </tr>
                                             </tbody>

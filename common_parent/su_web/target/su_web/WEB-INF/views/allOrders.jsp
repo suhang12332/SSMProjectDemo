@@ -141,7 +141,7 @@
                                                    end="${orders.size()}">
 
                                             <tbody>
-                                            <tr>
+                                            <tr onclick="window.location.href='${pageContext.request.contextPath}/orders/orderInformation.do?id='+${orders[stat.index].orderId}">
                                                 <th scope="row">${stat.index+1}</th>
                                                 <td>${orders[stat.index].orderId}</td>
                                                 <td><fmt:formatDate
@@ -173,14 +173,13 @@
                                                 <td>${orders[stat.index].product.productId}</td>
                                                 <td>${orders[stat.index].memberid.memberidId}</td>
                                                 <td style="text-align: -webkit-center;">
-                                                    <button onclick="window.location.href='${pageContext.request.contextPath}/orders/toUpdate.do?id=${orders[stat.index].orderId}'"
-                                                            class="ti-pencil btn"
-                                                            style="background:transparent;outline:none;"></button>
-                                                    <button
-                                                            class="ti-trash btn  "
-                                                            style="background: transparent;outline: none;"
+                                                    <i onclick="window.location.href='${pageContext.request.contextPath}/orders/toUpdate.do?id=${orders[stat.index].orderId}'"
+                                                            class="ti-pencil"
+                                                            style="cursor: pointer;z-index: 999"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <i class="ti-trash  "
+                                                            style="cursor: pointer;z-index: 999"
                                                             onclick="deletebyId1(${orders[stat.index].orderId})">
-                                                    </button>
+                                                    </i>
                                                 </td>
                                             </tr>
                                             </tbody>
