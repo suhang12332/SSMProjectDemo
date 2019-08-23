@@ -49,7 +49,7 @@ public interface OrdersDao extends BaseDao<Orders> {
             @Result(property = "orderStatus", column = "orderStatus", javaType = Integer.class),
             @Result(property = "product",column = "productId",javaType = com.su.entity.Product.class,one=@One(select = "com.su.dao.ProductDao.findById",fetchType = FetchType.EAGER)),
             @Result(property = "memberid", column = "memberidId", javaType = com.su.entity.Memberid.class, one = @One(select = "com.su.dao.MemberidDao.findById", fetchType = FetchType.EAGER)),
-            @Result(property = "tourists" ,column = "orderId",javaType = java.util.List.class,many =@Many(select = "com.su.dao.OrdersAndTouristDao.findByOrdersId",fetchType = FetchType.EAGER))
+            @Result(property = "tourists" ,column = "orderId",javaType = java.util.List.class,many =@Many(select = "com.su.dao.TouristDao.findTouristByOrdersId",fetchType = FetchType.EAGER))
     })
     @Select("select * from orders")
     List<Orders> findAll();

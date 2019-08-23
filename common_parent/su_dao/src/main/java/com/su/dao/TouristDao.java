@@ -94,4 +94,8 @@ public interface TouristDao extends BaseDao<Tourist> {
      */
     @Select("select * from tourist where passengerPhoneNumber=#{phoneNumber}")
     List<Tourist> selectTouristByPhoneNumber(@Param("phoneNumber") String phoneNumber);
+
+    @Select("select * from tourist where passengerId in (select touristId from orders_tourist where orderId=#{id})")
+    List<Tourist> findTouristByOrdersId(@Param("id") Integer id);
+
 }
