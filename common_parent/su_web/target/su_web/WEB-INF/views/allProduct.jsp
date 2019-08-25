@@ -43,7 +43,14 @@
           rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/lib/nixon.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/lib/font-awesome.min.css" rel="stylesheet">
 
+    <link href="${pageContext.request.contextPath}/css/lib/jsgrid/jsgrid-theme.min.css"
+          rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/css/lib/jsgrid/jsgrid.min.css" type="text/css"
+          rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/css/lib/menubar/sidebar.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/lib/helper.css" rel="stylesheet">
 
     <style type="text/css">
         th {
@@ -73,7 +80,7 @@
                     <div class="page-header">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li><a href="${pageContext.request.contextPath}/product/findAll.do">产品管理</a></li>
+                                <li><a href="${pageContext.request.contextPath}/product/findAll.do?page=1&size=5">产品管理</a></li>
                                 <li class="active">所有产品表</li>
                             </ol>
                         </div>
@@ -103,7 +110,7 @@
                                                                              role="link"></i>
                                             <ul class="card-option-dropdown dropdown-menu">
                                                 <li>
-                                                    <a href="${pageContext.request.contextPath}/product/findAll.do"><i
+                                                    <a href="${pageContext.request.contextPath}/product/findAll.do?page=1&size=5"><i
                                                             class="ti-loop"></i> 更新数据</a>
                                                 </li>
                                                 <li><a href="#"><i class="ti-menu-alt"></i> 详细日志</a>
@@ -119,10 +126,10 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <c:if test="${all.size()==0}">
+                                <c:if test="${all.list.size()==0}">
                                     <p style="text-align: center">没有产品信息</p>
                                 </c:if>
-                                <c:if test="${all.size()!=0}">
+                                <c:if test="${all.list.size()!=0}">
                                     <table class="table table-responsive table-hover"
                                            style="text-align: center">
                                         <thead>
@@ -138,34 +145,34 @@
                                             <th style="text-align: center">产品操作</th>
                                         </tr>
                                         </thead>
-                                        <c:forEach items="${all}" varStatus="stat" begin="0"
-                                                   end="${all.size()}">
-
+                                        <c:forEach items="${all.list}" varStatus="stat" begin="0"
+                                                   end="${all.size}" >
+<%----%>
                                             <tbody>
                                             <tr>
                                                 <th scope="row">${stat.index+1}</th>
-                                                <td>${all[stat.index].productId}</td>
-                                                <td>${all[stat.index].productName}</td>
-                                                <td>${all[stat.index].cityName}</td>
+                                                <td>${all.list[stat.index].productId}</td>
+                                                <td>${all.list[stat.index].productName}</td>
+                                                <td>${all.list[stat.index].cityName}</td>
                                                 <td><fmt:formatDate
-                                                        value="${all[stat.index].departureTime}"
+                                                        value="${all.list[stat.index].departureTime}"
                                                         pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                                                <td>￥${all[stat.index].productPrice}</td>
-                                                <td>${all[stat.index].productDesc}</td>
+                                                <td>￥${all.list[stat.index].productPrice}</td>
+                                                <td>${all.list[stat.index].productDesc}</td>
                                                 <td><c:if
-                                                        test="${all[stat.index].productStatus==1}">
+                                                        test="${all.list[stat.index].productStatus==1}">
                                                     开启
                                                 </c:if>
-                                                    <c:if test="${all[stat.index].productStatus==0}">
+                                                    <c:if test="${all.list[stat.index].productStatus==0}">
                                                         关闭
                                                     </c:if></td>
                                                 <td style="text-align: -webkit-center;">
-                                                    <i onclick="window.location.href='${pageContext.request.contextPath}/product/toUpdate.do?id=${all[stat.index].productId}'"
+                                                    <i onclick="window.location.href='${pageContext.request.contextPath}/product/toUpdate.do?id=${all.list[stat.index].productId}'"
                                                             class="ti-pencil"
                                                             style="cursor: pointer;z-index: 999"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                     <i class="ti-trash "
                                                             style="cursor: pointer;z-index: 999"
-                                                            onclick="deletebyId2(${all[stat.index].productId})">
+                                                            onclick="deletebyId2(${all.list[stat.index].productId})">
                                                     </i>
                                                 </td>
                                             </tr>
@@ -173,6 +180,28 @@
                                         </c:forEach>
                                     </table>
                                 </c:if>
+                                <hr style="margin-bottom: 10px;border-top: 0px solid;color: #ddd;">
+                                <div class="jsgrid-pager-container" style="display: block;">
+                                    <div class="jsgrid-pager">
+                                        <span class="jsgrid-pager-nav-button ">每页显示条数 <input type="text" onkeyup="size1()" id="size" style="border: solid 1px;BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none;BORDER-BOTTOM-STYLE: solid; outline: none;width: 3em;text-align:center" >条</span>
+                                        <span class="jsgrid-pager-nav-button ">当前页数 :</span><span class="jsgrid-pager-page jsgrid-pager-current-page" >${all.pageNum}</span>
+                                        <c:if test="${param.page>1}">
+                                            <span class="jsgrid-pager-nav-button ">
+                                            <a href="${pageContext.request.contextPath}/product/findAll.do?page=1&size=${all.pageSize}">首页</a>
+                                        </span>
+                                            <span class="jsgrid-pager-nav-button ">
+                                            <a href="${pageContext.request.contextPath}/product/findAll.do?page=${all.pageNum-1}&size=${all.pageSize}">上一页</a>
+                                        </span>
+                                        </c:if>
+                                        <c:if test="${param.page<all.pages}">
+                                            <span class="jsgrid-pager-nav-button"><a href="${pageContext.request.contextPath}/product/findAll.do?page=${all.pageNum+1}&size=${all.pageSize}" onclick="page()">下一页</a></span>
+                                            <span class="jsgrid-pager-nav-button"><a href="${pageContext.request.contextPath}/product/findAll.do?page=${all.pages}&size=${all.pageSize}">尾页</a></span> &nbsp;&nbsp;
+                                        </c:if>
+                                        <span class="jsgrid-pager-nav-button " style="float: right;">跳转到<input type="text" onkeyup="page()" id="page" style="border: solid 1px;BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none;BORDER-BOTTOM-STYLE: solid; outline: none;width: 3em;text-align:center" >页</span>
+                                        <span class="jsgrid-pager-nav-button " style="float: right;">共${all.pages}页</span>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div><!-- /# column -->
@@ -211,14 +240,22 @@
              function(isConfirm){
                  if (isConfirm) {
                      swal("删除成功 !!", "嘿 ,记录已被删除 !!", "success");
-                     window.location.href='${pageContext.request.contextPath}/orders/deleteOrdersByProductId.do?id='+id
+                     window.location.href='${pageContext.request.contextPath}/orders/selectOrdersIdByProductId.do?id='+id
                  }
                  else {
                      swal("已取消 !!", "嘿 ,记录很安全 !!", "error");
                  }
              });
-    };
+    }
+    function page() {
+        var val = document.getElementById("page").value;
+        window.location.href="${pageContext.request.contextPath}/product/findAll.do?page="+val+"&size=${param.size}"
+    }
+    function size1() {
+        var val= document.getElementById("size").value;
+        console.log(val)
+        window.location.href="${pageContext.request.contextPath}/product/findAll.do?page=1&size="+val
+    }
 </script>
 </body>
-
 </html>

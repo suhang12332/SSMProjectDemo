@@ -1,7 +1,9 @@
 package com.su.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 import com.su.entity.Tourist;
+import com.su.exception.BaseException;
 import com.su.service.TouristService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +33,7 @@ import javax.validation.Valid;
  */
 @Controller
 @RequestMapping("/tourist")
-public class TouristController {
+public class TouristController extends BaseException {
     /**
      * description: 构造方法注入tourService,指定其实现类的对象是touristServiceImpl
      *
@@ -48,9 +50,10 @@ public class TouristController {
      * @return java.lang.String
      */
     @GetMapping("/findAllTourist.do")
-    public String findAll(Model model) {
-        List<Tourist> all = touristService.findAll();
-        model.addAttribute("tourist", all);
+    public String findAll(@RequestParam(value = "page",required = true) int page,@RequestParam("size") int size,Model model) {
+        List<Tourist> all = touristService.findAll(page,size);
+        PageInfo<Tourist> touristPageInfo = new PageInfo<>(all);
+        model.addAttribute("tourist", touristPageInfo);
         return "allTourist";
     }
     /**
@@ -76,7 +79,7 @@ public class TouristController {
             return "addTourist";
         }
         touristService.insert(tourist);
-        return "redirect:findAllTourist.do";
+        return "redirect:findAllTourist.do?page=1&size=5";
     }
     /**
      * description: 根据游客id删除游客信息
@@ -87,7 +90,7 @@ public class TouristController {
     @GetMapping("/deleteTouristById.do")
     public String deleteTouristById(@RequestParam("id") Integer id) {
         touristService.deleteById(id);
-        return "redirect:findAllTourist.do";
+        return "redirect:findAllTourist.do?page=1&size=5";
     }
     /**
      * description: 根据id查询有游客信息
@@ -115,7 +118,7 @@ public class TouristController {
             return "updateTourist";
         }
         touristService.update(tourist);
-        return "redirect:findAllTourist.do";
+        return "redirect:findAllTourist.do?page=1&size=5";
     }
     /**
      * description: 接受前台的ajax传来的请求,根据游客证件号码查询游客信息

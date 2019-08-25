@@ -1,5 +1,7 @@
 package com.su.service.ordersserviceimpl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.su.dao.OrdersDao;
 import com.su.entity.Orders;
 import com.su.service.OrdersService;
@@ -25,15 +27,19 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
         super(ordersDao);
     }
 
+
     @Override
-    public List<Orders> findAll() {
-        return ordersDao.findAll();
+    public List<Orders> findAll(int page, int size) {
+        //参数pageMum是页码数,pageSize是每页显示的条数
+        PageHelper.startPage(page, size);
+        return ordersDao.findAll(page,size);
     }
 
     @Override
     public Orders findById(Integer id) {
         return ordersDao.findById(id);
     }
+
 
     @Override
     public int deleteById(Integer id) {
@@ -47,12 +53,16 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 
     @Override
     public int insert(Orders orders) {
-        System.out.println(orders);
         return ordersDao.insert(orders);
     }
 
     @Override
     public int update(Orders orders) {
         return ordersDao.update(orders);
+    }
+
+    @Override
+    public Orders findByProductId(Integer id) {
+        return ordersDao.findByProductId(id);
     }
 }

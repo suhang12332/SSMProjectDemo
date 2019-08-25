@@ -32,7 +32,7 @@
     <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
 
     <!-- Styles -->
-    <link href="${pageContext.request.contextPath}/fontAwesome/css/fontawesome-tourist.min.css"
+    <link href="${pageContext.request.contextPath}/fontAwesome/css/fontawesome-all.min.css"
           rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/lib/themify-icons.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/lib/weather-icons.css" rel="stylesheet">
@@ -43,6 +43,14 @@
           rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/lib/nixon.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/lib/font-awesome.min.css" rel="stylesheet">
+
+    <link href="${pageContext.request.contextPath}/css/lib/jsgrid/jsgrid-theme.min.css"
+          rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/css/lib/jsgrid/jsgrid.min.css" type="text/css"
+          rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/css/lib/menubar/sidebar.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/lib/helper.css" rel="stylesheet">
 
 
     <style type="text/css">
@@ -73,7 +81,7 @@
                     <div class="page-header">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li><a href="${pageContext.request.contextPath}/tourist/findAllTourist.do">游客管理</a></li>
+                                <li><a href="${pageContext.request.contextPath}/tourist/findAllTourist.do?page=1&size=5">游客管理</a></li>
                                 <li class="active">所有游客信息表</li>
                             </ol>
                         </div>
@@ -101,7 +109,7 @@
                                                                              role="link"></i>
                                             <ul class="card-option-dropdown dropdown-menu">
                                                 <li>
-                                                    <a href="${pageContext.request.contextPath}/tourist/findAllTourist.do"><i
+                                                    <a href="${pageContext.request.contextPath}/tourist/findAllTourist.do?page=1&size=5"><i
                                                             class="ti-loop"></i> 更新数据</a>
                                                 </li>
                                                 <li><a href="#"><i class="ti-menu-alt"></i> 详细日志</a>
@@ -117,10 +125,10 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <c:if test="${tourist.size()==0}">
+                                <c:if test="${tourist.size==0}">
                                     <p style="text-align: center">没有游客信息</p>
                                 </c:if>
-                                <c:if test="${tourist.size()!=0}">
+                                <c:if test="${tourist.size!=0}">
                                     <table class="table table-responsive table-hover"
                                            style="text-align: center">
                                         <thead>
@@ -136,43 +144,43 @@
                                             <th style="text-align: center">游客操作</th>
                                         </tr>
                                         </thead>
-                                        <c:forEach items="${tourist}" varStatus="stat" begin="0"
-                                                   end="${tourist.size()}">
+                                        <c:forEach items="${tourist.list}" varStatus="stat" begin="0"
+                                                   end="${tourist.size}">
 
                                             <tbody>
                                             <tr>
                                                 <th scope="row">${stat.index+1}</th>
-                                                <td>${tourist[stat.index].passengerId}</td>
-                                                <td>${tourist[stat.index].passengerName}</td>
-                                                <td>${tourist[stat.index].passengerSex}</td>
-                                                <td>${tourist[stat.index].passengerPhoneNumber}</td>
+                                                <td>${tourist.list[stat.index].passengerId}</td>
+                                                <td>${tourist.list[stat.index].passengerName}</td>
+                                                <td>${tourist.list[stat.index].passengerSex}</td>
+                                                <td>${tourist.list[stat.index].passengerPhoneNumber}</td>
                                                 <td>
-                                                    <c:if test="${tourist[stat.index].credentialsType==0}">
+                                                    <c:if test="${tourist.list[stat.index].credentialsType==0}">
                                                         身份证
                                                     </c:if>
-                                                    <c:if test="${tourist[stat.index].credentialsType==1}">
+                                                    <c:if test="${tourist.list[stat.index].credentialsType==1}">
                                                         护照
                                                     </c:if>
-                                                    <c:if test="${tourist[stat.index].credentialsType==2}">
+                                                    <c:if test="${tourist.list[stat.index].credentialsType==2}">
                                                         军官证
                                                     </c:if>
                                                 </td>
-                                                <td>${tourist[stat.index].credentialsNum}</td>
+                                                <td>${tourist.list[stat.index].credentialsNum}</td>
                                                 <td>
-                                                    <c:if test="${tourist[stat.index].passengerType==0}">
+                                                    <c:if test="${tourist.list[stat.index].passengerType==0}">
                                                         成人
                                                     </c:if>
-                                                    <c:if test="${tourist[stat.index].passengerType==1}">
+                                                    <c:if test="${tourist.list[stat.index].passengerType==1}">
                                                         儿童
                                                     </c:if>
                                                 </td>
                                                 <td style="text-align: -webkit-center;">
-                                                    <i onclick="window.location.href='${pageContext.request.contextPath}/tourist/toUpdate.do?id=${tourist[stat.index].passengerId}'"
+                                                    <i onclick="window.location.href='${pageContext.request.contextPath}/tourist/toUpdate.do?id=${tourist.list[stat.index].passengerId}'"
                                                             class="ti-pencil"
                                                             style="cursor: pointer;z-index: 999"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                     <i class="ti-trash "
                                                             style="cursor: pointer;z-index: 999"
-                                                            onclick="deletebyId3(${tourist[stat.index].passengerId})">
+                                                            onclick="deletebyId3(${tourist.list[stat.index].passengerId})">
                                                     </i>
                                                 </td>
                                             </tr>
@@ -180,6 +188,27 @@
                                         </c:forEach>
                                     </table>
                                 </c:if>
+                                <hr style="margin-bottom: 10px;border-top: 0px solid;color: #ddd;">
+                                <div class="jsgrid-pager-container" style="display: block;">
+                                    <div class="jsgrid-pager">
+                                        <span class="jsgrid-pager-nav-button ">每页显示条数 <input type="text" onkeyup="size3()" id="size" style="border: solid 1px;BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none;BORDER-BOTTOM-STYLE: solid; outline: none;width: 3em;text-align:center" >条</span>
+                                        <span class="jsgrid-pager-nav-button ">当前页数 :</span><span class="jsgrid-pager-page jsgrid-pager-current-page" >${tourist.pageNum}</span>
+                                        <c:if test="${param.page>1}">
+                                            <span class="jsgrid-pager-nav-button ">
+                                            <a href="${pageContext.request.contextPath}/tourist/findAllTourist.do?page=1&size=${tourist.pageSize}">首页</a>
+                                        </span>
+                                            <span class="jsgrid-pager-nav-button ">
+                                            <a href="${pageContext.request.contextPath}/tourist/findAllTourist.do?page=${tourist.pageNum-1}&size=${tourist.pageSize}">上一页</a>
+                                        </span>
+                                        </c:if>
+                                        <c:if test="${param.page<tourist.pages}">
+                                            <span class="jsgrid-pager-nav-button"><a href="${pageContext.request.contextPath}/tourist/findAllTourist.do?page=${tourist.pageNum+1}&size=${tourist.pageSize}" onclick="page()">下一页</a></span>
+                                            <span class="jsgrid-pager-nav-button"><a href="${pageContext.request.contextPath}/tourist/findAllTourist.do?page=${tourist.pages}&size=${tourist.pageSize}">尾页</a></span> &nbsp;&nbsp;
+                                        </c:if>
+                                        <span class="jsgrid-pager-nav-button " style="float: right;">跳转到<input type="text" onkeyup="page4()" id="page" style="border: solid 1px;BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none;BORDER-BOTTOM-STYLE: solid; outline: none;width: 3em;text-align:center" >页</span>
+                                        <span class="jsgrid-pager-nav-button " style="float: right;">共${tourist.pages}页</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div><!-- /# column -->
@@ -225,6 +254,15 @@
                  }
              });
     };
+    function page4() {
+        var val = document.getElementById("page").value;
+        window.location.href="${pageContext.request.contextPath}/tourist/findAllTourist.do?page="+val+"&size=${param.size}"
+    }
+    function size3() {
+        var val= document.getElementById("size").value;
+        console.log(val)
+        window.location.href="${pageContext.request.contextPath}/tourist/findAllTourist.do?page=1&size="+val
+    }
 </script>
 </body>
 

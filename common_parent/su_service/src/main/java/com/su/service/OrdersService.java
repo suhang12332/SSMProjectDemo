@@ -12,13 +12,14 @@ import java.util.List;
  */
 public interface OrdersService extends BaseService<Orders> {
     /**
-     * description: 查询所有的订单信息
+     * description: 查询所有的订单
      *
-     * @param
+     * @param page 页数
+     * @param size 每一页的条数
      * @return java.util.List<com.su.entity.Orders>
      */
     @Override
-    List<Orders> findAll();
+    List<Orders> findAll(int page,int size);
     /**
      * description: 因为删除一个产品时候的外键因素,所以先要删除订单表中的产品id
      *
@@ -51,4 +52,6 @@ public interface OrdersService extends BaseService<Orders> {
      */
     @Override
     int update(Orders orders);
+
+    Orders findByProductId(Integer id);
 }

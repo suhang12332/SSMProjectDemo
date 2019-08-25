@@ -21,10 +21,10 @@
                 <li>
                     <a class="sidebar-sub-toggle"><i class="ti-layout"></i> 数据管理 <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                     <ul>
-                        <li><a href="${pageContext.request.contextPath}/product/findAll.do">产品管理</a></li>
+                        <li><a href="${pageContext.request.contextPath}/product/findAll.do?page=1&size=5">产品管理</a></li>
                     </ul>
                     <ul>
-                        <li><a href="${pageContext.request.contextPath}/orders/findAllOrder.do">订单管理</a></li>
+                        <li><a href="${pageContext.request.contextPath}/orders/findAllOrder.do?page=1&size=5">订单管理</a></li>
                     </ul>
                 </li>
                 <li>
@@ -36,7 +36,7 @@
                 <li>
                     <a class="sidebar-sub-toggle"><i class="ti-user"></i> 游客管理 <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                     <ul>
-                        <li><a href="${pageContext.request.contextPath}/tourist/findAllTourist.do">游客信息</a></li>
+                        <li><a href="${pageContext.request.contextPath}/tourist/findAllTourist.do?page=1&size=5">游客信息</a></li>
                     </ul>
                 </li>
                 <li>

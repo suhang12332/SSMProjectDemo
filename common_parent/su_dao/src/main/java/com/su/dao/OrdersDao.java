@@ -37,6 +37,8 @@ public interface OrdersDao extends BaseDao<Orders> {
     /**
      * description: 查找所有的订单信息
      *
+     * @param page 页数
+     * @param size 每一页的条数
      * @return java.util.List<com.su.entity.Orders>
      */
     @Override
@@ -52,8 +54,7 @@ public interface OrdersDao extends BaseDao<Orders> {
             @Result(property = "tourists" ,column = "orderId",javaType = java.util.List.class,many =@Many(select = "com.su.dao.TouristDao.findTouristByOrdersId",fetchType = FetchType.EAGER))
     })
     @Select("select * from orders")
-    List<Orders> findAll();
-
+    List<Orders> findAll(int page,int size);
 
     /**
      * description: 因为删除一个产品时候的外键因素,所以先要删除订单表中的产品id
@@ -110,4 +111,14 @@ public interface OrdersDao extends BaseDao<Orders> {
     @Update("update orders set orderTime=#{orderTime,jdbcType=TIMESTAMP},peopleCount=#{peopleCount},orderDesc=#{orderDesc},payType=#{payType},orderStatus=#{orderStatus},productId=#{product.productId},memberidId=#{memberid.memberidId} where orderId=#{orderId}")
     int update(Orders orders);
 
+    /**
+     * description: 根据订单id查询订单信息 ,@ResultMap("findAll")为调用上面的Result
+     *
+     * @param id 查询条件
+     * @return com.su.entity.Orders 返回查找的数据
+     */
+    @ResultMap("findAll")
+    @Select("select * from orders where productId=#{id}")
+    @ResultType(List.class)
+    Orders findByProductId(Integer id);
 }

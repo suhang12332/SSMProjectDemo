@@ -26,16 +26,28 @@ import java.util.List;
 @Repository
 @Mapper
 public interface ProductDao extends BaseDao<Product> {
+
     /**
-     * description: 查询所有的信息
+     * description: 查询所有的产品
      *
-     * @return java.util.List<T>
+     * @param page 页数
+     * @param size 每页的条数
+     * @return java.util.List<com.su.entity.Product>
      */
     @Override
     @Select("select * from product")
     @ResultType(List.class)
-    List<Product> findAll();
+    List<Product> findAll(int page,int size);
 
+
+    /**
+     * description: 查询所有的产品不分页
+     *
+     * @return java.util.List<com.su.entity.Product>
+     */
+    @Select("select * from product")
+    @ResultType(List.class)
+    List<Product> findAllNoPage();
 
     /**
      * description: 根据id查询信息

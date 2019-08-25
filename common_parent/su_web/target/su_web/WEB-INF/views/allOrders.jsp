@@ -32,7 +32,7 @@
     <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
 
     <!-- Styles -->
-    <link href="${pageContext.request.contextPath}/fontAwesome/css/fontawesome-orders.min.css"
+    <link href="${pageContext.request.contextPath}/fontAwesome/css/fontawesome-all.min.css"
           rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/lib/themify-icons.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/lib/weather-icons.css" rel="stylesheet">
@@ -43,6 +43,14 @@
           rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/lib/nixon.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/lib/font-awesome.min.css" rel="stylesheet">
+
+    <link href="${pageContext.request.contextPath}/css/lib/jsgrid/jsgrid-theme.min.css"
+          rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/css/lib/jsgrid/jsgrid.min.css" type="text/css"
+          rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/css/lib/menubar/sidebar.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/lib/helper.css" rel="stylesheet">
 
 
     <style type="text/css">
@@ -73,7 +81,7 @@
                     <div class="page-header">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li><a href="${pageContext.request.contextPath}/orders/findAllOrder.do">订单管理</a></li>
+                                <li><a href="${pageContext.request.contextPath}/orders/findAllOrder.do?page=1&size=5">订单管理</a></li>
                                 <li class="active">所有订单表</li>
                             </ol>
                         </div>
@@ -101,7 +109,7 @@
                                                                              role="link"></i>
                                             <ul class="card-option-dropdown dropdown-menu">
                                                 <li>
-                                                    <a href="${pageContext.request.contextPath}/orders/findAllOrder.do"><i
+                                                    <a href="${pageContext.request.contextPath}/orders/findAllOrder.do?page=1&size=5"><i
                                                             class="ti-loop"></i> 更新数据</a>
                                                 </li>
                                                 <li><a href="#"><i class="ti-menu-alt"></i> 详细日志</a>
@@ -117,10 +125,10 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <c:if test="${orders.size()==0}">
+                                <c:if test="${orders.list.size()==0}">
                                     <p style="text-align: center">没有订单信息</p>
                                 </c:if>
-                                <c:if test="${orders.size()!=0}">
+                                <c:if test="${orders.list.size()!=0}">
                                     <table class="table table-responsive table-hover"
                                            style="text-align: center">
                                         <thead>
@@ -137,48 +145,48 @@
                                             <th style="text-align: center">订单操作</th>
                                         </tr>
                                         </thead>
-                                        <c:forEach items="${orders}" varStatus="stat" begin="0"
-                                                   end="${orders.size()}">
+                                        <c:forEach items="${orders.list}" varStatus="stat" begin="0"
+                                                   end="${orders.size}">
 
                                             <tbody>
-                                            <tr onclick="window.location.href='${pageContext.request.contextPath}/orders/orderInformation.do?id='+${orders[stat.index].orderId}">
+                                            <tr<%-- onclick="window.location.href='${pageContext.request.contextPath}/orders/orderInformation.do?id='+${orders.list[stat.index].orderId}"--%>>
                                                 <th scope="row">${stat.index+1}</th>
-                                                <td>${orders[stat.index].orderId}</td>
+                                                <td>${orders.list[stat.index].orderId}</td>
                                                 <td><fmt:formatDate
-                                                        value="${orders[stat.index].orderTime}"
+                                                        value="${orders.list[stat.index].orderTime}"
                                                         pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                                                <td>${orders[stat.index].peopleCount}</td>
+                                                <td>${orders.list[stat.index].peopleCount}</td>
 
-                                                <td>${orders[stat.index].orderDesc}</td>
+                                                <td>${orders.list[stat.index].orderDesc}</td>
 
                                                 <td>
-                                                    <c:if test="${orders[stat.index].payType==1}">
+                                                    <c:if test="${orders.list[stat.index].payType==1}">
                                                         微信
                                                     </c:if>
-                                                    <c:if test="${orders[stat.index].payType==0}">
+                                                    <c:if test="${orders.list[stat.index].payType==0}">
                                                         支付宝
                                                     </c:if>
-                                                    <c:if test="${orders[stat.index].payType==2}">
+                                                    <c:if test="${orders.list[stat.index].payType==2}">
                                                         其他
                                                     </c:if>
                                                 </td>
                                                 <td>
-                                                    <c:if test="${orders[stat.index].orderStatus==1}">
+                                                    <c:if test="${orders.list[stat.index].orderStatus==1}">
                                                         已支付
                                                     </c:if>
-                                                    <c:if test="${orders[stat.index].orderStatus==0}">
+                                                    <c:if test="${orders.list[stat.index].orderStatus==0}">
                                                         未支付
                                                     </c:if>
                                                 </td>
-                                                <td>${orders[stat.index].product.productId}</td>
-                                                <td>${orders[stat.index].memberid.memberidId}</td>
+                                                <td>${orders.list[stat.index].product.productId}</td>
+                                                <td>${orders.list[stat.index].memberid.memberidId}</td>
                                                 <td style="text-align: -webkit-center;">
-                                                    <i onclick="window.location.href='${pageContext.request.contextPath}/orders/toUpdate.do?id=${orders[stat.index].orderId}'"
+                                                    <i onclick="window.location.href='${pageContext.request.contextPath}/orders/toUpdate.do?id=${orders.list[stat.index].orderId}'"
                                                             class="ti-pencil"
                                                             style="cursor: pointer;z-index: 999"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                     <i class="ti-trash  "
                                                             style="cursor: pointer;z-index: 999"
-                                                            onclick="deletebyId1(${orders[stat.index].orderId})">
+                                                            onclick="deletebyId1(${orders.list[stat.index].orderId})">
                                                     </i>
                                                 </td>
                                             </tr>
@@ -186,6 +194,27 @@
                                         </c:forEach>
                                     </table>
                                 </c:if>
+                                <hr style="margin-bottom: 10px;border-top: 0px solid;color: #ddd;">
+                                <div class="jsgrid-pager-container" style="display: block;">
+                                    <div class="jsgrid-pager">
+                                        <span class="jsgrid-pager-nav-button ">每页显示条数 <input type="text" onkeyup="size2()" id="size" style="border: solid 1px;BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none;BORDER-BOTTOM-STYLE: solid; outline: none;width: 3em;text-align:center" >条</span>
+                                        <span class="jsgrid-pager-nav-button ">当前页数 :</span><span class="jsgrid-pager-page jsgrid-pager-current-page" >${orders.pageNum}</span>
+                                        <c:if test="${param.page>1}">
+                                            <span class="jsgrid-pager-nav-button ">
+                                            <a href="${pageContext.request.contextPath}/orders/findAllOrder.do?page=1&size=${orders.pageSize}">首页</a>
+                                        </span>
+                                            <span class="jsgrid-pager-nav-button ">
+                                            <a href="${pageContext.request.contextPath}/orders/findAllOrder.do?page=${orders.pageNum-1}&size=${orders.pageSize}">上一页</a>
+                                        </span>
+                                        </c:if>
+                                        <c:if test="${param.page<orders.pages}">
+                                            <span class="jsgrid-pager-nav-button"><a href="${pageContext.request.contextPath}/orders/findAllOrder.do?page=${orders.pageNum+1}&size=${orders.pageSize}" onclick="page()">下一页</a></span>
+                                            <span class="jsgrid-pager-nav-button"><a href="${pageContext.request.contextPath}/orders/findAllOrder.do?page=${orders.pages}&size=${orders.pageSize}">尾页</a></span> &nbsp;&nbsp;
+                                        </c:if>
+                                        <span class="jsgrid-pager-nav-button " style="float: right;">跳转到<input type="text" onkeyup="page1()" id="page" style="border: solid 1px;BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none;BORDER-BOTTOM-STYLE: solid; outline: none;width: 3em;text-align:center" >页</span>
+                                        <span class="jsgrid-pager-nav-button " style="float: right;">共${orders.pages}页</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div><!-- /# column -->
@@ -226,13 +255,22 @@
              function(isConfirm){
                  if (isConfirm) {
                      swal("删除成功 !!", "嘿 ,记录已被删除 !!", "success");
-                     window.location.href='${pageContext.request.contextPath}/orders/deleteOrdersById.do?id='+id
+                     window.location.href='${pageContext.request.contextPath}/orderstourist/deleteByOrdersId.do?id='+id
                  }
                  else {
                      swal("已取消 !!", "嘿 ,记录很安全 !!", "error");
                  }
              });
     };
+    function page1() {
+        var val = document.getElementById("page").value;
+        window.location.href="${pageContext.request.contextPath}/orders/findAllOrder.do?page="+val+"&size=${param.size}"
+    }
+    function size2() {
+        var val= document.getElementById("size").value;
+        console.log(val)
+        window.location.href="${pageContext.request.contextPath}/orders/findAllOrder.do?page=1&size="+val
+    }
 </script>
 </body>
 

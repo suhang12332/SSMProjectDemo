@@ -19,9 +19,11 @@ public interface BaseDao<T> {
     /**
      * description: 查询所有的信息
      *
+     * @param page 页数
+     * @param size 每一页的条数
      * @return java.util.List<T>
      */
-    List<T> findAll();
+    List<T> findAll(int page,int size);
 
     /**
      * description: 根据id查询信息

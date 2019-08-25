@@ -28,8 +28,8 @@ public class MemberidServiceImpl extends BaseServiceImpl<Memberid> implements Me
     }
 
     @Override
-    public List<Memberid> findAll() {
-        return memberidDao.findAll();
+    public List<Memberid> findAll(int page,int size) {
+        return memberidDao.findAll(page, size);
     }
 
     @Override
@@ -50,5 +50,10 @@ public class MemberidServiceImpl extends BaseServiceImpl<Memberid> implements Me
     @Override
     public int update(Memberid memberid) {
         return 0;
+    }
+
+    @Override
+    public List<Memberid> findAllNoPage() {
+        return memberidDao.findAllNoPage();
     }
 }

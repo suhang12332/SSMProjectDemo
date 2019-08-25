@@ -34,9 +34,20 @@ public interface MemberidDao extends BaseDao<Memberid> {
     Memberid findById(@Param("id") Integer id);
     /**
      * description: 查询所有的会员信息
+     *
+     * @param page 页数
+     * @param size 每页的条数
      * @return java.util.List<com.su.entity.Memberid>
      */
     @Override
     @Select("select * from memberid")
-    List<Memberid> findAll();
+    List<Memberid> findAll(int page,int size);
+
+    /**
+     * description: 查询所有的会员信息不分页
+     *
+     * @return java.util.List<com.su.entity.Memberid>
+     */
+    @Select("select * from memberid")
+    List<Memberid> findAllNoPage();
 }

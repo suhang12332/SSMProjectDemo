@@ -266,7 +266,7 @@
                                                 </ul>
                                                 <div id="invoice-bot">
 
-                                                    <div class="invoice-info" style="margin-left: 35px">
+                                                    <div class="invoice-info" style="margin-left: 35px"><br>
                                                         <h2>会员编号: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${ordersInformation.memberid.memberidId}</h2>
                                                         <h2>会员姓名: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${ordersInformation.memberid.memberidName}</h2>
                                                         <h2>会员昵称: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${ordersInformation.memberid.nickName}</h2>

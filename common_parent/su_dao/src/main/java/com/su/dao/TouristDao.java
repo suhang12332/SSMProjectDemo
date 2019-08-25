@@ -26,14 +26,25 @@ import java.util.List;
 @Mapper
 public interface TouristDao extends BaseDao<Tourist> {
     /**
-     * description: 查询所有的游客信息
+     * description: 查询所有的游客
+     *
+     * @param page 页数
+     * @param size 每一页的条数
      * @return java.util.List<com.su.entity.Tourist>
      */
     @Override
     @Select("select * from tourist")
     @ResultType(List.class)
-    List<Tourist> findAll();
+    List<Tourist> findAll(int page,int size);
 
+    /**
+     * description: 查询所有的游客数量,不分页
+     *
+     * @return java.util.List<com.su.entity.Tourist>
+     */
+    @Select("select * from tourist")
+    @ResultType(List.class)
+    List<Tourist> findAllNoPage();
 
     /**
      * description: 插入游客信息

@@ -1,4 +1,5 @@
 package com.su.controller;
+import com.github.pagehelper.PageInfo;
 import com.su.entity.Product;
 import com.su.exception.BaseException;
 import com.su.service.ProductService;
@@ -37,6 +38,7 @@ public class ProductController extends BaseException {
     public ProductController(@Qualifier("productServiceImpl") ProductService productService) {
         this.productService = productService;
     }
+
     /**
      * description: 查找所有的产品信息
      *
@@ -44,9 +46,11 @@ public class ProductController extends BaseException {
      * @return java.lang.String 返回视图
      */
     @GetMapping("/findAll.do")
-    public String findAll(Model model) {
-        List<Product> all = productService.findAll();
-        model.addAttribute("all", all);
+    public String findAll(@RequestParam(value = "page", required = true) int page, @RequestParam(value = "size", required = true) int size, Model model) {
+        List<Product> all = productService .findAll(page,size);
+        //pageInfo就是一个分页的beean
+        PageInfo<Product> productPageInfo = new PageInfo<>(all);
+        model.addAttribute("all", productPageInfo);
         return "allProduct";
     }
     /**
@@ -62,7 +66,7 @@ public class ProductController extends BaseException {
             return "addProduct";
         }
         productService.insert(product);
-        return "redirect:findAll.do";
+        return "redirect:findAll.do?page=1&size=5";
     }
     /**
      * description: 用于将product对象设置为addProduct视图的form backing object
@@ -84,7 +88,7 @@ public class ProductController extends BaseException {
     @GetMapping("/deleteProductById.do")
     public String deleteProductById(@RequestParam("id") Integer id) {
         productService.deleteById(id);
-        return "redirect:findAll.do";
+        return "redirect:findAll.do?page=1&size=5";
     }
     /**
      * description: 根据产品id查询产品信息,
@@ -112,7 +116,7 @@ public class ProductController extends BaseException {
             return "updateProduct";
         }
         productService.update(product);
-        return "redirect:findAll.do";
+        return "redirect:findAll.do?page=1&size=5";
     }
     /**
      * description: 跳转到登录页面

@@ -12,11 +12,13 @@ import java.util.List;
  */
 public interface BaseService<T> {
     /**
-     * description: 查询所有的信息
+     * description: 查询所有的产品
      *
-     * @return java.util.List<T>
+     * @param page 页数
+     * @param size 每页的条数
+     * @return java.util.List<com.su.entity.Product>
      */
-    List<T> findAll();
+    List<T> findAll(int page,int size);
 
     /**
      * description: 根据id查询信息

@@ -1,5 +1,6 @@
 package com.su.service.touristserviceimpl;
 
+import com.github.pagehelper.PageHelper;
 import com.su.dao.TouristDao;
 import com.su.entity.Tourist;
 import com.su.service.TouristService;
@@ -26,8 +27,10 @@ public class TouristServiceImpl extends BaseServiceImpl<Tourist> implements Tour
     }
 
     @Override
-    public List<Tourist> findAll() {
-        return touristDao.findAll();
+    public List<Tourist> findAll(int page, int size) {
+        //参数pageMum是页码数,pageSize是每页显示的条数
+        PageHelper.startPage(page, size);
+        return touristDao.findAll(page, size);
     }
 
     @Override
@@ -60,5 +63,10 @@ public class TouristServiceImpl extends BaseServiceImpl<Tourist> implements Tour
     @Override
     public List<Tourist> selectTouristByPhoneNumber(String phoneNumber) {
         return touristDao.selectTouristByPhoneNumber(phoneNumber);
+    }
+
+    @Override
+    public List<Tourist> findAllNoPage() {
+        return touristDao.findAllNoPage();
     }
 }

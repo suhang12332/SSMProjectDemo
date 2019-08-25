@@ -3,6 +3,9 @@ package com.su.service;
 import com.su.entity.Tourist;
 import com.su.service.baseservice.BaseService;
 
+import org.apache.ibatis.annotations.ResultType;
+import org.apache.ibatis.annotations.Select;
+
 import java.util.List;
 
 /**
@@ -29,4 +32,15 @@ public interface TouristService extends BaseService<Tourist> {
      * @return java.util.List<com.su.entity.Tourist>
      */
     List<Tourist> selectTouristByPhoneNumber(String phoneNumber);
+
+
+
+    /**
+     * description: 查询所有的游客数量,不分页
+     *
+     * @return java.util.List<com.su.entity.Tourist>
+     */
+    @Select("select * from tourist")
+    @ResultType(List.class)
+    List<Tourist> findAllNoPage();
 }

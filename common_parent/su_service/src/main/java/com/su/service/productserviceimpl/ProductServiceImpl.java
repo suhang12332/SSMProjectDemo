@@ -1,5 +1,6 @@
 package com.su.service.productserviceimpl;
 
+import com.github.pagehelper.PageHelper;
 import com.su.dao.ProductDao;
 import com.su.entity.Product;
 import com.su.service.ProductService;
@@ -26,8 +27,10 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
     }
 
     @Override
-    public List<Product> findAll() {
-        return productDao.findAll();
+    public List<Product> findAll(int page, int size) {
+        //参数pageMum是页码数,pageSize是每页显示的条数
+        PageHelper.startPage(page, size);
+        return productDao.findAll(page, size);
     }
 
     @Override
@@ -48,5 +51,10 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
     @Override
     public int update(Product product) {
         return productDao.update(product);
+    }
+
+    @Override
+    public List<Product> findAllNoPage() {
+        return productDao.findAllNoPage();
     }
 }

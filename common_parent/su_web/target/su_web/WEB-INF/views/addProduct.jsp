@@ -71,7 +71,7 @@
                     <div class="page-header">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li><a href="${pageContext.request.contextPath}/product/findAll.do">产品管理</a></li>
+                                <li><a href="${pageContext.request.contextPath}/product/findAll.do?page=1&size=5">产品管理</a></li>
                                 <li class="active">添加产品信息表</li>
 
                             </ol>

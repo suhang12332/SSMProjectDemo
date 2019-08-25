@@ -71,7 +71,7 @@
                     <div class="page-header">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li><a href="${pageContext.request.contextPath}/tourist/findAllTourist.do">游客信息</a></li>
+                                <li><a href="${pageContext.request.contextPath}/tourist/findAllTourist.do?page=1&size=5">游客信息</a></li>
                                 <li class="active">修改游客信息表</li>
                             </ol>
                         </div>
@@ -232,9 +232,7 @@
     function judgeTouristCredentialsNum() {
         $("#errorCredentialsNum").html("");
         var credentialsNum = document.getElementById("credentialsNum").value;
-        console.log(credentialsNum)
         var value = document.getElementById("credentials").value;
-        console.log(value)
         var b1 = credentialsNum == value;
         if (!b1) {
             $.ajax({

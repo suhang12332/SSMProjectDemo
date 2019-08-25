@@ -34,6 +34,11 @@
         </dependency>
         <dependency>
             <groupId>com.su</groupId>
+            <artifactId>su_entity</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.su</groupId>
             <artifactId>su_dao</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>

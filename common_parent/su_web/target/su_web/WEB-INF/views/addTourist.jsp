@@ -71,7 +71,7 @@
                     <div class="page-header">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li><a href="${pageContext.request.contextPath}/tourist/findAllTourist.do">游客信息</a></li>
+                                <li><a href="${pageContext.request.contextPath}/tourist/findAllTourist.do?page=1&size=5">游客信息</a></li>
                                 <li class="active">增加游客信息表单</li>
                             </ol>
                         </div>
