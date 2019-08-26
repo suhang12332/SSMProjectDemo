@@ -118,14 +118,6 @@ public class ProductController extends BaseException {
         productService.update(product);
         return "redirect:findAll.do?page=1&size=5";
     }
-    /**
-     * description: 跳转到登录页面
-     *
-     * @return java.lang.String 返回视图
-     */
-    @GetMapping("/login.do")
-    public String login(){
-        return "login";
-    }
+
 
 }

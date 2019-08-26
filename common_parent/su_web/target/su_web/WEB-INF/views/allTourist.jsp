@@ -206,7 +206,8 @@
                                             <span class="jsgrid-pager-nav-button"><a href="${pageContext.request.contextPath}/tourist/findAllTourist.do?page=${tourist.pages}&size=${tourist.pageSize}">尾页</a></span> &nbsp;&nbsp;
                                         </c:if>
                                         <span class="jsgrid-pager-nav-button " style="float: right;">跳转到<input type="text" onkeyup="page4()" id="page" style="border: solid 1px;BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none;BORDER-BOTTOM-STYLE: solid; outline: none;width: 3em;text-align:center" >页</span>
-                                        <span class="jsgrid-pager-nav-button " style="float: right;">共${tourist.pages}页</span>
+                                        <span class="jsgrid-pager-nav-button " style="float: right;">共 ${tourist.pages }页</span>
+                                        <span class="jsgrid-pager-nav-button " style="float: right;">共 ${tourist.total} 位游客</span>
                                     </div>
                                 </div>
                             </div>

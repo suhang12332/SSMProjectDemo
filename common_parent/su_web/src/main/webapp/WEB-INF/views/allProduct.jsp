@@ -194,11 +194,12 @@
                                         </span>
                                         </c:if>
                                         <c:if test="${param.page<all.pages}">
-                                            <span class="jsgrid-pager-nav-button"><a href="${pageContext.request.contextPath}/product/findAll.do?page=${all.pageNum+1}&size=${all.pageSize}" onclick="page()">下一页</a></span>
+                                            <span class="jsgrid-pager-nav-button"><a href="${pageContext.request.contextPath}/product/findAll.do?page=${all.pageNum+1}&size=${all.pageSize}">下一页</a></span>
                                             <span class="jsgrid-pager-nav-button"><a href="${pageContext.request.contextPath}/product/findAll.do?page=${all.pages}&size=${all.pageSize}">尾页</a></span> &nbsp;&nbsp;
                                         </c:if>
                                         <span class="jsgrid-pager-nav-button " style="float: right;">跳转到<input type="text" onkeyup="page()" id="page" style="border: solid 1px;BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none;BORDER-BOTTOM-STYLE: solid; outline: none;width: 3em;text-align:center" >页</span>
-                                        <span class="jsgrid-pager-nav-button " style="float: right;">共${all.pages}页</span>
+                                        <span class="jsgrid-pager-nav-button " style="float: right;"> 共${all.pages}页 </span>
+                                        <span class="jsgrid-pager-nav-button " style="float: right;">共 ${all.total} 个产品</span>
                                     </div>
                                 </div>
 

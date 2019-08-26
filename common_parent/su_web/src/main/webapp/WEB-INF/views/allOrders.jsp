@@ -149,17 +149,17 @@
                                                    end="${orders.size}">
 
                                             <tbody>
-                                            <tr<%-- onclick="window.location.href='${pageContext.request.contextPath}/orders/orderInformation.do?id='+${orders.list[stat.index].orderId}"--%>>
-                                                <th scope="row">${stat.index+1}</th>
-                                                <td>${orders.list[stat.index].orderId}</td>
-                                                <td><fmt:formatDate
+                                            <tr>
+                                                <th scope="row" onclick="window.location.href='${pageContext.request.contextPath}/orders/orderInformation.do?id='+${orders.list[stat.index].orderId}">${stat.index+1}</th>
+                                                <td onclick="window.location.href='${pageContext.request.contextPath}/orders/orderInformation.do?id='+${orders.list[stat.index].orderId}">${orders.list[stat.index].orderId}</td>
+                                                <td onclick="window.location.href='${pageContext.request.contextPath}/orders/orderInformation.do?id='+${orders.list[stat.index].orderId}"><fmt:formatDate
                                                         value="${orders.list[stat.index].orderTime}"
                                                         pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                                                <td>${orders.list[stat.index].peopleCount}</td>
+                                                <td onclick="window.location.href='${pageContext.request.contextPath}/orders/orderInformation.do?id='+${orders.list[stat.index].orderId}">${orders.list[stat.index].peopleCount}</td>
 
-                                                <td>${orders.list[stat.index].orderDesc}</td>
+                                                <td onclick="window.location.href='${pageContext.request.contextPath}/orders/orderInformation.do?id='+${orders.list[stat.index].orderId}">${orders.list[stat.index].orderDesc}</td>
 
-                                                <td>
+                                                <td onclick="window.location.href='${pageContext.request.contextPath}/orders/orderInformation.do?id='+${orders.list[stat.index].orderId}">
                                                     <c:if test="${orders.list[stat.index].payType==1}">
                                                         微信
                                                     </c:if>
@@ -170,7 +170,7 @@
                                                         其他
                                                     </c:if>
                                                 </td>
-                                                <td>
+                                                <td onclick="window.location.href='${pageContext.request.contextPath}/orders/orderInformation.do?id='+${orders.list[stat.index].orderId}">
                                                     <c:if test="${orders.list[stat.index].orderStatus==1}">
                                                         已支付
                                                     </c:if>
@@ -178,12 +178,12 @@
                                                         未支付
                                                     </c:if>
                                                 </td>
-                                                <td>${orders.list[stat.index].product.productId}</td>
-                                                <td>${orders.list[stat.index].memberid.memberidId}</td>
+                                                <td onclick="window.location.href='${pageContext.request.contextPath}/orders/orderInformation.do?id='+${orders.list[stat.index].orderId}">${orders.list[stat.index].product.productId}</td>
+                                                <td onclick="window.location.href='${pageContext.request.contextPath}/orders/orderInformation.do?id='+${orders.list[stat.index].orderId}">${orders.list[stat.index].memberid.memberidId}</td>
                                                 <td style="text-align: -webkit-center;">
                                                     <i onclick="window.location.href='${pageContext.request.contextPath}/orders/toUpdate.do?id=${orders.list[stat.index].orderId}'"
                                                             class="ti-pencil"
-                                                            style="cursor: pointer;z-index: 999"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            style="cursor: pointer;"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                     <i class="ti-trash  "
                                                             style="cursor: pointer;z-index: 999"
                                                             onclick="deletebyId1(${orders.list[stat.index].orderId})">
@@ -208,11 +208,13 @@
                                         </span>
                                         </c:if>
                                         <c:if test="${param.page<orders.pages}">
-                                            <span class="jsgrid-pager-nav-button"><a href="${pageContext.request.contextPath}/orders/findAllOrder.do?page=${orders.pageNum+1}&size=${orders.pageSize}" onclick="page()">下一页</a></span>
+                                            <span class="jsgrid-pager-nav-button"><a href="${pageContext.request.contextPath}/orders/findAllOrder.do?page=${orders.pageNum+1}&size=${orders.pageSize}">下一页</a></span>
                                             <span class="jsgrid-pager-nav-button"><a href="${pageContext.request.contextPath}/orders/findAllOrder.do?page=${orders.pages}&size=${orders.pageSize}">尾页</a></span> &nbsp;&nbsp;
                                         </c:if>
                                         <span class="jsgrid-pager-nav-button " style="float: right;">跳转到<input type="text" onkeyup="page1()" id="page" style="border: solid 1px;BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none;BORDER-BOTTOM-STYLE: solid; outline: none;width: 3em;text-align:center" >页</span>
-                                        <span class="jsgrid-pager-nav-button " style="float: right;">共${orders.pages}页</span>
+                                        <span class="jsgrid-pager-nav-button " style="float: right;">共 ${orders.pages} 页</span>
+                                        <span class="jsgrid-pager-nav-button " style="float: right;">共 ${orders.total} 个订单</span>
+
                                     </div>
                                 </div>
                             </div>

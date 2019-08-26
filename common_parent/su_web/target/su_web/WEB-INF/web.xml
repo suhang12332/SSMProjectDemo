@@ -40,7 +40,7 @@
   </filter>
   <filter-mapping>
     <filter-name>characterEncodingFilter</filter-name>
-    <url-pattern>/*</url-pattern>
+    <url-pattern>*.do</url-pattern>
   </filter-mapping>
   <display-name>Archetype Created Web Application</display-name>
   <error-page>

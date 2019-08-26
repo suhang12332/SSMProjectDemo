@@ -36,11 +36,20 @@
     <link href="${pageContext.request.contextPath}/css/lib/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/lib/helper.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+    <!-- Styles -->
+    <link href="${pageContext.request.contextPath}/fontAwesome/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/lib/weather-icons.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/css/lib/mmc-chat.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/css/lib/sidebar.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/lib/toastr/toastr.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/lib/nixon.css" rel="stylesheet">
+
     <style type="text/css">
         th {
             text-align: center; /** 设置水平方向居中 */
             vertical-align: middle /** 设置垂直方向居中 */
         }
+
         td {
             text-align: center; /** 设置水平方向居中 */
             vertical-align: middle /** 设置垂直方向居中 */
@@ -48,11 +57,13 @@
     </style>
 </head>
 
-<body class="bg-primary" >
+<body class="bg-primary" onload="info()">
 <div>
-    <i class="ti-arrow-left" style="position: absolute;top: 50px;right: 150px;cursor: pointer;font-size: large;" onclick="javascript:history.back()"></i>
+    <i class="ti-arrow-left"
+       style="position: absolute;top: 50px;right: 150px;cursor: pointer;font-size: large;"
+       onclick="javascript:history.back()"></i>
 </div>
-<div class="unix-invoice" >
+<div class="unix-invoice">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-2"></div>
@@ -65,7 +76,8 @@
                         <!--End Info-->
                         <div class="title">
                             <h4>订单详情</h4>
-                            <p>下单日期: <fmt:formatDate value="${ordersInformation.orderTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                            <p>下单日期: <fmt:formatDate value="${ordersInformation.orderTime}"
+                                                     pattern="yyyy-MM-dd HH:mm:ss"/>
                             </p>
                         </div>
                         <!--End Title-->
@@ -80,18 +92,25 @@
                                         <div class="col-lg-6">
                                             <div class="custom-tab user-profile-tab">
                                                 <ul class="nav nav-tabs" role="tablist">
-                                                    <li role="presentation" class="active" ><a href="#1" aria-controls="1" role="tab" data-toggle="tab" style="cursor: pointer">订单信息</a></li>
+                                                    <li role="presentation" class="active"><a
+                                                            href="#1" aria-controls="1" role="tab"
+                                                            data-toggle="tab"
+                                                            style="cursor: pointer">订单信息</a></li>
                                                 </ul>
                                                 <div class="tab-content">
-                                                    <div role="tabpanel" class="tab-pane active" id="1">
-                                                        <div class="contact-information" style="margin: 10px 35px;">
-                                                            <div class="phone-content" >
+                                                    <div role="tabpanel" class="tab-pane active"
+                                                         id="1">
+                                                        <div class="contact-information"
+                                                             style="margin: 10px 35px;">
+                                                            <div class="phone-content">
                                                                 <span class="contact-title">订单编号:</span>
                                                                 <span class="phone-number">${ordersInformation.orderId}</span>
                                                             </div>
                                                             <div class="address-content">
                                                                 <span class="contact-title">下单时间:</span>
-                                                                <span class="mail-address"><fmt:formatDate value="${ordersInformation.orderTime}" pattern="yyyy-MM-dd HH:mm:ss"/> </span>
+                                                                <span class="mail-address"><fmt:formatDate
+                                                                        value="${ordersInformation.orderTime}"
+                                                                        pattern="yyyy-MM-dd HH:mm:ss"/> </span>
                                                             </div>
                                                             <div class="email-content">
                                                                 <span class="contact-title">出游人数:</span>
@@ -135,11 +154,16 @@
                                         <div class="col-lg-6">
                                             <div class="custom-tab user-profile-tab">
                                                 <ul class="nav nav-tabs" role="tablist">
-                                                    <li role="presentation" class="active"><a href="#2" aria-controls="1" role="tab" data-toggle="tab" style="cursor: pointer">产品信息</a></li>
+                                                    <li role="presentation" class="active"><a
+                                                            href="#2" aria-controls="1" role="tab"
+                                                            data-toggle="tab"
+                                                            style="cursor: pointer">产品信息</a></li>
                                                 </ul>
                                                 <div class="tab-content">
-                                                    <div role="tabpanel" class="tab-pane active" id="2">
-                                                        <div class="contact-information" style="margin: 10px 35px;">
+                                                    <div role="tabpanel" class="tab-pane active"
+                                                         id="2">
+                                                        <div class="contact-information"
+                                                             style="margin: 10px 35px;">
                                                             <div class="phone-content">
                                                                 <span class="contact-title">产品编号:</span>
                                                                 <span class="phone-number">${ordersInformation.product.productId}</span>
@@ -154,11 +178,13 @@
                                                             </div>
                                                             <div class="website-content">
                                                                 <span class="contact-title">出发时间:</span>
-                                                                <span class="contact-website"><fmt:formatDate value="${ordersInformation.product.departureTime}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
+                                                                <span class="contact-website"><fmt:formatDate
+                                                                        value="${ordersInformation.product.departureTime}"
+                                                                        pattern="yyyy-MM-dd HH:mm:ss"/></span>
                                                             </div>
                                                             <div class="skype-content">
                                                                 <span class="contact-title">产品价格:</span>
-                                                                <span class="contact-skype">${ordersInformation.product.productPrice}</span>
+                                                                <span class="contact-skype">￥&nbsp;${ordersInformation.product.productPrice}</span>
                                                             </div>
                                                             <div class="skype-content">
                                                                 <span class="contact-title">产品描述:</span>
@@ -191,58 +217,75 @@
                                         <div class="col-lg-12">
                                             <div class="custom-tab user-profile-tab">
                                                 <ul class="nav nav-tabs" role="tablist">
-                                                    <li role="presentation" class="active" ><a href="#3" aria-controls="1" role="tab" data-toggle="tab" style="cursor: pointer">游客信息</a></li>
+                                                    <li role="presentation" class="active"><a
+                                                            href="#3" aria-controls="1" role="tab"
+                                                            data-toggle="tab"
+                                                            style="cursor: pointer">游客信息</a></li>
                                                 </ul>
                                                 <div class="tab-content">
-                                                    <div role="tabpanel" class="tab-pane active" id="3">
+                                                    <div role="tabpanel" class="tab-pane active"
+                                                         id="3">
                                                         <div class="col-lg-12">
                                                             <div class="card alert">
                                                                 <div class="card-body">
-                                                                    <table class="table table-responsive">
-                                                                        <thead>
-                                                                        <tr>
-                                                                            <th>#</th>
-                                                                            <th>游客编号</th>
-                                                                            <th>游客姓名</th>
-                                                                            <th>游客性别</th>
-                                                                            <th>联系方式</th>
-                                                                            <th>证件类型</th>
-                                                                            <th>证件号码</th>
-                                                                            <th style="text-align: center;vertical-align: middle">游客类型</th>
-                                                                        </tr>
-                                                                        </thead>
-                                                                        <c:forEach items="${ordersInformation.tourists}" begin="0" end="${ordersInformation.tourists.size()}" varStatus="stat">
-                                                                            <tbody>
+                                                                    <c:if test="${ordersInformation.tourists.size()==0}">
+                                                                        <p style="text-align: center">
+                                                                            我滴个龟龟 ,
+                                                                            订单里面怎么没有能没有游客信息呢</p>
+                                                                    </c:if>
+                                                                    <c:if test="${ordersInformation.tourists.size()!=0}">
+                                                                        <table class="table table-responsive">
+                                                                            <thead>
                                                                             <tr>
-                                                                                <th scope="row">${stat.index+1}</th>
-                                                                                <td>${ordersInformation.tourists[stat.index].passengerId}</td>
-                                                                                <td>${ordersInformation.tourists[stat.index].passengerName}</td>
-                                                                                <td>${ordersInformation.tourists[stat.index].passengerSex}</td>
-                                                                                <td>${ordersInformation.tourists[stat.index].passengerPhoneNumber}</td>
-                                                                                <td>
-                                                                                    <c:if test="${ordersInformation.tourists[stat.index].credentialsType==0}">
-                                                                                        身份证
-                                                                                    </c:if>
-                                                                                    <c:if test="${ordersInformation.tourists[stat.index].credentialsType==1}">
-                                                                                        护照
-                                                                                    </c:if>
-                                                                                    <c:if test="${ordersInformation.tourists[stat.index].credentialsType==2}">
-                                                                                        军官证
-                                                                                    </c:if>
-                                                                                </td>
-                                                                                <td>${ordersInformation.tourists[stat.index].credentialsNum}</td>
-                                                                                <td style="text-align: center;vertical-align: middle">
-                                                                                    <c:if test="${ordersInformation.tourists[stat.index].passengerType==0}">
-                                                                                        成人
-                                                                                    </c:if>
-                                                                                    <c:if test="${ordersInformation.tourists[stat.index].passengerType==1}">
-                                                                                        儿童
-                                                                                    </c:if>
-                                                                                </td>
+                                                                                <th>#</th>
+                                                                                <th>游客编号</th>
+                                                                                <th>游客姓名</th>
+                                                                                <th>游客性别</th>
+                                                                                <th>联系方式</th>
+                                                                                <th>证件类型</th>
+                                                                                <th>证件号码</th>
+                                                                                <th style="text-align: center;vertical-align: middle">
+                                                                                    游客类型
+                                                                                </th>
                                                                             </tr>
-                                                                            </tbody>
-                                                                        </c:forEach>
-                                                                    </table>
+                                                                            </thead>
+                                                                            <c:forEach
+                                                                                    items="${ordersInformation.tourists}"
+                                                                                    begin="0"
+                                                                                    end="${ordersInformation.tourists.size()}"
+                                                                                    varStatus="stat">
+                                                                                <tbody>
+                                                                                <tr>
+                                                                                    <th scope="row">${stat.index+1}</th>
+                                                                                    <td>${ordersInformation.tourists[stat.index].passengerId}</td>
+                                                                                    <td>${ordersInformation.tourists[stat.index].passengerName}</td>
+                                                                                    <td>${ordersInformation.tourists[stat.index].passengerSex}</td>
+                                                                                    <td>${ordersInformation.tourists[stat.index].passengerPhoneNumber}</td>
+                                                                                    <td>
+                                                                                        <c:if test="${ordersInformation.tourists[stat.index].credentialsType==0}">
+                                                                                            身份证
+                                                                                        </c:if>
+                                                                                        <c:if test="${ordersInformation.tourists[stat.index].credentialsType==1}">
+                                                                                            护照
+                                                                                        </c:if>
+                                                                                        <c:if test="${ordersInformation.tourists[stat.index].credentialsType==2}">
+                                                                                            军官证
+                                                                                        </c:if>
+                                                                                    </td>
+                                                                                    <td>${ordersInformation.tourists[stat.index].credentialsNum}</td>
+                                                                                    <td style="text-align: center;vertical-align: middle">
+                                                                                        <c:if test="${ordersInformation.tourists[stat.index].passengerType==0}">
+                                                                                            成人
+                                                                                        </c:if>
+                                                                                        <c:if test="${ordersInformation.tourists[stat.index].passengerType==1}">
+                                                                                            儿童
+                                                                                        </c:if>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                </tbody>
+                                                                            </c:forEach>
+                                                                        </table>
+                                                                    </c:if>
                                                                 </div>
                                                             </div>
                                                         </div><!-- /# column -->
@@ -262,11 +305,15 @@
                                         <div class="col-lg-12">
                                             <div class="custom-tab user-profile-tab">
                                                 <ul class="nav nav-tabs" role="tablist">
-                                                    <li role="presentation" class="active"><a href="#4" aria-controls="1" role="tab" data-toggle="tab" style="cursor: pointer">会员信息</a></li>
+                                                    <li role="presentation" class="active"><a
+                                                            href="#4" aria-controls="1" role="tab"
+                                                            data-toggle="tab"
+                                                            style="cursor: pointer">会员信息</a></li>
                                                 </ul>
                                                 <div id="invoice-bot">
 
-                                                    <div class="invoice-info" style="margin-left: 35px"><br>
+                                                    <div class="invoice-info"
+                                                         style="margin-left: 35px"><br>
                                                         <h2>会员编号: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${ordersInformation.memberid.memberidId}</h2>
                                                         <h2>会员姓名: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${ordersInformation.memberid.memberidName}</h2>
                                                         <h2>会员昵称: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${ordersInformation.memberid.nickName}</h2>
@@ -274,7 +321,14 @@
                                                         <h2>邮箱地址: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${ordersInformation.memberid.email}</h2>
                                                     </div>
                                                     <div id="project" style="padding-top: 70px">
-                                                        <p style="font-family: 'DejaVu Sans Mono';font-size: 15px">The time that flows, all become the beautiful ornament that the road is, look at the sky, see snow, in quiet, unspoken words are good scenery.</p>
+                                                        <p style="font-family: 'DejaVu Sans Mono';font-size: 15px">
+                                                            The time that flows, all become the
+                                                            beautiful ornament that the road is,
+                                                            look at the sky, see snow, in quiet,
+                                                            unspoken words are good scenery.</p>
+                                                        <p style="font-family: 'DejaVu Sans Mono';font-size: 15px;float: right;padding-right: 20px">
+                                                            ———————琳七奶奶
+                                                        </p>
                                                     </div>
 
                                                 </div>
@@ -293,6 +347,40 @@
         </div>
     </div>
 </div>
+
+
+<script src="${pageContext.request.contextPath}/js/lib/jquery.min.js"></script><!-- jquery vendor -->
+<script src="${pageContext.request.contextPath}/js/lib/jquery.nanoscroller.min.js"></script><!-- nano scroller -->
+<script src="${pageContext.request.contextPath}/js/lib/sidebar.js"></script><!-- sidebar -->
+<script src="${pageContext.request.contextPath}/js/lib/bootstrap.min.js"></script><!-- bootstrap -->
+<script src="${pageContext.request.contextPath}/js/lib/mmc-common.js"></script>
+<script src="${pageContext.request.contextPath}/js/lib/mmc-chat.js"></script>
+<script src="${pageContext.request.contextPath}/js/lib/toastr/toastr.min.js"></script><!-- scripit init-->
+<script src="${pageContext.request.contextPath}/js/scripts.js"></script><!-- scripit init-->
+
+
+<script type="text/javascript">
+    function info() {
+        toastr.info('该页面为订单展示页面,无法编辑哦','系统通知',{
+            "positionClass": "toast-top-center",
+            timeOut: 7000,
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut",
+            "tapToDismiss": false
+        })
+    }
+</script>
 </body>
 
 </html>

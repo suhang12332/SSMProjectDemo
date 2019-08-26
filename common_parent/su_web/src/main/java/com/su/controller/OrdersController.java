@@ -176,7 +176,13 @@ public class OrdersController extends BaseException {
         ordersService.update(orders);
         return "redirect:findAllOrder.do?page=1&size=5";
     }
-
+    /**
+     * description: 订单的详细信息
+     *
+     * @param id 订单di
+     * @param model mdoel域存放订单信息
+     * @return java.lang.String 返回视图
+     */
     @GetMapping("/orderInformation.do")
     public String orderInformation(@RequestParam("id") Integer id,Model model) {
         Orders byId = ordersService.findById(id);

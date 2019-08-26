@@ -42,7 +42,7 @@
                 <li>
                     <a class="sidebar-sub-toggle"><i class="ti-user"></i> 用户管理 <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                     <ul>
-                        <li><a href="uc-calendar.html">用户信息</a></li>
+                        <li><a href="${pageContext.request.contextPath}/user/findAll.do?page=1&size=5">用户信息</a></li>
                     </ul>
                 </li>
             </ul>

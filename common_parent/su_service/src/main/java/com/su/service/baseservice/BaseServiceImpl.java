@@ -4,6 +4,7 @@ import com.su.dao.OrdersDao;
 import com.su.dao.OrdersTouristDao;
 import com.su.dao.ProductDao;
 import com.su.dao.TouristDao;
+import com.su.dao.UserDao;
 import com.su.service.OrdersTouristService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,4 +68,15 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
         this.ordersTouristDao = ordersTouristDao;
     }
 
+
+    /**
+     * description: 构造方法注入userDao.指定其实现类的对象是userDao
+     *
+     * @return
+     */
+    @Autowired
+    protected UserDao userDao;
+    public BaseServiceImpl(@Qualifier("userDao") UserDao userDao) {
+        this.userDao = userDao;
+    }
 }
