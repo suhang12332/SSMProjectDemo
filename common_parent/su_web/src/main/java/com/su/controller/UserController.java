@@ -121,8 +121,49 @@ public class UserController {
     @ResponseBody
     @GetMapping("/selectByUserName.do")
     public Integer selectByUserName(@RequestParam("userName") String userName) {
-        System.out.println(userName);
         List<User> users = userService.selectByUserName(userName);
         return users.size();
+    }
+    /**
+     * description: 根据用户id删除用户
+     *
+     * @param id 用户id
+     * @return java.lang.String 重定向到查询所有的用户
+     */
+    @GetMapping("/deleteById.do")
+    public String deleteById(@RequestParam("id") int id){
+        userService.deleteById(id);
+        return "redirect:findAll.do?page=1&size=5";
+    }
+
+    /**
+     * description: 跳转到更新用户页面
+     *
+     * @param id 用户id
+     * @param model mdoel域存放用户的信息,用于显示在页面上
+     * @return java.lang.String
+     */
+    @GetMapping("/toUpdateUser.do")
+    public String toUpdateUser(@RequestParam("id") int id,Model model) {
+        User byId = userService.findById(id);
+        model.addAttribute("user", byId);
+        return "updateUser";
+    }
+
+    /**
+     * description: 更新用户信息
+     *
+     * @param user 用户信息
+     * @param result 结果集
+     * @return java.lang.String
+     */
+    @PostMapping("/updateUser.do")
+    public String updateUser(@Valid User user, BindingResult result) {
+        if (result.hasErrors()) {
+            return "updateUser";
+        }
+        int update = userService.update(user);
+        System.out.println(update);
+        return "redirect:findAll.do?page=1&size=5";
     }
 }

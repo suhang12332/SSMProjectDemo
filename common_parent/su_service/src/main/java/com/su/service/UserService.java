@@ -3,6 +3,7 @@ package com.su.service;
 import com.su.entity.User;
 import com.su.service.baseservice.BaseService;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -54,4 +55,33 @@ public interface UserService extends BaseService<User> {
      * @return java.util.List<com.su.entity.User>
      */
     List<User> selectByUserName(String userName);
+
+
+    /**
+     * description: 根据用户id删除用户信息
+     *
+     * @param id 用户id
+     * @return int 操作的行数
+     */
+    @Override
+    int deleteById(Integer id);
+
+    /**
+     * description: 根据用户id查寻用户信息
+     *
+     * @param id 用户id
+     * @return com.su.entity.User
+     */
+    @Override
+    User findById(Integer id);
+
+
+    /**
+     * description: 更新用户信息
+     *
+     * @param user 用户信息
+     * @return int
+     */
+    @Override
+    int update(User user);
 }

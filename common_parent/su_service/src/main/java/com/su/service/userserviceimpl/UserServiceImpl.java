@@ -35,12 +35,13 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
     @Override
     public User findById(Integer id) {
-        return null;
+
+        return userDao.findById(id);
     }
 
     @Override
     public int deleteById(Integer id) {
-        return 0;
+        return userDao.deleteById(id);
     }
 
     @Override
@@ -61,6 +62,6 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
     @Override
     public int update(User user) {
-        return 0;
+        return userDao.update(user);
     }
 }

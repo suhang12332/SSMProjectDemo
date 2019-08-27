@@ -53,5 +53,12 @@ public interface OrdersService extends BaseService<Orders> {
     @Override
     int update(Orders orders);
 
+
+    /**
+     * description: 根据产品id查询订单信息
+     *
+     * @param id 产品id
+     * @return com.su.entity.Orders
+     */
     Orders findByProductId(Integer id);
 }

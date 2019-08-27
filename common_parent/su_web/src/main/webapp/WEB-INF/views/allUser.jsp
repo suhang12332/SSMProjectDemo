@@ -164,7 +164,7 @@
                                                     </c:if>
                                                 </td>
                                                 <td style="text-align: -webkit-center;">
-                                                    <i onclick="window.location.href='${pageContext.request.contextPath}/user/toUpdate.do?id=${user.list[stat.index].userId}'"
+                                                    <i onclick="window.location.href='${pageContext.request.contextPath}/user/toUpdateUser.do?id=${user.list[stat.index].userId}'"
                                                        class="ti-pencil"
                                                        style="cursor: pointer;z-index: 999"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                     <i class="ti-trash "
@@ -237,7 +237,7 @@
              function(isConfirm){
                  if (isConfirm) {
                      swal("删除成功 !!", "嘿 ,记录已被删除 !!", "success");
-                     window.location.href='${pageContext.request.contextPath}/user/deleteTouristById.do?id='+id
+                     window.location.href='${pageContext.request.contextPath}/user/deleteById.do?id='+id
                  }
                  else {
                      swal("已取消 !!", "嘿 ,记录很安全 !!", "error");
