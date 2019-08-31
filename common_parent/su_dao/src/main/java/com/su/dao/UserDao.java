@@ -1,8 +1,6 @@
 package com.su.dao;
-
 import com.su.dao.basedao.BaseDao;
 import com.su.entity.User;
-
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
