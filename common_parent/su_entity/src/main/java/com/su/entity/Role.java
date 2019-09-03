@@ -17,7 +17,7 @@ public class Role {
      */
     private Integer roleId;
     /**
-     * 角色名称
+     * 角色名称 分为管理员和普通用户
      */
     private String roleName;
     /**

@@ -16,7 +16,7 @@
         <div class="nano-content">
             <ul>
                 <li class="active">
-                    <a class="sidebar-sub-toggle" onclick="window.location.href='${pageContext.request.contextPath}/index.jsp'"><i class="ti-home"></i> 首页</a>
+                    <a class="sidebar-sub-toggle" onclick="window.location.href='${pageContext.request.contextPath}/user/index.do'"><i class="ti-home"></i> 首页</a>
                 </li>
                 <li>
                     <a class="sidebar-sub-toggle"><i class="ti-layout"></i> 数据管理 <span class="sidebar-collapse-icon ti-angle-down"></span></a>

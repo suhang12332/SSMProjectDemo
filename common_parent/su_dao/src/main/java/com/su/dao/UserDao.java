@@ -3,10 +3,15 @@ import com.su.dao.basedao.BaseDao;
 import com.su.entity.User;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultType;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.mapping.FetchType;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
@@ -39,7 +44,18 @@ public interface UserDao extends BaseDao<User> {
      * @return T 返回的结果集
      */
     @Override
+    @Results(id="findById",value = {
+            @Result(property = "userId", column = "userId", id = true, javaType = Integer.class),
+            @Result(property = "userEmail", column = "userEmail", javaType = String.class),
+            @Result(property = "userName", column = "userName", javaType = String.class),
+            @Result(property = "userPassword", column = "userPassword", javaType = String.class),
+            @Result(property = "phoneNum", column = "phoneNum", javaType = String.class),
+            @Result(property = "userPassword", column = "userPassword", javaType = String.class),
+            @Result(property = "userStatus", column = "userStatus", javaType = Integer.class),
+            @Result(property = "role", column = "userId", javaType = List.class,many = @Many(select = "com.su.dao.RoleDao.findRoleByUserId",fetchType = FetchType.EAGER))
+    })
     @Select("select * from user where userId=#{id}")
+    @ResultType(User.class)
     User findById(@Param("id") Integer id);
 
     /**
@@ -85,12 +101,20 @@ public interface UserDao extends BaseDao<User> {
 
 
     /**
-     * description: 根据查询用户信息
+     * description: 根据查询用户信息,用于检测用户名是否重复
      *
      * @param userName 电话号码
      * @return java.util.List<com.su.entity.User>
      */
     @Select("select * from user where userName=#{userName}")
     List<User> selectByUserName(@Param("userName") String userName);
+    /**
+     * description: 根据用户姓名查询信息 用于登录
+     *
+     * @param userName 用户姓名
+     * @return com.su.entity.User
+     */
+    @Select("select * from user where userName=#{userName}")
+    User selectByName (@Param("userName") String userName);
 
 }

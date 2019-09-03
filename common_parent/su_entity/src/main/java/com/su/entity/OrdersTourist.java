@@ -12,7 +12,16 @@ import lombok.Data;
  */
 @Data
 public class OrdersTourist {
+    /**
+     * 无意义的主键
+     */
     private Integer orderTouristId;
+    /**
+     * 订单id
+     */
     private Integer orderId;
+    /**
+     * 游客id
+     */
     private Integer touristId;
 }

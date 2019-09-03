@@ -97,7 +97,7 @@ public interface OrdersDao extends BaseDao<Orders> {
     @Override
     @ResultMap("findAll")
     @Select("select * from orders where orderId=#{id}")
-    @ResultType(List.class)
+    @ResultType(Orders.class)
     Orders findById(Integer id);
 
 

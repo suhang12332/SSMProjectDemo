@@ -120,7 +120,6 @@
                                                     清楚的是</a></li>
                                             </ul>
                                         </li>
-
                                     </ul>
                                 </div>
                             </div>
@@ -148,12 +147,12 @@
 
                                             <tbody>
                                             <tr>
-                                                <th scope="row">${stat.index+1}</th>
-                                                <td>${user.list[stat.index].userId}</td>
-                                                <td>${user.list[stat.index].userName}</td>
-                                                <td>${user.list[stat.index].userPassword}</td>
-                                                <td>${user.list[stat.index].userEmail}</td>
-                                                <td>${user.list[stat.index].phoneNum}</td>
+                                                <th scope="row" onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}'">${stat.index+1}</th>
+                                                <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}'">${user.list[stat.index].userId}</td>
+                                                <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}'">${user.list[stat.index].userName}</td>
+                                                <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}'">${user.list[stat.index].userPassword}</td>
+                                                <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}'">${user.list[stat.index].userEmail}</td>
+                                                <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}'">${user.list[stat.index].phoneNum}</td>
 
                                                 <td>
                                                     <c:if test="${user.list[stat.index].userStatus==0}">
@@ -220,7 +219,6 @@
 <script src="${pageContext.request.contextPath}/js/lib/sweetalert/sweetalert.min.js"></script>
 <!-- scripit init-->
 <script src="${pageContext.request.contextPath}/js/scripts.js"></script><!-- scripit init-->
-
 <script type="text/javascript">
     function deletebyId3(id){
         swal({

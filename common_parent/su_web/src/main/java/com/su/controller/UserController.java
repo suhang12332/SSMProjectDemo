@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 /**
@@ -35,14 +36,6 @@ public class UserController {
     @Autowired
     public UserController(@Qualifier("userServiceImpl") UserService userService) {
         this.userService = userService;
-    }
-    /**
-     * description: 跳转到登录页面
-     * @return java.lang.String 返回视图
-     */
-    @GetMapping("/login.do")
-    public String login() {
-        return "login";
     }
 
     /**
@@ -146,6 +139,7 @@ public class UserController {
     @GetMapping("/toUpdateUser.do")
     public String toUpdateUser(@RequestParam("id") int id,Model model) {
         User byId = userService.findById(id);
+        System.out.println(byId);
         model.addAttribute("user", byId);
         return "updateUser";
     }
@@ -165,5 +159,65 @@ public class UserController {
         int update = userService.update(user);
         System.out.println(update);
         return "redirect:findAll.do?page=1&size=5";
+    }
+    /**
+     * description: 用户详细信息
+     *
+     * @param id 用户id
+     * @param model model域存放结果集
+     * @return java.lang.String
+     */
+    @GetMapping("/userInformation.do")
+    public String userInformation(@RequestParam("id") Integer id, Model model) {
+        User byId = userService.findById(id);
+        model.addAttribute("user", byId);
+        return "userInformation";
+    }
+
+    /**
+     * description: 跳转到登录页面
+     *
+     * @return java.lang.String 返回视图
+     */
+    @GetMapping("/login.do")
+    public String login(Model model) {
+        model.addAttribute("user", new User());
+        return "login";
+    }
+
+    /**
+     * description: 注销登录
+     *
+     * @param session 用户session
+     * @return java.lang.String 重定向到用户登录页面
+     */
+    @GetMapping("/logout.do")
+    public String logOut(HttpSession session) {
+        session.invalidate();
+        return "redirect:login.do";
+    }
+    /**
+     * description: 用于判断用户是否登录
+     *
+     * @param user
+     * @return java.lang.String
+     */
+    @PostMapping("/isLogin.do")
+    public String isLogin(User user,HttpSession session) {
+        Boolean login = userService.isLogin(user);
+        if (login) {
+            session.setAttribute("user",userService.findUserByName(user));
+            return "index";
+        }
+        return "redirect:login.do";
+    }
+    /**
+     * description: 跳转到主页面
+     *
+     * @return java.lang.String
+     */
+    @GetMapping("/index.do")
+    public String index(){
+        return "index";
     }
 }

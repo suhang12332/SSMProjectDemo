@@ -83,4 +83,11 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--拦截路径,拦截所有的路径-->
+            <mvc:mapping path="/**"/>
+            <bean class="com.su.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

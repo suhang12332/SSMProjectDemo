@@ -84,4 +84,15 @@ public interface UserService extends BaseService<User> {
      */
     @Override
     int update(User user);
+
+    /**
+     * description: 用户登录模块
+     *
+     * @param user 用户信息
+     * @return int
+     */
+    Boolean isLogin(User user);
+
+
+    User findUserByName(User user);
 }

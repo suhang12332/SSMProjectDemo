@@ -2,6 +2,8 @@ package com.su.entity;
 
 import com.su.annotation.PhoneNumber;
 
+import java.util.List;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
@@ -47,4 +49,9 @@ public class User {
      * 用户状态 0关闭,1开启
      */
     private Integer userStatus;
+
+    /**
+     * 用户角色信息
+     */
+    private List<Role> role;
 }

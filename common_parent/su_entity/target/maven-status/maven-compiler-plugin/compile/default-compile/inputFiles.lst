@@ -1,0 +1,11 @@
+/home/su/MavenProjects/SSMProjectDemo/common_parent/su_entity/src/main/java/com/su/entity/User.java
+/home/su/MavenProjects/SSMProjectDemo/common_parent/su_entity/src/main/java/com/su/entity/Product.java
+/home/su/MavenProjects/SSMProjectDemo/common_parent/su_entity/src/main/java/com/su/entity/Permissions.java
+/home/su/MavenProjects/SSMProjectDemo/common_parent/su_entity/src/main/java/com/su/entity/Memberid.java
+/home/su/MavenProjects/SSMProjectDemo/common_parent/su_entity/src/main/java/com/su/annotation/PhoneNumberValidator.java
+/home/su/MavenProjects/SSMProjectDemo/common_parent/su_entity/src/main/java/com/su/entity/OrdersTourist.java
+/home/su/MavenProjects/SSMProjectDemo/common_parent/su_entity/src/main/java/com/su/annotation/PhoneNumber.java
+/home/su/MavenProjects/SSMProjectDemo/common_parent/su_entity/src/main/java/com/su/entity/Tourist.java
+/home/su/MavenProjects/SSMProjectDemo/common_parent/su_entity/src/main/java/com/su/entity/Role.java
+/home/su/MavenProjects/SSMProjectDemo/common_parent/su_entity/src/main/java/com/su/entity/Orders.java
+/home/su/MavenProjects/SSMProjectDemo/common_parent/su_entity/src/main/java/com/su/entity/Log.java

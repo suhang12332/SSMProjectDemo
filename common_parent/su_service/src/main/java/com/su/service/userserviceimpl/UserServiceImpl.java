@@ -2,6 +2,7 @@ package com.su.service.userserviceimpl;
 
 import com.github.pagehelper.PageHelper;
 import com.su.dao.UserDao;
+import com.su.dao.basedao.BaseDao;
 import com.su.entity.User;
 import com.su.service.UserService;
 import com.su.service.baseservice.BaseServiceImpl;
@@ -63,5 +64,17 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     @Override
     public int update(User user) {
         return userDao.update(user);
+    }
+
+    @Override
+    public Boolean isLogin(User user) {
+        User userInformation = userDao.selectByName(user.getUserName());
+        //当用户不为空的时候并且用户密码与数据库的一致的时候登录成功
+        return userInformation != null && user.getUserPassword().equals(userInformation.getUserPassword());
+    }
+
+    @Override
+    public User findUserByName(User user) {
+        return userDao.selectByName(user.getUserName());
     }
 }
