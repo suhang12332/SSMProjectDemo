@@ -135,6 +135,7 @@
                                             <th>#</th>
                                             <th>用户id</th>
                                             <th>用户姓名</th>
+                                            <th>性别</th>
                                             <th>用户密码</th>
                                             <th>用户邮箱</th>
                                             <th>联系方式</th>
@@ -150,9 +151,11 @@
                                                 <th scope="row" onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}'">${stat.index+1}</th>
                                                 <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}'">${user.list[stat.index].userId}</td>
                                                 <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}'">${user.list[stat.index].userName}</td>
+                                                <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}'">${user.list[stat.index].userSex}</td>
                                                 <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}'">${user.list[stat.index].userPassword}</td>
                                                 <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}'">${user.list[stat.index].userEmail}</td>
                                                 <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}'">${user.list[stat.index].phoneNum}</td>
+
 
                                                 <td>
                                                     <c:if test="${user.list[stat.index].userStatus==0}">
