@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -32,7 +33,6 @@ import javax.validation.Valid;
 @RequestMapping("/user")
 public class UserController {
     private UserService userService;
-
     @Autowired
     public UserController(@Qualifier("userServiceImpl") UserService userService) {
         this.userService = userService;
@@ -58,7 +58,6 @@ public class UserController {
     public String findAll(@RequestParam("page") int page, @RequestParam("size") int size, Model model){
         List<User> all = userService.findAll(page, size);
         PageInfo<User> userPageInfo = new PageInfo<>(all);
-        System.out.println(userPageInfo);
         model.addAttribute("user", userPageInfo);
         return "allUser";
     }
@@ -125,6 +124,7 @@ public class UserController {
      */
     @GetMapping("/deleteById.do")
     public String deleteById(@RequestParam("id") int id){
+        userService.deleteUserRoleById(id);
         userService.deleteById(id);
         return "redirect:findAll.do?page=1&size=5";
     }
@@ -139,7 +139,6 @@ public class UserController {
     @GetMapping("/toUpdateUser.do")
     public String toUpdateUser(@RequestParam("id") int id,Model model) {
         User byId = userService.findById(id);
-        System.out.println(byId);
         model.addAttribute("user", byId);
         return "updateUser";
     }
@@ -157,7 +156,6 @@ public class UserController {
             return "updateUser";
         }
         int update = userService.update(user);
-        System.out.println(update);
         return "redirect:findAll.do?page=1&size=5";
     }
     /**
@@ -203,12 +201,13 @@ public class UserController {
      * @return java.lang.String
      */
     @PostMapping("/isLogin.do")
-    public String isLogin(User user,HttpSession session) {
+    public String isLogin(User user, HttpSession session, HttpServletRequest request) {
         Boolean login = userService.isLogin(user);
         if (login) {
             session.setAttribute("user",userService.findUserByName(user));
             return "index";
         }
+        request.setAttribute("error", login);
         return "redirect:login.do";
     }
     /**

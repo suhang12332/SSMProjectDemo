@@ -77,4 +77,9 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     public User findUserByName(User user) {
         return userDao.selectByName(user.getUserName());
     }
+
+    @Override
+    public int deleteUserRoleById(Integer id) {
+        return userDao.deleteUserRoleById(id);
+    }
 }

@@ -3,6 +3,7 @@ import com.su.dao.MemberidDao;
 import com.su.dao.OrdersDao;
 import com.su.dao.OrdersTouristDao;
 import com.su.dao.ProductDao;
+import com.su.dao.RoleDao;
 import com.su.dao.TouristDao;
 import com.su.dao.UserDao;
 import com.su.service.OrdersTouristService;
@@ -78,5 +79,16 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
     protected UserDao userDao;
     public BaseServiceImpl(@Qualifier("userDao") UserDao userDao) {
         this.userDao = userDao;
+    }
+
+    /**
+     * description: 构造方法注入roleDoa.指定其实现类的对象是roleDao
+     *
+     * @return
+     */
+    @Autowired
+    protected RoleDao roleDao;
+    public BaseServiceImpl(@Qualifier("roleDao") RoleDao roleDao) {
+        this.roleDao = roleDao;
     }
 }

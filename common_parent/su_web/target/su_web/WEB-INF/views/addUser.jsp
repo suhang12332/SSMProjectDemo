@@ -134,7 +134,7 @@
                                                 <input value="${user.phoneNum}" style="display: none" id="phoneNum">
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label">游客状态</label>
+                                                <label class="col-sm-2 control-label">用户状态</label>
                                                 <div class="col-sm-8">
                                                     <form:select path="userStatus" cssClass="form-control btn btn-primary">
                                                         <label>请选择用户状态</label>
@@ -143,6 +143,16 @@
                                                     </form:select>
                                                 </div>
                                                 <label class="col-sm-2 control-label" style="color: red"><form:errors path="userStatus" /> </label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">用户性别</label>
+                                                <div class="col-sm-8">
+                                                    <form:select path="userSex" cssClass="form-control btn btn-primary">
+                                                        <label>请选择用户性别</label>
+                                                        <form:option value="男" cssClass="form-control btn btn-primary">男</form:option>
+                                                        <form:option value="女" cssClass="form-control btn btn-primary">女</form:option>
+                                                    </form:select>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-primary col-sm-offset-4">确认</button>

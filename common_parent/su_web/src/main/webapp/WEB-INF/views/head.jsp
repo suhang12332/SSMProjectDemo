@@ -179,15 +179,11 @@
             </li>
             <li class="header-icon dib chat-sidebar-icon"><i class="ti-comments"></i></li>
             <li class="header-icon dib">
-                <img class="avatar-img" src="${pageContext.request.contextPath}/images/avatar/1.jpg" alt="" /> <span class="user-avatar">简 <i class="ti-angle-down f-s-10"></i></span>
+                <img class="avatar-img" src="${pageContext.request.contextPath}/images/avatar/1.jpg" alt="" /> <span class="user-avatar">${sessionScope.user.userName} <i class="ti-angle-down f-s-10"></i></span>
                 <div class="drop-down dropdown-profile">
-                    <div class="dropdown-content-heading">
-                        <span class="text-left">现在升级</span>
-                        <p class="trial-day">30天步道</p>
-                    </div>
                     <div class="dropdown-content-body">
                         <ul>
-                            <li><a href="#"><i class="ti-user"></i> <span>轮廓</span></a></li>
+                            <li><a href="${pageContext.request.contextPath}/user/userInformation.do?id=${sessionScope.user.userId}"><i class="ti-user"></i> <span>轮廓</span></a></li>
                             <li><a href="#"><i class="ti-wallet"></i> <span>我的平衡</span></a></li>
                             <li><a href="#"><i class="ti-write"></i> <span>我的任务</span></a></li>
                             <li><a href="#"><i class="ti-calendar"></i> <span>我的日历</span></a></li>

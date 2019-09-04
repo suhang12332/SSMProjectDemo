@@ -73,7 +73,6 @@
                             </div>
                         </form:form>
                     </div>
-                    ${requestScope.msg}
                 </div>
             </div>
         </div>
@@ -91,9 +90,8 @@
     function login() {
         var username = document.getElementById("username").value;
         var password = document.getElementById("password").value;
-        if(username == null || password == null || username == "" || password == "" || username == undefined || password == undefined) {
-            document.getElementById("btn").disabled = true;
-            toastr.warning('用户名或者密码不能为空','系统通知',{
+        if(${requestScope.msg!=null}){
+            toastr.error('你还没有登录,请登录','系统通知',{
                 "positionClass": "toast-top-center",
                 timeOut: 7000,
                 "closeButton": true,
@@ -111,8 +109,27 @@
                 "hideMethod": "fadeOut",
                 "tapToDismiss": false
             })
-
-        }else {
+        }else if(username == null || password == null || username == "" || password == "" || username == undefined || password == undefined) {
+            document.getElementById("btn").disabled = true;
+            toastr.warning('用户名或者密码不能为空', '系统通知', {
+                "positionClass": "toast-top-center",
+                timeOut: 7000,
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": true,
+                "preventDuplicates": true,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut",
+                "tapToDismiss": false
+            })
+        } else  {
             document.getElementById("btn").disabled = false;
         }
     }

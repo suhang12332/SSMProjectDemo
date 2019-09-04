@@ -38,7 +38,6 @@
         <property name="defaultEncoding" value="utf-8"/>
         <property name="cacheSeconds" value="120"/>
     </bean>
-
     <!--注册校验器-->
     <bean id="validatorFactoryBean" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
         <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>

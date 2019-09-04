@@ -3,8 +3,11 @@ package com.su.dao;
 import com.su.dao.basedao.BaseDao;
 import com.su.entity.Role;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -16,6 +19,8 @@ import java.util.List;
  * @description
  * @date 2019/9/2 下午5:58
  */
+@Repository
+@Mapper
 public interface RoleDao extends BaseDao<Role> {
     /**
      * description: 根据用户id查询角色信息
@@ -24,5 +29,5 @@ public interface RoleDao extends BaseDao<Role> {
      * @return java.util.List<com.su.entity.Role>
      */
     @Select("select * from role where roleId in (select roleId from user_role where userId=#{id})")
-    List<Role>  findRoleByUserId(@Param("id") Integer id);
+    List<Role> findRoleByUserId(@Param("id") Integer id);
 }

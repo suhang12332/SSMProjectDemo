@@ -44,6 +44,10 @@
     <link href="${pageContext.request.contextPath}/css/lib/toastr/toastr.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/lib/nixon.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
     <style type="text/css">
         th {
             text-align: center; /** 设置水平方向居中 */
@@ -66,8 +70,8 @@
 <div class="unix-invoice">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-2"></div>
-            <div class="col-lg-8">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
                 <div id="invoice" class="effect2 m-t-120">
                     <div id="invoice-top" style="min-height: 35px;">
                         <div class="invoice-info">
@@ -86,71 +90,96 @@
                             <div class="card-body">
                                 <div class="user-profile">
                                     <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="custom-tab user-profile-tab">
-                                                <ul class="nav nav-tabs" role="tablist">
-                                                    <li role="presentation" class="active"><a
-                                                            href="#1" aria-controls="1" role="tab"
-                                                            data-toggle="tab"
-                                                            style="cursor: pointer">用户信息</a></li>
-                                                </ul>
-                                                <div class="tab-content">
-                                                    <div role="tabpanel" class="tab-pane active"
-                                                         id="1">
-                                                        <div class="contact-information"
-                                                             style="margin: 10px 35px;">
-                                                            <div class="phone-content">
-                                                                <span class="contact-title">用户编号:</span>
-                                                                <span class="phone-number">${user.userId}</span>
-                                                            </div>
-                                                            <div class="phone-content">
-                                                                <span class="contact-title">用户姓名:</span>
-                                                                <span class="phone-number">${user.userName}</span>
-                                                            </div>
-                                                            <div class="address-content">
-                                                                <span class="contact-title">用户邮箱:</span>
-                                                                <span class="mail-address">${user.userEmail} </span>
-                                                            </div>
-                                                            <div class="website-content">
-                                                                <span class="contact-title">用户密码:</span>
-                                                                <span class="contact-website">${user.userPassword}</span>
-                                                            </div>
-                                                            <div class="skype-content">
-                                                                <span class="contact-title">用户状态:</span>
-                                                                <span class="contact-skype">
-                                                                    <c:if test="${user.userStatus==0}">
-                                                                        关闭
-                                                                    </c:if>
-                                                                    <c:if test="${user.userStatus==1}">
-                                                                        打开
-                                                                    </c:if>
-                                                                </span>
-                                                            </div>
-                                                            <c:if test="${user.role.size()<=0}">
-                                                                当前用户没有任何角色信息
-                                                            </c:if>
-                                                            <c:if test="${user.role.size()>0}">
-                                                                <div class="phone-content">
-                                                                    <span class="contact-title">角色名称:</span>
-                                                                    <c:forEach items="${user.role}" varStatus="stat" begin="0" end="${user.role.size()}">
-                                                                        <span class="phone-number">${user.role[stat.index].roleName}</span>
-                                                                    </c:forEach>
+                                        <div class="col-lg-5">
+                                            <div class="card alert">
+                                                <div class="card-body">
+                                                    <div class="user-profile">
+                                                        <div class="row">
+                                                            <div class="col-lg-4">
+                                                                <div class="user-photo m-b-30">
+                                                                    <img class="img-responsive" src="${pageContext.request.contextPath}/images/head/timg.jpg"/>
                                                                 </div>
-                                                                <div class="address-content">
-                                                                    <span class="contact-title">角色描述:</span>
-                                                                    <c:forEach items="${user.role}" varStatus="stat" begin="0" end="${user.role.size()}">
-                                                                        <span class="phone-number">${user.role[stat.index].roleDesc}</span>
-                                                                    </c:forEach>
+                                                            </div>
+                                                            <div class="col-lg-8">
+                                                                <div class="user-profile-name" style="color: #878787">
+                                                                    ${user.userSex=="男"?"<i class=\"fas fa-mars\" style=\"color:#00b4ef\"></i>":"<i class=\"fas fa-venus\" style=\"color:#d44950\"></i>"}
+                                                                    &nbsp;${user.userName}
                                                                 </div>
+                                                                <div class="user-Location" style="color:#878787;"><i class="ti-location-pin" style="color:#878787;"></i> 陕西西安</div>
 
-                                                            </c:if>
+                                                                <div class="user-job-title"><br>
+                                                                    <c:if test="${user.role.size()==0}">
+                                                                        闲人一枚
+                                                                    </c:if>
+                                                                    <c:if test="${user.role.size()>0}">
+                                                                        <c:forEach items="${user.role}" begin="0" end="${user.role.size()}" varStatus="stat">
+                                                                            ${user.role[stat.index].roleName}
+                                                                        </c:forEach>
+                                                                    </c:if>
+                                                                </div>
+                                                                <div class="ratings">
+                                                                    <h4>评级</h4>
+                                                                    <div class="rating-star">
+                                                                        <span style="color: #878787">8.9</span>
+                                                                        <i class="ti-star color-primary"></i>
+                                                                        <i class="ti-star color-primary"></i>
+                                                                        <i class="ti-star color-primary"></i>
+                                                                        <i class="ti-star color-primary"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div style="color:#878787;"><span style="color: #00838F">职务描述:</span>
+                                                                    <c:if test="${user.role.size()==0}">
+                                                                        没有职务
+                                                                    </c:if>
+                                                                    <c:if test="${user.role.size()>0}">
+                                                                        <c:forEach items="${user.role}" begin="0" end="${user.role.size()}" varStatus="stat">
+                                                                            ${user.role[stat.index].roleDesc}
+                                                                        </c:forEach>
+                                                                    </c:if>
+                                                                </div>
+                                                            </div>
                                                         </div>
-
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="custom-tab user-profile-tab">
+                                                                    <ul class="nav nav-tabs" role="tablist">
+                                                                        <li role="presentation" class="active"><a href="#1" aria-controls="1" role="tab" data-toggle="tab">详细信息</a></li>
+                                                                    </ul>
+                                                                    <div class="tab-content">
+                                                                        <div role="tabpanel" class="tab-pane active" id="1">
+                                                                            <div class="contact-information">
+                                                                                <div class="phone-content">
+                                                                                    <span class="contact-title">联系方式:</span>
+                                                                                    <span class="phone-number">${user.phoneNum}</span>
+                                                                                </div>
+                                                                                <div class="skype-content">
+                                                                                    <span class="contact-title">用户密码:</span>
+                                                                                    <span class="contact-skype">${user.userPassword}</span>
+                                                                                </div>
+                                                                                <div class="email-content">
+                                                                                    <span class="contact-title">邮箱:</span>
+                                                                                    <span class="contact-email">${user.userEmail}</span>
+                                                                                </div>
+                                                                                <div class="skype-content">
+                                                                                    <span class="contact-title">用户状态</span>
+                                                                                    <c:if test="${user.userStatus==0}">
+                                                                                        <span class="contact-skype">关闭</span>
+                                                                                    </c:if>
+                                                                                    <c:if test="${user.userStatus==1}">
+                                                                                        <span class="contact-skype">打开</span>
+                                                                                    </c:if>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-6">
+                                        </div><!-- /# column -->
+                                        <div class="col-lg-7">
                                             <div class="custom-tab user-profile-tab">
                                                 <ul class="nav nav-tabs" role="tablist">
                                                     <li role="presentation" class="active"><a
@@ -179,7 +208,7 @@
                 </div>
                 <!--End Invoice-->
             </div>
-            <div class="col-lg-2"></div>
+            <div class="col-lg-1"></div>
         </div>
     </div>
 </div>

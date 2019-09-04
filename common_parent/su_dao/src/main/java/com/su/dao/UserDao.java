@@ -51,6 +51,7 @@ public interface UserDao extends BaseDao<User> {
             @Result(property = "userPassword", column = "userPassword", javaType = String.class),
             @Result(property = "phoneNum", column = "phoneNum", javaType = String.class),
             @Result(property = "userPassword", column = "userPassword", javaType = String.class),
+            @Result(property = "userSex", column = "userSex", javaType = String.class),
             @Result(property = "userStatus", column = "userStatus", javaType = Integer.class),
             @Result(property = "role", column = "userId", javaType = List.class,many = @Many(select = "com.su.dao.RoleDao.findRoleByUserId",fetchType = FetchType.EAGER))
     })
@@ -75,7 +76,7 @@ public interface UserDao extends BaseDao<User> {
      * @return int 返回操作的行数
      */
     @Override
-    @Insert("insert into user (userEmail, userName, userPassword, phoneNum, userStatus) values (#{userEmail},#{userName},#{userPassword},#{phoneNum},#{userStatus})")
+    @Insert("insert into user (userEmail, userName, userPassword, phoneNum, userStatus,userSex) values (#{userEmail},#{userName},#{userPassword},#{phoneNum},#{userStatus},#{userSex})")
     int insert(User user);
 
     /**
@@ -86,7 +87,7 @@ public interface UserDao extends BaseDao<User> {
      */
 
     @Override
-    @Update("update user set userEmail=#{userEmail},userName=#{userName},userPassword=#{userPassword},phoneNum=#{phoneNum},userStatus=#{userStatus} where userId=#{userId}")
+    @Update("update user set userEmail=#{userEmail},userName=#{userName},userPassword=#{userPassword},phoneNum=#{phoneNum},userStatus=#{userStatus},userSex=#{userSex} where userId=#{userId}")
     int update(User user);
 
 
@@ -117,4 +118,13 @@ public interface UserDao extends BaseDao<User> {
     @Select("select * from user where userName=#{userName}")
     User selectByName (@Param("userName") String userName);
 
+
+    /**
+     * description: 因为外键的原因,想要删除用户,必须先要删除中间表
+     *
+     * @param id 用户id
+     * @return int 返回操作的行数
+     */
+    @Delete("delete from user_role where userId=#{id}")
+    int deleteUserRoleById(@Param("id") Integer id);
 }

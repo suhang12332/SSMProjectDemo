@@ -93,6 +93,19 @@ public interface UserService extends BaseService<User> {
      */
     Boolean isLogin(User user);
 
-
+    /**
+     * description: 根据用户名查找用户信息
+     *
+     * @param user user引用
+     * @return com.su.entity.User
+     */
     User findUserByName(User user);
+
+    /**
+     * description: 因为外键的原因,想要删除用户,必须先要删除中间表
+     *
+     * @param id 用户id
+     * @return int 返回操作的行数
+     */
+    int deleteUserRoleById(Integer id);
 }

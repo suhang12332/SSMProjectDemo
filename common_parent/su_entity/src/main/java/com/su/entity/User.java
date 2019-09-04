@@ -54,4 +54,8 @@ public class User {
      * 用户角色信息
      */
     private List<Role> role;
+    /**
+     * 用户性别
+     */
+    private String userSex;
 }
