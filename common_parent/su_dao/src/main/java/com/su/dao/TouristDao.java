@@ -106,6 +106,13 @@ public interface TouristDao extends BaseDao<Tourist> {
     @Select("select * from tourist where passengerPhoneNumber=#{phoneNumber}")
     List<Tourist> selectTouristByPhoneNumber(@Param("phoneNumber") String phoneNumber);
 
+
+    /**
+     * description: 根据订单id查询游客信息id,在根据查询出来的游客id查询游客表(因为订单和游客的信息是多对多的关系)
+     *
+     * @param id 订单id
+     * @return java.util.List<com.su.entity.Tourist>
+     */
     @Select("select * from tourist where passengerId in (select touristId from orders_tourist where orderId=#{id})")
     List<Tourist> findTouristByOrdersId(@Param("id") Integer id);
 
