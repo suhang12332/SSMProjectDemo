@@ -1,7 +1,10 @@
 package com.su.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.su.entity.Log;
 import com.su.entity.User;
+import com.su.exception.BaseException;
+import com.su.service.LogService;
 import com.su.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,11 +35,18 @@ import javax.validation.Valid;
  */
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseException {
     private UserService userService;
+    private LogService logService;
+    private Log log;
+
     @Autowired
-    public UserController(@Qualifier("userServiceImpl") UserService userService) {
+    public UserController(@Qualifier("userServiceImpl") UserService userService,
+                          @Qualifier("logServiceImpl") LogService logService,
+                          @Qualifier("log") Log log) {
         this.userService = userService;
+        this.logService = logService;
+        this.log = log;
     }
 
     /**
@@ -166,8 +177,11 @@ public class UserController {
      * @return java.lang.String
      */
     @GetMapping("/userInformation.do")
-    public String userInformation(@RequestParam("id") Integer id, Model model) {
+    public String userInformation(@RequestParam("id") Integer id, Model model,@RequestParam("page") int page, @RequestParam("size") int size) {
         User byId = userService.findById(id);
+        List<Log> byUserName = logService.findByUserName(byId.getUserName(), page, size);
+        PageInfo<Log> userPageInfo = new PageInfo<>(byUserName);
+        model.addAttribute("log", userPageInfo);
         model.addAttribute("user", byId);
         return "userInformation";
     }
@@ -182,21 +196,29 @@ public class UserController {
         model.addAttribute("user", new User());
         return "login";
     }
-
     /**
      * description: 注销登录
-     *
      * @param session 用户session
      * @return java.lang.String 重定向到用户登录页面
      */
     @GetMapping("/logout.do")
-    public String logOut(HttpSession session) {
+    public String logOut(HttpSession session,HttpServletRequest request) {
+        User allPost = (User) session.getAttribute("user");
+        log.setUserName(allPost.getUserName());
+        //设置日期
+        log.setVisitTime(new Date());
+        //存入ip
+        log.setIp(request.getRemoteAddr());
+        //存入路径
+        log.setUrl(request.getRequestURI());
+        //存入方法
+        log.setMethod(request.getMethod());
+        logService.insert(log);
         session.invalidate();
         return "redirect:login.do";
     }
     /**
      * description: 用于判断用户是否登录
-     *
      * @param user
      * @return java.lang.String
      */
@@ -207,7 +229,6 @@ public class UserController {
             session.setAttribute("user",userService.findUserByName(user));
             return "index";
         }
-        request.setAttribute("error", login);
         return "redirect:login.do";
     }
     /**
@@ -219,4 +240,5 @@ public class UserController {
     public String index(){
         return "index";
     }
+
 }

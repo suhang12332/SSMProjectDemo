@@ -28,12 +28,6 @@
                     </ul>
                 </li>
                 <li>
-                    <a class="sidebar-sub-toggle"><i class="ti-panel"></i> 系统管理 <span class="sidebar-collapse-icon ti-angle-down"></span></a>
-                    <ul>
-                        <li><a href="uc-calendar.html">日历</a></li>
-                    </ul>
-                </li>
-                <li>
                     <a class="sidebar-sub-toggle"><i class="ti-user"></i> 游客管理 <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                     <ul>
                         <li><a href="${pageContext.request.contextPath}/tourist/findAllTourist.do?page=1&size=5">游客信息</a></li>
@@ -43,6 +37,13 @@
                     <a class="sidebar-sub-toggle"><i class="ti-user"></i> 用户管理 <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                     <ul>
                         <li><a href="${pageContext.request.contextPath}/user/findAll.do?page=1&size=5">用户信息</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a class="sidebar-sub-toggle"><i class="ti-user"></i> 日志管理 <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                    <ul>
+                        <li><a href="${pageContext.request.contextPath}/log/findAll.do?page=1&size=10">日志信息</a></li>
                     </ul>
                 </li>
             </ul>
@@ -191,7 +192,7 @@
                             <li><a href="#"><i class="ti-settings"></i> <span>设置</span></a></li>
                             <li><a href="#"><i class="ti-help-alt"></i> <span>帮助</span></a></li>
                             <li><a href="#"><i class="ti-lock"></i> <span>锁屏</span></a></li>
-                            <li><a href="#"><i class="ti-power-off"></i> <span>登出</span></a></li>
+                            <li><a href="${pageContext.request.contextPath}/user/logout.do"><i class="ti-power-off"></i> <span>登出</span></a></li>
                         </ul>
                     </div>
                 </div>

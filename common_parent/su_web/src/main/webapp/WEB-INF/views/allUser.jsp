@@ -148,13 +148,13 @@
 
                                             <tbody>
                                             <tr>
-                                                <th scope="row" onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}'">${stat.index+1}</th>
-                                                <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}'">${user.list[stat.index].userId}</td>
-                                                <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}'">${user.list[stat.index].userName}</td>
-                                                <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}'">${user.list[stat.index].userSex}</td>
-                                                <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}'">${user.list[stat.index].userPassword}</td>
-                                                <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}'">${user.list[stat.index].userEmail}</td>
-                                                <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}'">${user.list[stat.index].phoneNum}</td>
+                                                <th scope="row" onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}&page=1&size=6'">${stat.index+1}</th>
+                                                <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}&page=1&size=6'">${user.list[stat.index].userId}</td>
+                                                <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}&page=1&size=6'">${user.list[stat.index].userName}</td>
+                                                <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}&page=1&size=6'">${user.list[stat.index].userSex}</td>
+                                                <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}&page=1&size=6'">${user.list[stat.index].userPassword}</td>
+                                                <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}&page=1&size=6'">${user.list[stat.index].userEmail}</td>
+                                                <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}&page=1&size=6'">${user.list[stat.index].phoneNum}</td>
 
 
                                                 <td>

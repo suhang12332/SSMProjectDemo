@@ -1,7 +1,6 @@
 package com.su.entity;
 
 import com.su.annotation.PhoneNumber;
-
 import java.util.List;
 
 import javax.validation.constraints.Email;
@@ -58,4 +57,5 @@ public class User {
      * 用户性别
      */
     private String userSex;
+
 }

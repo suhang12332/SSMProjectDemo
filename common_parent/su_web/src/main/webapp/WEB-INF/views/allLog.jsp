@@ -73,7 +73,7 @@
                 <div class="col-lg-8 p-0">
                     <div class="page-header">
                         <div class="page-title">
-                            <h1>用户管理</h1>
+                            <h1>日志管理</h1>
                         </div>
                     </div>
                 </div><!-- /# column -->
@@ -81,8 +81,8 @@
                     <div class="page-header">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li><a href="${pageContext.request.contextPath}/user/findAll.do?page=1&size=5">用户信息</a></li>
-                                <li class="active">所有用户信息表</li>
+                                <li><a href="${pageContext.request.contextPath}/log/findAll.do?page=1&size=10">日志信息</a></li>
+                                <li class="active">所有日志信息表</li>
                             </ol>
                         </div>
                     </div>
@@ -94,12 +94,11 @@
                     <div class="col-lg-10">
                         <div class="card alert">
                             <div class="card-header">
-                                <h4>所有用户信息表 </h4>
-
+                                <h4>所有日志信息表 </h4>
                                 <div class="card-header-right-icon">
                                     <button type="button" class="btn btn-default btn-outline m-b-10"
-                                            onclick="window.location.href='${pageContext.request.contextPath}/user/toAdd.do'">
-                                        增加游客信息
+                                            onclick="window.location.href='${pageContext.request.contextPath}/log/deleteLog.do?userName=${sessionScope.user.userName}'">
+                                        清除自己的日志信息
                                     </button>
                                     <ul>
                                         <li class="card-option drop-menu"><i class="ti-settings"
@@ -109,7 +108,7 @@
                                                                              role="link"></i>
                                             <ul class="card-option-dropdown dropdown-menu">
                                                 <li>
-                                                    <a href="${pageContext.request.contextPath}/user/findAll.do?page=1&size=5"><i
+                                                    <a href="${pageContext.request.contextPath}/log/findAll.do?page=1&size=10"><i
                                                             class="ti-loop"></i> 更新数据</a>
                                                 </li>
                                                 <li><a href="#"><i class="ti-menu-alt"></i> 详细日志</a>
@@ -121,86 +120,68 @@
                                             </ul>
                                         </li>
                                     </ul>
+
                                 </div>
+
                             </div>
+
                             <div class="card-body">
-                                <c:if test="${user.size==0}">
-                                    <p style="text-align: center">没有游客信息</p>
+                                <c:if test="${log.size==0}">
+                                    <p style="text-align: center">没有日志信息</p>
                                 </c:if>
-                                <c:if test="${user.size!=0}">
+                                <c:if test="${log.size!=0}">
                                     <table class="table table-responsive table-hover"
                                            style="text-align: center">
                                         <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>用户id</th>
-                                            <th>用户姓名</th>
-                                            <th>性别</th>
-                                            <th>用户密码</th>
-                                            <th>用户邮箱</th>
-                                            <th>联系方式</th>
-                                            <th>用户状态</th>
-                                            <th style="text-align: center">用户操作</th>
+                                            <th>日志ID</th>
+                                            <th>操作时间</th>
+                                            <th>操作用户</th>
+                                            <th>ip地址</th>
+                                            <th>资源路径</th>
+                                            <th style="text-align: center;">请求方法</th>
                                         </tr>
                                         </thead>
-                                        <c:forEach items="${user.list}" varStatus="stat" begin="0"
-                                                   end="${user.size}">
-
+                                        <c:forEach items="${log.list}" varStatus="stat" begin="0"
+                                                   end="${log.size}">
                                             <tbody>
                                             <tr>
-                                                <th scope="row" onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}&page=1&size=6'">${stat.index+1}</th>
-                                                <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}&page=1&size=6'">${user.list[stat.index].userId}</td>
-                                                <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}&page=1&size=6'">${user.list[stat.index].userName}</td>
-                                                <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}&page=1&size=6'">${user.list[stat.index].userSex}</td>
-                                                <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}&page=1&size=6'">${user.list[stat.index].userPassword}</td>
-                                                <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}&page=1&size=6'">${user.list[stat.index].userEmail}</td>
-                                                <td onclick="window.location.href='${pageContext.request.contextPath}/user/userInformation.do?id=${user.list[stat.index].userId}&page=1&size=6'">${user.list[stat.index].phoneNum}</td>
-
-
-                                                <td>
-                                                    <c:if test="${user.list[stat.index].userStatus==0}">
-                                                        关闭
-                                                    </c:if>
-                                                    <c:if test="${user.list[stat.index].userStatus==1}">
-                                                        打开
-                                                    </c:if>
-                                                </td>
-                                                <td style="text-align: -webkit-center;">
-                                                    <i onclick="window.location.href='${pageContext.request.contextPath}/user/toUpdateUser.do?id=${user.list[stat.index].userId}'"
-                                                       class="ti-pencil"
-                                                       style="cursor: pointer;z-index: 999"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <i class="ti-trash "
-                                                       style="cursor: pointer;z-index: 999"
-                                                       onclick="deletebyId3(${user.list[stat.index].userId})">
-                                                    </i>
-                                                </td>
+                                                <th scope="row" >${stat.index+1}</th>
+                                                <td >${log.list[stat.index].logId}</td>
+                                                <td ><fmt:formatDate value="${log.list[stat.index].visitTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                                                <td >${log.list[stat.index].userName}</td>
+                                                <td >${log.list[stat.index].ip}</td>
+                                                <td >${log.list[stat.index].url}</td>
+                                                <td style="text-align: center">${log.list[stat.index].method}</td>
                                             </tr>
                                             </tbody>
                                         </c:forEach>
                                     </table>
-                                </c:if>
-                                <hr style="margin-bottom: 10px;border-top: 0px solid;color: #ddd;">
-                                <div class="jsgrid-pager-container" style="display: block;">
-                                    <div class="jsgrid-pager">
-                                        <span class="jsgrid-pager-nav-button ">每页显示条数 <input type="text" onkeyup="size3()" id="size" style="border: solid 1px;BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none;BORDER-BOTTOM-STYLE: solid; outline: none;width: 3em;text-align:center" >条</span>
-                                        <span class="jsgrid-pager-nav-button ">当前页数 :</span><span class="jsgrid-pager-page jsgrid-pager-current-page" >${user.pageNum}</span>
-                                        <c:if test="${param.page>1}">
+                                    <hr style="margin-bottom: 10px;border-top: 0px solid;color: #ddd;">
+                                    <div class="jsgrid-pager-container" style="display: block;">
+                                        <div class="jsgrid-pager">
+                                            <span class="jsgrid-pager-nav-button ">每页显示条数 <input type="text" onkeyup="size3()" id="size" style="border: solid 1px;BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none;BORDER-BOTTOM-STYLE: solid; outline: none;width: 3em;text-align:center" >条</span>
+                                            <span class="jsgrid-pager-nav-button ">当前页数 :</span><span class="jsgrid-pager-page jsgrid-pager-current-page" >${log.pageNum}</span>
+                                            <c:if test="${param.page>1}">
                                             <span class="jsgrid-pager-nav-button ">
-                                            <a href="${pageContext.request.contextPath}/user/findAllTourist.do?page=1&size=${user.pageSize}">首页</a>
+                                            <a href="${pageContext.request.contextPath}/log/findAll.do?page=1&size=${log.pageSize}">首页</a>
                                         </span>
-                                            <span class="jsgrid-pager-nav-button ">
-                                            <a href="${pageContext.request.contextPath}/user/findAllTourist.do?page=${user.pageNum-1}&size=${user.pageSize}">上一页</a>
+                                                <span class="jsgrid-pager-nav-button ">
+                                            <a href="${pageContext.request.contextPath}/log/findAll.do?page=${log.pageNum-1}&size=${log.pageSize}">上一页</a>
                                         </span>
-                                        </c:if>
-                                        <c:if test="${param.page<user.pages}">
-                                            <span class="jsgrid-pager-nav-button"><a href="${pageContext.request.contextPath}/user/findAllTourist.do?page=${user.pageNum+1}&size=${user.pageSize}">下一页</a></span>
-                                            <span class="jsgrid-pager-nav-button"><a href="${pageContext.request.contextPath}/user/findAllTourist.do?page=${user.pages}&size=${user.pageSize}">尾页</a></span> &nbsp;&nbsp;
-                                        </c:if>
-                                        <span class="jsgrid-pager-nav-button " style="float: right;">跳转到<input type="text" onkeyup="page4()" id="page" style="border: solid 1px;BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none;BORDER-BOTTOM-STYLE: solid; outline: none;width: 3em;text-align:center" >页</span>
-                                        <span class="jsgrid-pager-nav-button " style="float: right;">共 ${user.pages }页</span>
-                                        <span class="jsgrid-pager-nav-button " style="float: right;">共 ${user.total} 位游客</span>
+                                            </c:if>
+                                            <c:if test="${param.page<log.pages}">
+                                                <span class="jsgrid-pager-nav-button"><a href="${pageContext.request.contextPath}/log/findAll.do?page=${log.pageNum+1}&size=${log.pageSize}">下一页</a></span>
+                                                <span class="jsgrid-pager-nav-button"><a href="${pageContext.request.contextPath}/log/findAll.do?page=${log.pages}&size=${log.pageSize}">尾页</a></span> &nbsp;&nbsp;
+                                            </c:if>
+                                            <span class="jsgrid-pager-nav-button " style="float: right;">跳转到<input type="text" onkeyup="page4()" id="page" style="border: solid 1px;BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none;BORDER-BOTTOM-STYLE: solid; outline: none;width: 3em;text-align:center" >页</span>
+                                            <span class="jsgrid-pager-nav-button " style="float: right;">共 ${log.pages }页</span>
+                                            <span class="jsgrid-pager-nav-button " style="float: right;">共 ${log.total} 条日志</span>
+                                        </div>
                                     </div>
-                                </div>
+                                </c:if>
+
                             </div>
                         </div>
                     </div><!-- /# column -->
@@ -238,7 +219,7 @@
              function(isConfirm){
                  if (isConfirm) {
                      swal("删除成功 !!", "嘿 ,记录已被删除 !!", "success");
-                     window.location.href='${pageContext.request.contextPath}/user/deleteById.do?id='+id
+                     window.location.href='${pageContext.request.contextPath}/log/deleteById.do?id='+id
                  }
                  else {
                      swal("已取消 !!", "嘿 ,记录很安全 !!", "error");
@@ -247,12 +228,12 @@
     };
     function page4() {
         var val = document.getElementById("page").value;
-        window.location.href="${pageContext.request.contextPath}/user/findAll.do?page="+val+"&size=${param.size}"
+        window.location.href="${pageContext.request.contextPath}/log/findAll.do?page="+val+"&size=${param.size}"
     }
     function size3() {
         var val= document.getElementById("size").value;
         console.log(val)
-        window.location.href="${pageContext.request.contextPath}/user/findAll.do?page=1&size="+val
+        window.location.href="${pageContext.request.contextPath}/log/findAll.do?page=1&size="+val
     }
 </script>
 </body>

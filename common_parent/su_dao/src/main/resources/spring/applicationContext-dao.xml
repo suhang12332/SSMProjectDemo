@@ -5,6 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
     <!--扫描dao包,包括子包，使注解生效，-->
     <context:component-scan base-package="com.su.dao"/>
+    <context:component-scan base-package="com.su.entity"/>
     <!-- 数据库连接信息的配置文件 -->
     <context:property-placeholder
             location="classpath:database/database.properties"/>

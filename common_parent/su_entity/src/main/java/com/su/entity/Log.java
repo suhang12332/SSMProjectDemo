@@ -1,5 +1,7 @@
 package com.su.entity;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
 
 import lombok.Data;
@@ -13,6 +15,7 @@ import lombok.Data;
  * @date 2019/8/26 下午7:09
  */
 @Data
+@Component
 public class Log {
     /**
      * 日志id
@@ -34,10 +37,6 @@ public class Log {
      * 访问url
      */
     private String url;
-    /**
-     * 执行时长
-     */
-    private Integer executionTime;
     /**
      * 执行方法
      */

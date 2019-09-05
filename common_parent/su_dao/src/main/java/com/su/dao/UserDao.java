@@ -53,7 +53,8 @@ public interface UserDao extends BaseDao<User> {
             @Result(property = "userPassword", column = "userPassword", javaType = String.class),
             @Result(property = "userSex", column = "userSex", javaType = String.class),
             @Result(property = "userStatus", column = "userStatus", javaType = Integer.class),
-            @Result(property = "role", column = "userId", javaType = List.class,many = @Many(select = "com.su.dao.RoleDao.findRoleByUserId",fetchType = FetchType.EAGER))
+            @Result(property = "role", column = "userId", javaType = List.class,many = @Many(select = "com.su.dao.RoleDao.findRoleByUserId",fetchType = FetchType.EAGER)),
+//            @Result(property = "log", column = "userName", javaType = List.class,many = @Many(select = "com.su.dao.LogDao.findByUserName",fetchType = FetchType.EAGER))
     })
     @Select("select * from user where userId=#{id}")
     @ResultType(User.class)

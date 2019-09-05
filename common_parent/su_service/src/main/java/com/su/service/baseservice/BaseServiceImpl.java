@@ -1,4 +1,5 @@
 package com.su.service.baseservice;
+import com.su.dao.LogDao;
 import com.su.dao.MemberidDao;
 import com.su.dao.OrdersDao;
 import com.su.dao.OrdersTouristDao;
@@ -90,5 +91,16 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
     protected RoleDao roleDao;
     public BaseServiceImpl(@Qualifier("roleDao") RoleDao roleDao) {
         this.roleDao = roleDao;
+    }
+
+    /**
+     * description: 构造方法注入logDoa.指定其实现类的对象是logDao
+     *
+     * @return
+     */
+    @Autowired
+    protected LogDao logDao;
+    public BaseServiceImpl(@Qualifier("logDao") LogDao logDao) {
+        this.logDao = logDao;
     }
 }

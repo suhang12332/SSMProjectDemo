@@ -30,19 +30,27 @@
     <!-- Standard iPhone Touch Icon-->
     <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
 
-    <!-- Styles -->
-    <link href="${pageContext.request.contextPath}/css/lib/font-awesome.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/fontAwesome/css/fontawesome-all.min.css"
+           rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/lib/themify-icons.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/lib/bootstrap.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/lib/helper.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
-    <!-- Styles -->
-    <link href="${pageContext.request.contextPath}/fontAwesome/css/fontawesome-all.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/lib/weather-icons.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/css/lib/mmc-chat.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/css/lib/weather-icons.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/lib/mmc-chat.css" rel="stylesheet"/>
     <link href="${pageContext.request.contextPath}/css/lib/sidebar.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/lib/toastr/toastr.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/lib/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/lib/sweetalert/sweetalert.css"
+          rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/lib/nixon.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/lib/font-awesome.min.css" rel="stylesheet">
+
+    <link href="${pageContext.request.contextPath}/css/lib/jsgrid/jsgrid-theme.min.css"
+          rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/css/lib/jsgrid/jsgrid.min.css" type="text/css"
+          rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/css/lib/menubar/sidebar.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/lib/helper.css" rel="stylesheet">
+    <!-- Styles -->
+    <link href="${pageContext.request.contextPath}/css/lib/toastr/toastr.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
           integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
@@ -65,7 +73,7 @@
 <div>
     <i class="ti-arrow-left"
        style="position: absolute;top: 50px;right: 150px;cursor: pointer;font-size: large;"
-       onclick="javascript:history.back()"></i>
+       onclick="window.location.href='${pageContext.request.contextPath}/user/findAll.do?page=1&size=5'"></i>
 </div>
 <div class="unix-invoice">
     <div class="container-fluid">
@@ -90,7 +98,7 @@
                             <div class="card-body">
                                 <div class="user-profile">
                                     <div class="row">
-                                        <div class="col-lg-5">
+                                        <div class="col-lg-4">
                                             <div class="card alert">
                                                 <div class="card-body">
                                                     <div class="user-profile">
@@ -179,7 +187,7 @@
                                                 </div>
                                             </div>
                                         </div><!-- /# column -->
-                                        <div class="col-lg-7">
+                                        <div class="col-lg-8">
                                             <div class="custom-tab user-profile-tab">
                                                 <ul class="nav nav-tabs" role="tablist">
                                                     <li role="presentation" class="active"><a
@@ -193,6 +201,63 @@
                                                         <div class="contact-information"
                                                              style="margin: 10px 35px;">
                                                             <div class="phone-content">
+                                                                <c:if test="${log.size==0}">
+                                                                    <p style="text-align: center">该用户可能偷懒,没有操作记录</p>
+                                                                </c:if>
+                                                                <c:if test="${log.size!=0}">
+                                                                    <table class="table table-responsive table-hover"
+                                                                           style="text-align: center">
+                                                                        <thead>
+                                                                        <tr>
+                                                                            <th>#</th>
+                                                                            <th>日志ID</th>
+                                                                            <th>操作时间</th>
+                                                                            <th>操作用户</th>
+                                                                            <th>ip地址</th>
+                                                                            <th>资源路径</th>
+                                                                            <th style="text-align: center;">请求方法</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <c:forEach items="${log.list}" varStatus="stat" begin="0"
+                                                                                   end="${log.size}">
+                                                                            <%----%>
+                                                                            <tbody>
+                                                                            <tr>
+                                                                                <th scope="row" >${stat.index+1}</th>
+                                                                                <td >${log.list[stat.index].logId}</td>
+                                                                                <td ><fmt:formatDate value="${log.list[stat.index].visitTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                                                                                <td >${log.list[stat.index].userName}</td>
+                                                                                <td >${log.list[stat.index].ip}</td>
+                                                                                <td >${log.list[stat.index].url}</td>
+                                                                                <td style="text-align: center">${log.list[stat.index].method}</td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                        </c:forEach>
+                                                                    </table>
+                                                                    <hr style="margin-bottom: 10px;border-top: 0px solid;color: #ddd;">
+                                                                    <div class="jsgrid-pager-container" style="display: block;">
+                                                                        <div class="jsgrid-pager">
+                                                                            <span class="jsgrid-pager-nav-button ">每页显示条数 <input type="text" onkeyup="size4()" id="size" style="border: solid 1px;BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none;BORDER-BOTTOM-STYLE: solid; outline: none;width: 3em;text-align:center" >条</span>
+                                                                            <span class="jsgrid-pager-nav-button ">当前页数 :</span><span class="jsgrid-pager-page jsgrid-pager-current-page" >${log.pageNum}</span>
+                                                                            <c:if test="${param.page>1}">
+                                            <span class="jsgrid-pager-nav-button ">
+                                            <a href="${pageContext.request.contextPath}/user/userInformation.do?id=${user.userId}&page=1&size=${log.pageSize}">首页</a>
+                                        </span>
+                                                                                <span class="jsgrid-pager-nav-button ">
+                                            <a href="${pageContext.request.contextPath}/user/userInformation.do?id=${user.userId}&page=${log.pageNum-1}&size=${log.pageSize}">上一页</a>
+                                        </span>
+                                                                            </c:if>
+                                                                            <c:if test="${param.page<log.pages}">
+                                                                                <span class="jsgrid-pager-nav-button"><a href="${pageContext.request.contextPath}/user/userInformation.do?id=${user.userId}&page=${log.pageNum+1}&size=${log.pageSize}">下一页</a></span>
+                                                                                <span class="jsgrid-pager-nav-button"><a href="${pageContext.request.contextPath}/user/userInformation.do?id=${user.userId}&page=${log.pages}&size=${log.pageSize}">尾页</a></span> &nbsp;&nbsp;
+                                                                            </c:if>
+                                                                            <span class="jsgrid-pager-nav-button " style="float: right;">跳转到<input type="text" onkeyup="page5()" id="page" style="border: solid 1px;BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none;BORDER-BOTTOM-STYLE: solid; outline: none;width: 3em;text-align:center" >页</span>
+                                                                            <span class="jsgrid-pager-nav-button " style="float: right;">共 ${log.pages }页</span>
+                                                                            <span class="jsgrid-pager-nav-button " style="float: right;">共 ${log.total} 条日志</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </c:if>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -226,7 +291,7 @@
 
 <script type="text/javascript">
     function info() {
-        toastr.info('该页面为订单展示页面,无法编辑哦','系统通知',{
+        toastr.info('该页面为用户信息展示页面,无法编辑哦','系统通知',{
             "positionClass": "toast-top-center",
             timeOut: 7000,
             "closeButton": true,
@@ -244,6 +309,15 @@
             "hideMethod": "fadeOut",
             "tapToDismiss": false
         })
+    }
+    function page5() {
+        var val = document.getElementById("page").value;
+        window.location.href="${pageContext.request.contextPath}/user/userInformation.do?id=${user.userId}&page="+val+"&size=${param.size}"
+    }
+    function size4() {
+        var val= document.getElementById("size").value;
+        console.log(val)
+        window.location.href="${pageContext.request.contextPath}/user/userInformation.do?id=${user.userId}&page=1&size="+val
     }
 </script>
 </body>
